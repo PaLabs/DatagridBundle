@@ -1,0 +1,20 @@
+services:
+  pa_datagrid.field_registry:
+    class: PaLabs\DatagridBundle\Field\FieldRegistry
+
+  pa_datagrid.field_renderer:
+    class: PaLabs\DatagridBundle\Field\FieldRenderer
+    arguments:
+      - '@pa_datagrid.field_registry'
+
+  pa_datagrid.context_builder:
+    class: PaLabs\DatagridBundle\GridContextBuilder
+    public: false
+    arguments:
+      - '@form.factory'
+
+  pa_datagrid.builder.display:
+    class: PaLabs\DatagridBundle\View\GridDisplayViewBuilder
+    arguments:
+      - '@pa_datagrid.context_builder'
+      - '@pa_datagrid.field_renderer'

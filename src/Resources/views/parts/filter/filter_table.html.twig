@@ -1,0 +1,29 @@
+<table class="admin_filter" data-component-role="filter_table">
+    {% set anyFilterEnabled = false %}
+    {% set filterForm = grid.form.ds.f %}
+
+    {% for fieldName, field in filterForm.children %}
+        {% if field.vars['filter_enabled'] %}
+            {% set anyFilterEnabled = true %}
+        {% endif %}
+    {% endfor %}
+
+    {% for fieldName, field in filterForm.children %}
+        {% set needDisplay = field.vars['filter_enabled'] or (not anyFilterEnabled and field.vars['default']) %}
+        <tr data-field="{{ fieldName }}"
+            data-label="{{ field.vars.label|trans }}"
+            data-display="{{ needDisplay }}"
+            {% if not needDisplay %} style="display: none" {% endif %}
+        >
+            <td width="130px">{{ field.vars.label|trans }}</td>
+            <td>{{ form_widget(field) }}</td>
+            <td class="hide_row">
+
+                        <span class="btn btn-default" data-component-role="hide_filter_row"
+                              data-field="{{ fieldName }}">
+                            <span class="glyphicon glyphicon-minus"></span>
+                        </span>
+            </td>
+        </tr>
+    {% endfor %}
+</table>

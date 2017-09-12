@@ -1,0 +1,32 @@
+{% if grid.dataSourceResult.isHasData %}
+    <table class="table table-striped">
+        <thead>
+        {% for record in grid.header %}
+            <tr>
+                {% for column in record %}
+                    {% set columnOptions = column.fieldData.options %}
+                    <th {% if columnOptions['style'] is defined %}style="{{ columnOptions['style'] }}"{% endif %}>
+                        {{ column.renderedContent|raw }}
+                    </th>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </thead>
+
+        <tbody>
+        {% for record in grid.rows %}
+            <tr>
+                {% for column in record %}
+                    {% set columnOptions = column.fieldData.options %}
+                    <td {% if columnOptions['style'] is defined %}style="{{ columnOptions['style'] }}"{% endif %}>
+                        {{ column.renderedContent|raw }}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% else %}
+    Пока нет данных
+{% endif %}

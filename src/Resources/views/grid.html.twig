@@ -1,0 +1,64 @@
+{% block grid_header %}
+    <form method="get">
+        {% block after_form_open %}{% endblock %}
+
+        <div class="box-full-width">
+
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    {% block settings_tabs_header %}
+                        <li class="active">
+                            <a data-toggle="tab"
+                               href="#filter_settings">{{ 'filter'|trans({}, 'PaDatagridBundle') }}</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#grid_settings">{{ 'table'|trans({}, 'PaDatagridBundle') }}</a>
+                        </li>
+                    {% endblock %}
+                </ul>
+                <div class="tab-content">
+                    {% block settings_tabs_body %}
+                        <div class="tab-pane active" id="filter_settings">
+                            {% include '@PaDatagrid/parts/datasource/filtered_paginated_datasource.html.twig' %}
+                        </div>
+
+                        <div class="tab-pane" id="grid_settings">
+                            {% include '@PaDatagrid/parts/grid_selected_fields.html.twig' %}
+                        </div>
+                    {% endblock %}
+                </div>
+            </div>
+
+        </div>
+    </form>
+{% endblock %}
+
+{% block grid_body %}
+    <div class="box box-primary box-full-width">
+        <div class="box-body">
+
+            {% block data_table %}
+                <div class="table-responsive">
+                    {% include '@PaDatagrid/parts/data_table.html.twig' %}
+                </div>
+            {% endblock %}
+
+            {% block pagination %}
+                {% if grid.dataSourceResult.pager is defined %}
+                    {% set pager = grid.dataSourceResult.pager %}
+                    <hr/>
+
+                    <div class="text-center">
+                        {% include '@PaDatagrid/parts/pagination.html.twig' with pager.getPaginationData() %}
+                        <div class="pull-right">
+                            {{ pager.getCurrentPageNumber() }}
+                            &nbsp;&nbsp;/&nbsp;&nbsp;{{ pager.getPageCount() }}
+                            &nbsp;&nbsp;-&nbsp;&nbsp;{{ 'total_items'|trans({'%itemsCount%': pager.getTotalItemsCount()}, 'PaDatagridBundle') }}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endblock %}
+
+        </div>
+    </div>
+{% endblock %}

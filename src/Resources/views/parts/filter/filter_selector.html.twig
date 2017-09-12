@@ -1,0 +1,24 @@
+{% set filterForm = grid.form.ds.f %}
+
+<span class="dropdown" data-component-role="field_selector">
+    <button class="btn btn-default dropdown-toggle"
+            type="button"
+            id="field_selector_button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="true">
+        {{ 'filter'|trans({}, 'PaDatagridBundle') }}
+        <span class="caret"></span>
+    </button>
+
+    <ul class="dropdown-menu" aria-labelledby="field_selector_button">
+        {% for fieldName, field in filterForm.children %}
+            <li data-field="{{ fieldName }}">
+        <a href="#">
+        <input type="checkbox" data-component-role="row_visibility"/>
+            {{ field.vars.label|trans }}
+        </a>
+        </li>
+        {% endfor %}
+    </ul>
+</span>

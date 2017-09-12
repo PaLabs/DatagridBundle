@@ -1,0 +1,57 @@
+{% set selectedFieldsForm = grid.form.gs.f %}
+{% set selectedFields = selectedFieldsForm.vars.data|split(',') %}
+{% set availableFields = selectedFieldsForm.vars['fields'] %}
+{% set fieldLabels = selectedFieldsForm.vars['fieldLabels'] %}
+
+<div class="row">
+    <div class="col-md-6" data-widget="columns_selector">
+        {{ form_widget(selectedFieldsForm, {'attr': {'data-component-role': 'selected_fields', 'style': 'display: none'}}) }}
+
+        <table width="100%" style="margin-bottom: 10px;">
+            <tr>
+                <td colspan="2">{{ 'available_columns'|trans({}, 'PaDatagridBundle') }}:</td>
+                <td colspan="2">{{ 'selected_columns'|trans({}, 'PaDatagridBundle') }}:</td>
+            </tr>
+            <tr>
+                <td width="40%" style="padding-right: 5px">
+                    <select data-component-role="all_columns_list"
+                            multiple="multiple"
+                            size="10"
+                            style="width: 100%">
+                        {% for field in availableFields %}#}
+                            <option value="{{ field.name }}">{{ field.label }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td align="center" style="padding-right: 5px">
+                    <span class="btn btn-default" data-component-role="add_column_button">-></span>
+                </td>
+                <td width="40%" style="padding-right: 5px">
+                    <select data-component-role="target_columns"
+                            multiple="multiple"
+                            size="10"
+                            style="width: 100%">
+                        {% for fieldName in selectedFields %}
+                            {% if fieldLabels[fieldName] is defined %}
+                                <option value="{{ fieldName }}">{{ fieldLabels[fieldName] }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </td>
+                <td align="center">
+                                                        <span class="btn btn-default"
+                                                              data-component-role="move_up_column_button"
+                                                              style="width: 100%">{{ 'move_up'|trans({}, 'PaDatagridBundle') }}</span>
+                    <br/>
+                    <span class="btn btn-default"
+                          data-component-role="move_down_column_button" style="width: 100%">{{ 'move_down'|trans({}, 'PaDatagridBundle') }}</span>
+                    <br/>
+                    <span class="btn btn-default"
+                          data-component-role="del_column_button" style="width: 100%">{{ 'delete'|trans({}, 'PaDatagridBundle') }}</span>
+                </td>
+            </tr>
+        </table>
+        {% include '@PaDatagrid/parts/buttons.html.twig' %}
+    </div>
+
+</div>

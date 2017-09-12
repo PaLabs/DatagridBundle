@@ -1,0 +1,17 @@
+filter: Filter
+sorting: Sorting
+table: Table
+available_columns: Available columns
+selected_columns: Selected columns
+move_up: Move uo
+move_down: Move down
+delete: Delete
+records_per_page: Records per page
+order_asc: Ascending
+order_desc: Descending
+operator_contains: Contains
+total_items: Total %itemsCount% records
+
+form:
+  apply: Apply
+  reset: Reset

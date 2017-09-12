@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-md-6">
+        <div data-widget="filter">
+            {% include '@PaDatagrid/parts/filter/filter_table.html.twig' %}
+
+            <div style="height: 30px; margin-top: 10px;">
+                <div class="pull-right">
+                    {% include '@PaDatagrid/parts/filter/filter_selector.html.twig' %}
+                </div>
+            </div>
+        </div>
+        {% include '@PaDatagrid/parts/buttons.html.twig' %}
+    </div>
+
+    <div class="col-md-6">
+        {% include '@PaDatagrid/parts/sort/sort_collection.html.twig' with {'form': grid.form.ds.o} %}
+
+        {% block per_page_selector %}
+            {% if grid.form.ds.pp is defined %}
+                <div class="row form-group">
+                    <label class="control-label col-md-4">
+                        {{ 'records_per_page'|trans({}, 'PaDatagridBundle') }}
+                    </label>
+                    <div class="col-md-8">
+                        {{ form_widget(grid.form.ds.pp) }}
+                    </div>
+                </div>
+            {% endif %}
+        {% endblock %}
+    </div>
+</div>
