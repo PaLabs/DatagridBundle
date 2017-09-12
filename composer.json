@@ -1,0 +1,15 @@
+{
+    "name": "palabs/datagrid-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony Datagrid bundle",
+    "keywords": ["Datagrid"],
+    "license": "MIT",
+    "require": {
+        "php": "^7.0",
+    },
+    "autoload": {
+        "psr-4": {
+            "PaLabs\\DatagridBundle\\": "src/"
+        },
+    }
+}
