@@ -1,4 +1,4 @@
-{% block text_filter_form_widget %}
+{% block string_filter_form_widget %}
     <table width="100%">
         <tr>
             <td width="150px">{{ form_widget(form.o) }}</td>
@@ -13,6 +13,15 @@
             <td>{{ form_widget(form.start) }}</td>
             <td width="50px" align="center">...</td>
             <td>{{ form_widget(form.end) }}</td>
+        </tr>
+    </table>
+{% endblock %}
+
+{% block entity_filter_form_widget %}
+    <table width="100%">
+        <tr>
+            <td width="150px">{{ form_widget(form.o) }}</td>
+            <td style="padding-left: 10px">{{ form_widget(form.v) }}</td>
         </tr>
     </table>
 {% endblock %}

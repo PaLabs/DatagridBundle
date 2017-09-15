@@ -5,6 +5,8 @@ namespace PaLabs\DatagridBundle\DataSource\Result;
 
 
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
+use PaLabs\DatagridBundle\DataSource\DataSourceSettingsForm;
+use PaLabs\DatagridBundle\Grid\Form\GridForm;
 
 class Pager
 {
@@ -80,7 +82,8 @@ class Pager
             $endPage = $pageCount;
         }
 
-        $viewData = array(
+        $pageParameterName = sprintf('%s[%s][%s]', GridForm::FORM_NAME, GridForm::DATA_SOURCE_SETTINGS_FORM_NAME, DataSourceSettingsForm::PAGE_FORM_NAME);
+        $viewData = [
             'last' => $pageCount,
             'current' => $current,
             'numItemsPerPage' => $this->itemNumberPerPage,
@@ -89,8 +92,9 @@ class Pager
             'totalCount' => $this->totalItemsCount,
             'pageRange' => $this->pageRange,
             'startPage' => $startPage,
-            'endPage' => $endPage
-        );
+            'endPage' => $endPage,
+            'pageParameterName' => $pageParameterName
+        ];
 
         if ($current > 1) {
             $viewData['previous'] = $current - 1;

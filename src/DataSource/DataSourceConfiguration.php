@@ -4,8 +4,8 @@
 namespace PaLabs\DatagridBundle\DataSource;
 
 
-use PaLabs\DatagridBundle\Filter\FilterApplier;
-use PaLabs\DatagridBundle\Sort\SortApplier;
+use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\QueryBuilderFilterApplier;
+use PaLabs\DatagridBundle\DataSource\Doctrine\Order\QueryBuilderSortApplier;
 
 class DataSourceConfiguration
 {

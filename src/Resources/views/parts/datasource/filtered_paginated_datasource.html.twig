@@ -1,19 +1,23 @@
 <div class="row">
     <div class="col-md-6">
-        <div data-widget="filter">
-            {% include '@PaDatagrid/parts/filter/filter_table.html.twig' %}
+        {% if grid.form.ds.f is defined %}
+            <div data-widget="filter">
+                {% include '@PaDatagrid/parts/filter/filter_table.html.twig' %}
 
-            <div style="height: 30px; margin-top: 10px;">
-                <div class="pull-right">
-                    {% include '@PaDatagrid/parts/filter/filter_selector.html.twig' %}
+                <div style="height: 30px; margin-top: 10px;">
+                    <div class="pull-right">
+                        {% include '@PaDatagrid/parts/filter/filter_selector.html.twig' %}
+                    </div>
                 </div>
             </div>
-        </div>
+        {% endif %}
         {% include '@PaDatagrid/parts/buttons.html.twig' %}
     </div>
 
     <div class="col-md-6">
-        {% include '@PaDatagrid/parts/sort/sort_collection.html.twig' with {'form': grid.form.ds.o} %}
+        {% if grid.form.ds.o is defined %}
+            {% include '@PaDatagrid/parts/sort/sort_collection.html.twig' with {'form': grid.form.ds.o} %}
+        {% endif %}
 
         {% block per_page_selector %}
             {% if grid.form.ds.pp is defined %}

@@ -1,21 +1,31 @@
 services:
 
   pa_datagrid.field.boolean:
-    class: PaLabs\DatagridBundle\Field\Type\BooleanField
+    class: PaLabs\DatagridBundle\Field\Type\Boolean\BooleanField
+    tags: ['pa_datagrid.field']
 
   pa_datagrid.field.date:
-   class: PaLabs\DatagridBundle\Field\Type\DateField
+   class: PaLabs\DatagridBundle\Field\Type\Date\DateField
+   tags: ['pa_datagrid.field']
 
   pa_datagrid.field.date_time:
-   class: PaLabs\DatagridBundle\Field\Type\DateTimeField
+   class: PaLabs\DatagridBundle\Field\Type\DateTime\DateTimeField
+   tags: ['pa_datagrid.field']
 
   pa_datagrid.field.string:
-    class: PaLabs\DatagridBundle\Field\Type\StringField
+    class: PaLabs\DatagridBundle\Field\Type\String\StringField
+    tags: ['pa_datagrid.field']
+
+  pa_datagrid.field.html:
+    class: PaLabs\DatagridBundle\Field\Type\Html\HtmlField
+    tags: ['pa_datagrid.field']
 
   pa_datagrid.field.twig:
-    class: PaLabs\DatagridBundle\Field\Type\TwigField
+    class: PaLabs\DatagridBundle\Field\Type\Twig\TwigField
+    tags: ['pa_datagrid.field']
     arguments:
-      - '@templating.engine.delegating'
+      - '@templating'
 
   pa_datagrid.field.url:
-    class: PaLabs\DatagridBundle\Field\Type\UrlField
+    class: PaLabs\DatagridBundle\Field\Type\Url\UrlField
+    tags: ['pa_datagrid.field']

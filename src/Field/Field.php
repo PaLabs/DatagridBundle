@@ -5,7 +5,7 @@ namespace PaLabs\DatagridBundle\Field;
 
 interface Field
 {
-    public function render(FieldData $data, String $displayFormat);
+    public function render(FieldData $data, string $format);
 
     public function dataClass() : string;
 }

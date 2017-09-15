@@ -3,18 +3,13 @@
 namespace PaLabs\DatagridBundle\DataSource;
 
 
-use PaLabs\DatagridBundle\DataSource\Result\DataSourceResult;
-use PaLabs\DatagridBundle\GridContext;
-use PaLabs\DatagridBundle\GridParameters;
+use PaLabs\DatagridBundle\DataSource\Result\DataSourceResultContainer;
+use PaLabs\DatagridBundle\Grid\GridContext;
+use PaLabs\DatagridBundle\Grid\GridParameters;
 
 interface ConfigurableDataSource
 {
     public function configure(GridParameters $parameters): DataSourceConfiguration;
 
-    /**
-     * @param DataSourceConfiguration $configuration
-     * @param GridContext $context
-     * @return DataSourceResult
-     */
-    public function rows(DataSourceConfiguration $configuration, GridContext $context);
+    public function rows(DataSourceConfiguration $configuration, GridContext $context): DataSourceResultContainer;
 }

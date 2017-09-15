@@ -7,8 +7,8 @@ use Doctrine\ORM\QueryBuilder;
 
 interface FilterInterface
 {
-    public function getDefaultFormType();
-    public function getDefaultFormOptions();
+    public function formType(): string;
+    public function formOptions(): array;
 
-    public function apply(QueryBuilder $qb, $name, $criteria, array $options = []);
+    public function apply($filtrable, string $name, $criteria, array $options = []);
 }

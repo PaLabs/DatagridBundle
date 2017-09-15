@@ -4,16 +4,17 @@
 namespace PaLabs\DatagridBundle\DataSource\Doctrine\Filtrable;
 
 
-use PaLabs\DatagridBundle\DataSource\DataSourceConfiguration;
-use PaLabs\DatagridBundle\DataSource\DataSourcePage;
-use PaLabs\DatagridBundle\DataSource\Result\DataSourceResult;
-use PaLabs\DatagridBundle\GridContext;
 use Doctrine\ORM\QueryBuilder;
+use PaLabs\DatagridBundle\DataSource\DataSourceConfiguration;
+use PaLabs\DatagridBundle\DataSource\Result\DataSourcePage;
+use PaLabs\DatagridBundle\DataSource\Result\DataSourceResultContainer;
+use PaLabs\DatagridBundle\Grid\GridContext;
+use PaLabs\DatagridBundle\Grid\GridParameters;
 
 abstract class DoctrineSinglePageDataSource extends DoctrineDataSource
 {
 
-    public function rows(DataSourceConfiguration $configuration, GridContext $context)
+    public function rows(DataSourceConfiguration $configuration, GridContext $context): DataSourceResultContainer
     {
         $queryBuilder = $this->createQuery($context);
         $this->applyFilterSorting($queryBuilder, $configuration, $context);
@@ -24,20 +25,19 @@ abstract class DoctrineSinglePageDataSource extends DoctrineDataSource
     protected function allPagesRows(QueryBuilder $queryBuilder, DataSourceConfiguration $configuration, GridContext $context)
     {
         $rows = $queryBuilder->getQuery()->getResult();
-        $pageContext = $this->fetchDataAfterPagination($rows, $configuration, $context);
-        $pageRowsIterator = $this->transformDataIterator($rows, $configuration, $context, $pageContext);
+        $pageContext = $this->buildPageContext($rows, $configuration, $context);
+        $pageRowsIterator = $this->transformPage($rows, $configuration, $context, $pageContext);
 
         $page = new DataSourcePage($pageRowsIterator, $pageContext);
-        $result = new DataSourceResult([$page], count($rows) > 0);
+        $result = new DataSourceResultContainer([$page], count($rows));
         return $result;
     }
 
-    protected function getSettingsFormOptions($filters, $sorting)
+    protected function getSettingsFormOptions(GridParameters $parameters): array
     {
-        return array_merge(parent::getSettingsFormOptions($filters, $sorting), [
+        return [
             'enablePerPageSelector' => false
-        ]);
-
+        ];
     }
 
 

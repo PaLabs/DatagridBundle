@@ -26,25 +26,23 @@ class DataSourceSettings
         $self = (new static());
         return $self
             ->setFilters([])
+            ->setOrder([])
             ->setPerPage(20)
-            ->setPage(1)
-            ->setOrder([
-                new OrderItem('entity.id', OrderItem::DESC)
-            ]);
+            ->setPage(1);
     }
 
     public function toUrlParams()
     {
         $data = ['filters' => $this->filters, 'order' => $this->order, 'perPage' => $this->perPage];
         array_walk_recursive($data, function (&$value) {
-             if (is_object($value)) {
+            if (is_object($value)) {
                 $value = $value->getId();
             }
         });
         return $data;
     }
 
-    public function getOrder()
+    public function getOrder(): array
     {
         return $this->order;
     }

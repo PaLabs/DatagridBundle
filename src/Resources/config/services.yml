@@ -1,20 +1,27 @@
 services:
+
   pa_datagrid.field_registry:
-    class: PaLabs\DatagridBundle\Field\FieldRegistry
+    class: PaLabs\DatagridBundle\Field\Registry\FieldRegistry
+    private: true
+
+  pa_datagrid.filter_registry:
+    class: PaLabs\DatagridBundle\Filter\Registry\FilterRegistry
+    private: true
 
   pa_datagrid.field_renderer:
-    class: PaLabs\DatagridBundle\Field\FieldRenderer
+    class: PaLabs\DatagridBundle\Field\Renderer\FieldRenderer
     arguments:
       - '@pa_datagrid.field_registry'
 
-  pa_datagrid.context_builder:
-    class: PaLabs\DatagridBundle\GridContextBuilder
-    public: false
+  pa_datagrid.view_builder:
+    class: PaLabs\DatagridBundle\Grid\View\GridViewBuilder
     arguments:
       - '@form.factory'
-
-  pa_datagrid.builder.display:
-    class: PaLabs\DatagridBundle\View\GridDisplayViewBuilder
-    arguments:
-      - '@pa_datagrid.context_builder'
       - '@pa_datagrid.field_renderer'
+
+  pa_datagrid.exporter.xlsx:
+    class: PaLabs\DatagridBundle\Grid\Export\XlsxExporter
+    tags: ['pa_datagrid.exporter']
+
+  pa_datagrid.exporter:
+    class: PaLabs\DatagridBundle\Grid\Export\GridExporterFacade

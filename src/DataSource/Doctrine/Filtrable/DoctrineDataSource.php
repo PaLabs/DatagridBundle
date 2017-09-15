@@ -3,27 +3,30 @@
 namespace PaLabs\DatagridBundle\DataSource\Doctrine\Filtrable;
 
 
-use PaLabs\DatagridBundle\DataSource\ConfigurableDataSource;
-use PaLabs\DatagridBundle\DataSource\DataSourceConfiguration;
-use PaLabs\DatagridBundle\DataSource\DataSourcePage;
-use PaLabs\DatagridBundle\DataSource\DataSourceSettings;
-use PaLabs\DatagridBundle\DataSource\Doctrine\Filtrable\DataSourceSettingsForm;
-use PaLabs\DatagridBundle\DataSource\Result\DataSourceResult;
-use PaLabs\DatagridBundle\DataSource\Result\DataSourcePagerResult;
-use PaLabs\DatagridBundle\DataSource\Result\Pager;
-use PaLabs\DatagridBundle\Filter\FilterApplier;
-use PaLabs\DatagridBundle\Filter\FilterBuilder;
-use PaLabs\DatagridBundle\Sort\SortApplier;
-use PaLabs\DatagridBundle\Sort\SortBuilder;
-use PaLabs\DatagridBundle\GridContext;
-use PaLabs\DatagridBundle\GridParameters;
-use PaLabs\DatagridBundle\Util\DoctrineIterator;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use Knp\Component\Pager\PaginatorInterface;
+use PaLabs\DatagridBundle\DataSource\AbstractConfigurableDataSource;
+use PaLabs\DatagridBundle\DataSource\ConfigurableDataSource;
+use PaLabs\DatagridBundle\DataSource\DataSourceConfiguration;
+use PaLabs\DatagridBundle\DataSource\Result\DataSourcePage;
+use PaLabs\DatagridBundle\DataSource\DataSourceSettings;
+use PaLabs\DatagridBundle\DataSource\Doctrine\Order\QueryBuilderSortApplier;
+use PaLabs\DatagridBundle\DataSource\Order\SortBuilder;
+use PaLabs\DatagridBundle\DataSource\Result\DataSourceResultContainer;
+use PaLabs\DatagridBundle\DataSource\Result\PagedDataSourceResultContainer;
+use PaLabs\DatagridBundle\DataSource\Result\Pager;
+use PaLabs\DatagridBundle\DataTable\AbstractConfigurableDataTable;
+use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\QueryBuilderFilterApplier;
+use PaLabs\DatagridBundle\Filter\FilterBuilder;
+use PaLabs\DatagridBundle\Filter\Registry\FilterRegistry;
+use PaLabs\DatagridBundle\Grid\GridContext;
+use PaLabs\DatagridBundle\Grid\GridOptions;
+use PaLabs\DatagridBundle\Grid\GridParameters;
+use PaLabs\DatagridBundle\Util\DoctrineIterator;
 
-abstract class DoctrineDataSource implements ConfigurableDataSource
+abstract class DoctrineDataSource extends AbstractConfigurableDataSource
 {
     protected $em;
     protected $paginator;
@@ -33,54 +36,54 @@ abstract class DoctrineDataSource implements ConfigurableDataSource
     public function __construct(
         EntityManagerInterface $em,
         PaginatorInterface $paginator,
-        FilterApplier $filterApplier,
-        SortApplier $sortApplier)
+        QueryBuilderFilterApplier $filterApplier,
+        QueryBuilderSortApplier $sortApplier,
+        FilterRegistry $filterRegistry)
     {
+        parent::__construct($filterRegistry);
         $this->em = $em;
         $this->paginator = $paginator;
         $this->filterApplier = $filterApplier;
         $this->sortApplier = $sortApplier;
+        $this->filterRegistry = $filterRegistry;
     }
-
-    protected abstract function configureFilters(FilterBuilder $builder, GridParameters $parameters);
-
-    protected abstract function configureSorting(SortBuilder $builder, GridParameters $parameters);
 
     protected abstract function createQuery(GridContext $context);
 
 
-    public function rows(DataSourceConfiguration $configuration, GridContext $context)
+    public function rows(DataSourceConfiguration $configuration, GridContext $context) : DataSourceResultContainer
     {
         $queryBuilder = $this->createQuery($context);
         $this->applyFilterSorting($queryBuilder, $configuration, $context);
 
-        switch ($context->pagingType) {
-            case GridContext::PAGING_TYPE_SPLIT_BY_PAGES:
+        switch ($context->getOptions()->getPagingType()) {
+            case GridOptions::PAGING_TYPE_SPLIT_BY_PAGES:
                 return $this->onePageRows($queryBuilder, $configuration, $context);
-            case GridContext::PAGING_TYPE_SINGLE_PAGE:
+            case GridOptions::PAGING_TYPE_SINGLE_PAGE:
                 return $this->allPagesRows($queryBuilder, $configuration, $context);
             default:
-                throw new \Exception(sprintf("Unsupported context type: %s", $context->pagingType));
+                throw new \Exception(sprintf("Unsupported context type: %s",$context->getOptions()->getPagingType()));
         }
 
     }
 
     protected function applyFilterSorting(QueryBuilder $queryBuilder, DataSourceConfiguration $configuration, GridContext $context)
     {
-        $this->filterApplier->apply($queryBuilder, $configuration->getFilters(), $context->dataSourceSettings->getFilters());
-        $this->sortApplier->apply($queryBuilder, $configuration->getSorting(), $context->dataSourceSettings->getOrder());
+        $this->filterApplier->apply($queryBuilder, $configuration->getFilters(), $context->getDataSourceSettings()->getFilters());
+        $this->sortApplier->apply($queryBuilder, $configuration->getSorting(), $context->getDataSourceSettings()->getOrder());
     }
 
     protected function onePageRows(QueryBuilder $queryBuilder, DataSourceConfiguration $configuration, GridContext $context)
     {
         /** @var SlidingPagination $pagination */
-        $pagination = $this->paginator->paginate($queryBuilder, $context->dataSourceSettings->getPage(),
-            $context->dataSourceSettings->getPerPage());
+        $pagination = $this->paginator->paginate($queryBuilder, $context->getDataSourceSettings()->getPage(),
+            $context->getDataSourceSettings()->getPerPage());
+        $rows = $pagination->getItems();
 
-        $pageContext = $this->fetchDataAfterPagination($pagination->getItems(), $configuration, $context);
-        $pageRowsIterator = $this->transformDataIterator($pagination->getItems(), $configuration, $context, $pageContext);
+        $pageContext = $this->buildPageContext($rows, $configuration, $context);
+        $pageRowsIterator = $this->transformPage($rows, $configuration, $context, $pageContext);
         $page = new DataSourcePage($pageRowsIterator, $pageContext);
-        $result = new DataSourcePagerResult([$page], Pager::fromKpnPagination($pagination));
+        $result = new PagedDataSourceResultContainer([$page], Pager::fromKpnPagination($pagination));
         return $result;
     }
 
@@ -88,7 +91,7 @@ abstract class DoctrineDataSource implements ConfigurableDataSource
     {
         $itemsCount = DoctrineIterator::count($queryBuilder);
         $pageIterator = $this->allPagesRowsIterator($queryBuilder, $itemsCount, $configuration, $context);
-        $result = new DataSourceResult($pageIterator, $itemsCount > 0);
+        $result = new DataSourceResultContainer($pageIterator, $itemsCount);
         return $result;
     }
 
@@ -96,8 +99,8 @@ abstract class DoctrineDataSource implements ConfigurableDataSource
     {
         $doctrineIterator = DoctrineIterator::iterator($queryBuilder, $itemsCount);
         foreach ($doctrineIterator as $rowData) {
-            $pageContext = $this->fetchDataAfterPagination($rowData, $configuration, $context);
-            $pageRowsIterator = $this->transformDataIterator($rowData, $configuration, $context, $pageContext);
+            $pageContext = $this->buildPageContext($rowData, $configuration, $context);
+            $pageRowsIterator = $this->transformPage($rowData, $configuration, $context, $pageContext);
             $page = new DataSourcePage($pageRowsIterator, $pageContext);
 
             yield $page;
@@ -105,54 +108,15 @@ abstract class DoctrineDataSource implements ConfigurableDataSource
         }
     }
 
-    protected function transformDataIterator($rows, DataSourceConfiguration $configuration, GridContext $context, $pageContext)
+    protected function transformPage(array $rows, DataSourceConfiguration $configuration, GridContext $context, $pageContext)
     {
-        foreach ($rows as $row) {
-            yield $row;
-        }
+        return $rows;
     }
 
 
-    protected function fetchDataAfterPagination($rows, DataSourceConfiguration $configuration, GridContext $context)
+    protected function buildPageContext(array $rows, DataSourceConfiguration $configuration, GridContext $context)
     {
-
+        return [];
     }
-
-
-    protected function getSettingsForm(GridParameters $parameters)
-    {
-        return DataSourceSettingsForm::class;
-    }
-
-    protected function getSettingsFormOptions($filters, $sorting)
-    {
-        return [
-            'filters' => $filters,
-            'sorting' => $sorting
-        ];
-    }
-
-    protected function getDefaultSettings(GridParameters $parameters)
-    {
-        return DataSourceSettings::defaultSettings();
-    }
-
-    public function configure(GridParameters $parameters): DataSourceConfiguration
-    {
-        $filterBuilder = new FilterBuilder();
-        $this->configureFilters($filterBuilder, $parameters);
-        $filters = $filterBuilder->getFilters();
-
-        $sortBuilder = new SortBuilder();
-        $this->configureSorting($sortBuilder, $parameters);
-        $sorting = $sortBuilder->getSorting();
-
-        $form = $this->getSettingsForm($parameters);
-        $formOptions = $this->getSettingsFormOptions($filters, $sorting);
-        $formDefaults = $this->getDefaultSettings($parameters);
-
-        return new DataSourceConfiguration($form, $formOptions, $formDefaults, $filters, $sorting);
-    }
-
 
 }

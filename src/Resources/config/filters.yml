@@ -1,0 +1,36 @@
+services:
+  pa_datagrid.filter.boolean:
+    class: PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\Boolean\BooleanFilter
+    tags: ['pa_datagrid.filter']
+
+  pa_datagrid.filter.date:
+    class: PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\Date\DateFilter
+    tags: ['pa_datagrid.filter']
+
+  pa_datagrid.filter.entity:
+    class: PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\Entity\EntityFilter
+    tags: ['pa_datagrid.filter']
+
+  pa_datagrid.filter.integer:
+    class: PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\Integer\IntegerFilter
+    tags: ['pa_datagrid.filter']
+
+  pa_datagrid.filter.string:
+    class: PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\String\StringFilter
+    tags: ['pa_datagrid.filter']
+
+  pa_datagrid.filter.callback:
+    class: PaLabs\DatagridBundle\Filter\Type\CallbackFilter
+    tags: ['pa_datagrid.filter']
+
+  pa_datagrid.filter.collection_emptiness:
+    class: PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\CollectionEmptinessFilter
+    tags: ['pa_datagrid.filter']
+
+  pa_datagrid.filter.integer_having:
+    class: PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\IntegerHavingFilter
+    tags: ['pa_datagrid.filter']
+
+  pa_datagrid.filter.in_null:
+    class: PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\IsNullFilter
+    tags: ['pa_datagrid.filter']

@@ -8,20 +8,20 @@ use Doctrine\ORM\QueryBuilder;
 
 class CallbackFilter implements FilterInterface
 {
-    public function getDefaultFormType()
+    public function formType(): string
     {
-        return null;
+        return '';
     }
 
-    public function getDefaultFormOptions()
+    public function formOptions(): array
     {
         return [];
     }
 
-    public function apply(QueryBuilder $qb, $name, $criteria, array $options = [])
+    public function apply($qb, string $name, $criteria, array $options = [])
     {
         $callback = $options['callback'];
-        $callback($name, $criteria, $qb, $options);
+        return $callback($name, $criteria, $qb, $options);
     }
 
 }

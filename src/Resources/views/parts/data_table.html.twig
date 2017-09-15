@@ -1,4 +1,4 @@
-{% if grid.dataSourceResult.isHasData %}
+{% if grid.dataSourceResult.totalItemsCount > 0 %}
     <table class="table table-striped">
         <thead>
         {% for record in grid.header %}

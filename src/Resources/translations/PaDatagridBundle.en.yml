@@ -11,6 +11,8 @@ order_asc: Ascending
 order_desc: Descending
 operator_contains: Contains
 total_items: Total %itemsCount% records
+equals: Equals
+not_equals: Not equals
 
 form:
   apply: Apply

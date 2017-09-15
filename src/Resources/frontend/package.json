@@ -1,0 +1,28 @@
+{
+  "name": "DatagridBundle-frontend",
+  "version": "0.1.0",
+  "description": "NOTES =====",
+  "main": "",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "babel-core": "^6.1.21",
+    "babel-loader": "^6.2.2",
+    "babel-plugin-transform-runtime": "^6.4.3",
+    "babel-polyfill": "^6.1.19",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-runtime": "^6.3.19",
+    "css-loader": "^0.23.0",
+    "exports-loader": "^0.6.2",
+    "extract-text-webpack-plugin": "^0.9.1",
+    "file-loader": "^0.8.4",
+    "less": "^2.5.3",
+    "less-loader": "^2.2.1",
+    "nunjucks": "^2.1.0",
+    "nunjucks-loader": "^2.2.1",
+    "style-loader": "^0.13.0",
+    "url-loader": "^0.5.6",
+    "webpack": "^1.12.6",
+    "es6-promise": "^3.0.2"
+  }
+}

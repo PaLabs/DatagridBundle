@@ -9,11 +9,15 @@
         "knplabs/knp-paginator-bundle": "^2.6",
         "doctrine/common": "^2.8",
         "doctrine/orm": "^2.5",
-        "symfony/form": "^3.3"
+        "symfony/form": "^3.3",
+        "symfony/doctrine-bridge": "^3.3"
     },
     "autoload": {
         "psr-4": {
             "PaLabs\\DatagridBundle\\": "src/"
         }
+    },
+    "require-dev": {
+        "phpoffice/phpspreadsheet": "1.0.0-beta"
     }
 }
