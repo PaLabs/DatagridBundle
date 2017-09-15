@@ -1,9 +1,9 @@
 <?php
 
-namespace PaLabs\DatagridBundle\Column;
+namespace PaLabs\DatagridBundle\DataTable\Column;
 
 
-class GridColumn
+class Column
 {
     public $headerName;
     public $columnListName;

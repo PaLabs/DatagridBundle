@@ -4,7 +4,7 @@
 namespace PaLabs\DatagridBundle\DataTable\Service;
 
 
-use PaLabs\DatagridBundle\Column\GridColumn;
+use PaLabs\DatagridBundle\DataTable\Column\Column;
 use PaLabs\DatagridBundle\Grid\GridContext;
 
 class DisplayColumnsBuilder
@@ -22,7 +22,7 @@ class DisplayColumnsBuilder
 
         $displayFields = [];
         foreach ($this->columns as $fieldName => $field) {
-            /** @var \PaLabs\DatagridBundle\Column\GridColumn $field */
+            /** @var \PaLabs\DatagridBundle\DataTable\Column\Column $field */
             if ($field->required && $this->needDisplayField($field, $context)) {
                 $displayFields[] = $fieldName;
             }
@@ -34,7 +34,7 @@ class DisplayColumnsBuilder
                 throw new \LogicException(sprintf("Unknown column field: %s", $field));
             }
 
-            /** @var \PaLabs\DatagridBundle\Column\GridColumn $fieldDesc */
+            /** @var \PaLabs\DatagridBundle\DataTable\Column\Column $fieldDesc */
             $fieldDesc = $this->columns[$field];
 
             if ($this->needDisplayField($fieldDesc, $context)) {
@@ -45,7 +45,7 @@ class DisplayColumnsBuilder
         return $displayFields;
     }
 
-    private function needDisplayField(GridColumn $field, GridContext $context)
+    private function needDisplayField(Column $field, GridContext $context)
     {
         if ($field->needDisplayCallback === null) {
             return true;

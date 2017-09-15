@@ -3,21 +3,15 @@
 namespace PaLabs\DatagridBundle\DataTable;
 
 
+use PaLabs\DatagridBundle\DataTable\Column\ColumnsBuilder;
 use PaLabs\DatagridBundle\DataSource\Result\DataSourcePage;
-use PaLabs\DatagridBundle\Column\GridColumn;
-use PaLabs\DatagridBundle\Column\GridColumnsBuilder;
 use PaLabs\DatagridBundle\DataSource\Result\DataSourceResultContainer;
-use PaLabs\DatagridBundle\DataTable\ConfigurableDataTable;
-use PaLabs\DatagridBundle\Field\Type\String\StringField;
-use PaLabs\DatagridBundle\DataTable\ColumnMakerContext;
 use PaLabs\DatagridBundle\DataTable\Form\SettingsForm;
-use PaLabs\DatagridBundle\DataTable\DataTableConfig;
-use PaLabs\DatagridBundle\Grid\GridContext;
-use PaLabs\DatagridBundle\Grid\GridParameters;
-use PaLabs\DatagridBundle\DataTable\DataTableResultContainer;
-use PaLabs\DatagridBundle\DataTable\DataTableSettings;
 use PaLabs\DatagridBundle\DataTable\Service\ColumnMakerCaller;
 use PaLabs\DatagridBundle\DataTable\Service\DisplayColumnsBuilder;
+use PaLabs\DatagridBundle\Field\Type\String\StringField;
+use PaLabs\DatagridBundle\Grid\GridContext;
+use PaLabs\DatagridBundle\Grid\GridParameters;
 
 abstract class AbstractConfigurableDataTable implements ConfigurableDataTable
 {
@@ -27,7 +21,7 @@ abstract class AbstractConfigurableDataTable implements ConfigurableDataTable
 
     public function __construct()
     {
-        $columnsBuilder = new GridColumnsBuilder();
+        $columnsBuilder = new ColumnsBuilder();
         $this->configureColumns($columnsBuilder);
         $this->columns = $columnsBuilder->build();
 
@@ -35,7 +29,7 @@ abstract class AbstractConfigurableDataTable implements ConfigurableDataTable
         $this->displayColumnsBuilder = new DisplayColumnsBuilder($this->columns);
     }
 
-    protected abstract function configureColumns(GridColumnsBuilder $builder);
+    protected abstract function configureColumns(ColumnsBuilder $builder);
 
     public function configure(GridParameters $parameters): DataTableConfig
     {
@@ -73,7 +67,7 @@ abstract class AbstractConfigurableDataTable implements ConfigurableDataTable
     private function buildRow($rowData, int $loopIndex, DataSourcePage $page, GridContext $context, array $displayFields)
     {
         return array_map(function(string $fieldName) use($rowData, $loopIndex, $page, $context) {
-            /** @var \PaLabs\DatagridBundle\Column\GridColumn $column * */
+            /** @var \PaLabs\DatagridBundle\DataTable\Column\Column $column * */
             $column = $this->columns[$fieldName];
             $columnMaker = $column->columnMaker;
             $columnMakerContext = new ColumnMakerContext($rowData, $loopIndex, $page, $context);
@@ -85,7 +79,7 @@ abstract class AbstractConfigurableDataTable implements ConfigurableDataTable
     public function buildHeader(GridContext $context, array $displayFields)
     {
         $headerRow = array_map(function ($fieldName) use ($context) {
-            /** @var \PaLabs\DatagridBundle\Column\GridColumn $field * */
+            /** @var \PaLabs\DatagridBundle\DataTable\Column\Column $field * */
             $field = $this->columns[$fieldName];
 
             if ($field->headerBuilder !== null) {
@@ -121,7 +115,7 @@ abstract class AbstractConfigurableDataTable implements ConfigurableDataTable
     {
         $fields = [];
         foreach ($this->columns as $name => $field) {
-            /** @var \PaLabs\DatagridBundle\Column\GridColumn $field */
+            /** @var \PaLabs\DatagridBundle\DataTable\Column\Column $field */
             if (!$field->required) {
                 $fields[] = [
                     'name' => $name,

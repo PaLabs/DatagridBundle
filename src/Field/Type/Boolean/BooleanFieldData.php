@@ -10,7 +10,7 @@ class BooleanFieldData extends BaseFieldData
 {
     protected $value;
     
-    public function __construct(bool $url, array $options = [])
+    public function __construct(bool $value, array $options = [])
     {
         parent::__construct($options);
         $this->value = $value;

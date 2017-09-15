@@ -16,7 +16,7 @@ class ColumnMakerCaller
     public function __construct(array $columns)
     {
         foreach ($columns as $columnName => $column) {
-            /** @var \PaLabs\DatagridBundle\Column\GridColumn $column */
+            /** @var \PaLabs\DatagridBundle\DataTable\Column\Column $column */
             $columnMaker = $column->columnMaker;
 
             $r = new \ReflectionFunction($columnMaker);

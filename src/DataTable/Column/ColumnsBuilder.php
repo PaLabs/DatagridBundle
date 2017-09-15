@@ -1,15 +1,13 @@
 <?php
 
-namespace PaLabs\DatagridBundle\Column;
+namespace PaLabs\DatagridBundle\DataTable\Column;
 
 
-use PaLabs\DatagridBundle\Column\GridColumn;
-
-class GridColumnsBuilder
+class ColumnsBuilder
 {
     private $columns = [];
 
-    public function add($name, GridColumn $column)
+    public function add($name, Column $column)
     {
         if (array_key_exists($name, $this->columns)) {
             throw new \Exception(sprintf('Column already exists in grid fields, name=%s', $name));
@@ -30,7 +28,7 @@ class GridColumnsBuilder
                 $columnOptions = ['label' => $columnOptions];
             }
 
-            $this->add($name, new GridColumn($callback, $columnOptions));
+            $this->add($name, new Column($callback, $columnOptions));
         }
     }
 

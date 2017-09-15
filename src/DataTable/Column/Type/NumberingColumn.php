@@ -1,16 +1,16 @@
 <?php
 
 
-namespace PaLabs\DatagridBundle\Column\Type;
+namespace PaLabs\DatagridBundle\DataTable\Column\Type;
 
 
-use PaLabs\DatagridBundle\Column\GridColumn;
+use PaLabs\DatagridBundle\DataTable\Column\Column;
 use PaLabs\DatagridBundle\DataTable\ColumnMakerContext;
 use PaLabs\DatagridBundle\Field\Type\String\StringField;
 use PaLabs\DatagridBundle\Grid\GridContext;
 use PaLabs\DatagridBundle\Grid\GridOptions;
 
-class NumberingColumn extends GridColumn
+class NumberingColumn extends Column
 {
 
     public function __construct(array $columnParameters = [])
