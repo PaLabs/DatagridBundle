@@ -13,9 +13,9 @@ use PaLabs\DatagridBundle\Field\Type\String\StringFieldData;
 
 class StringField extends HtmlOrTextField
 {
-    public static function field(string $value = '', array $renderOptions = [], array $options = [])
+    public static function field(string $value = null, array $renderOptions = [], array $options = [])
     {
-        return new StringFieldData($value, $renderOptions, $options);
+        return new StringFieldData($value ?? '', $renderOptions, $options);
     }
 
     public function renderHtml(FieldData $data)

@@ -4,8 +4,6 @@
 namespace PaLabs\DatagridBundle\DataSource\Result;
 
 
-use PaLabs\DatagridBundle\DataSource\Result\DataSourcePage;
-
 class DataSourceResultContainer
 {
     /** @var DataSourcePage[] */
