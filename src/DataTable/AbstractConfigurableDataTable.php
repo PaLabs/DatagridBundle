@@ -56,7 +56,7 @@ abstract class AbstractConfigurableDataTable implements ConfigurableDataTable
         $loopIndex = 0;
 
         foreach ($container->getPages() as $page) {
-            foreach ($page->rows as $rowData) {
+            foreach ($page->getRows() as $rowData) {
                 yield $this->buildRow($rowData, $loopIndex, $page, $context, $displayFields);
                 $loopIndex++;
             }

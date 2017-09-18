@@ -3,20 +3,15 @@
 namespace PaLabs\DatagridBundle\Grid\View;
 
 
-use PaLabs\DatagridBundle\DataTable\ConfigurableDataTable;
 use PaLabs\DatagridBundle\DataSource\ConfigurableDataSource;
-use PaLabs\DatagridBundle\DataSource\Result\PagedDataSourceResultContainer;
+use PaLabs\DatagridBundle\DataTable\ConfigurableDataTable;
 use PaLabs\DatagridBundle\Field\FieldData;
 use PaLabs\DatagridBundle\Field\Renderer\FieldRenderer;
 use PaLabs\DatagridBundle\Grid\Form\GridForm;
 use PaLabs\DatagridBundle\Grid\Form\GridFormData;
 use PaLabs\DatagridBundle\Grid\GridContext;
-use PaLabs\DatagridBundle\Grid\GridContextBuilder;
 use PaLabs\DatagridBundle\Grid\GridOptions;
 use PaLabs\DatagridBundle\Grid\GridParameters;
-use PaLabs\DatagridBundle\Grid\View\ContextBuilderTrait;
-use PaLabs\DatagridBundle\Grid\View\GridView;
-use PaLabs\DatagridBundle\Grid\View\ViewBuilderTrait;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -64,7 +59,6 @@ class GridViewBuilder
         $gridData = $this->handleForm($request, $gridForm);
 
         $gridContext = new GridContext($gridData, $parameters, $options);
-        //$gridContext->getDataSourceSettings()->setPage($request->query->get('page', 1));
 
         $dataSourceResult = $dataSource->rows($dataSourceConfig, $gridContext);
         $dataTableResult = $dataTable->rows($dataSourceResult, $dataTableConfig, $gridContext);
