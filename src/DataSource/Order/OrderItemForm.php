@@ -5,6 +5,7 @@ namespace PaLabs\DatagridBundle\DataSource\Order;
 
 use PaLabs\DatagridBundle\DataSource\Order\OrderItem;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -19,29 +20,37 @@ class OrderItemForm extends AbstractType
     {
         $builder
             ->add(self::FIELD_FORM_NAME, ChoiceType::class, [
-                'property_path' => 'field',
                 'required' => true,
                 'choices' => $options['sortFields']
             ])
             ->add(self::DIRECTION_FORM_NAME, ChoiceType::class, [
-                'property_path' => 'direction',
                 'required' => true,
                 'choices' => [
                     'order_asc' => OrderItem::ASC,
                     'order_desc' => OrderItem::DESC
                 ]
             ]);
+        $builder->addModelTransformer(new CallbackTransformer(
+            function (OrderItem $item = null) {
+                if ($item == null) {
+                    return null;
+                }
+                return [
+                    self::FIELD_FORM_NAME => $item->getField(),
+                    self::DIRECTION_FORM_NAME => $item->getDirection()
+                ];
+            },
+            function (array $itemData) {
+                return new OrderItem($itemData[self::FIELD_FORM_NAME], $itemData[self::DIRECTION_FORM_NAME]);
+            }
+        ));
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults([
-                'data_class' => OrderItem::class,
                 'translation_domain' => 'PaDatagridBundle',
-                'empty_data' => function (FormInterface $form) {
-                    return new OrderItem($form->get(self::FIELD_FORM_NAME)->getData(), $form->get(self::DIRECTION_FORM_NAME)->getData());
-                }
             ])
             ->setRequired(['sortFields']);
     }
