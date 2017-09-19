@@ -25,7 +25,7 @@ class EntityFilterForm extends AbstractType
                     'not_equals' => EntityFilter::OPERATOR_NOT_EQUALS
                 ]
             ])
-            ->add(self::VALUE_FIELD, $options['value_form'],
+            ->add(self::VALUE_FIELD, $options['entity_form'],
                 array_merge(['required' => false], $options['entity_options']));
 
         $builder->addModelTransformer(new EntityFilterModelTransformer());
@@ -35,15 +35,10 @@ class EntityFilterForm extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'value_form' => $this->defaultEntityForm(),
+                'entity_form' => EntityType::class,
                 'entity_options' => [],
                 'translation_domain' => 'PaDatagridBundle'
             ]);
-    }
-
-    protected function defaultEntityForm()
-    {
-        return EntityType::class;
     }
 
     public function getParent()

@@ -9,6 +9,12 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class BooleanFilterModelTransformer implements DataTransformerInterface
 {
+    public static function formData(BooleanFilterData $value) {
+        return [
+            BooleanFilterForm::VALUE_FIELD => $value->getValue(),
+        ];
+    }
+
     public function transform($value) {
         if ($value == null) {
             return null;
@@ -17,9 +23,7 @@ class BooleanFilterModelTransformer implements DataTransformerInterface
             throw new TransformationFailedException();
         }
 
-        return [
-            BooleanFilterForm::VALUE_FIELD => $value->getValue(),
-        ];
+       return self::formData($value);
     }
 
     public function reverseTransform($value) {

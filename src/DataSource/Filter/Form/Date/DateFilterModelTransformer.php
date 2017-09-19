@@ -9,6 +9,13 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class DateFilterModelTransformer  implements DataTransformerInterface
 {
+    public static function formData(DateFilterData $value) {
+        return [
+            DateFilterForm::START_FIELD => $value->getStartDate(),
+            DateFilterForm::END_FIELD => $value->getEndDate()
+        ];
+    }
+
     public function transform($value) {
         if ($value == null) {
             return null;
@@ -17,10 +24,7 @@ class DateFilterModelTransformer  implements DataTransformerInterface
             throw new TransformationFailedException();
         }
 
-        return [
-            DateFilterForm::START_FIELD => $value->getStartDate(),
-            DateFilterForm::END_FIELD => $value->getEndDate()
-        ];
+        return self::formData($value);
     }
 
     public function reverseTransform($value) {

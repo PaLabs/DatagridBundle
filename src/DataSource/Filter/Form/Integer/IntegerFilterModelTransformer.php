@@ -9,6 +9,12 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class IntegerFilterModelTransformer implements DataTransformerInterface
 {
+    public static function formData(IntegerFilterData $value) {
+        return [
+            IntegerFilterForm::VALUE_FIELD => $value->getValue(),
+        ];
+    }
+
     public function transform($value) {
         if ($value == null) {
             return null;
@@ -17,9 +23,7 @@ class IntegerFilterModelTransformer implements DataTransformerInterface
             throw new TransformationFailedException();
         }
 
-        return [
-            IntegerFilterForm::VALUE_FIELD => $value->getValue(),
-        ];
+        return self::formData($value);
     }
 
     public function reverseTransform($value) {
