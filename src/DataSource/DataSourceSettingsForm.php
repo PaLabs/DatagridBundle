@@ -3,10 +3,9 @@
 namespace PaLabs\DatagridBundle\DataSource;
 
 
-use PaLabs\DatagridBundle\DataSource\DataSourceSettings;
+use PaLabs\DatagridBundle\DataSource\Filter\FilterCollectionForm;
 use PaLabs\DatagridBundle\DataSource\Order\OrderForm;
 use PaLabs\DatagridBundle\Form\Type\EmptyGetForm;
-use PaLabs\DatagridBundle\Filter\FilterCollectionForm;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;

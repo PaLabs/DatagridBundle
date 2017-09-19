@@ -50,13 +50,13 @@
 	
 	var _Builder2 = _interopRequireDefault(_Builder);
 	
-	var _EntityCollectionElement = __webpack_require__(87);
+	var _OrderCollectionElement = __webpack_require__(87);
 	
-	var _EntityCollectionElement2 = _interopRequireDefault(_EntityCollectionElement);
+	var _OrderCollectionElement2 = _interopRequireDefault(_OrderCollectionElement);
 	
-	var _EntityCollection = __webpack_require__(106);
+	var _OrderCollection = __webpack_require__(106);
 	
-	var _EntityCollection2 = _interopRequireDefault(_EntityCollection);
+	var _OrderCollection2 = _interopRequireDefault(_OrderCollection);
 	
 	var _ColumnsSelector = __webpack_require__(109);
 	
@@ -69,7 +69,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	$(document).ready(function () {
-	    var components = [_EntityCollectionElement2.default, _EntityCollection2.default, _ColumnsSelector2.default, _Filter2.default];
+	    var components = [_OrderCollectionElement2.default, _OrderCollection2.default, _ColumnsSelector2.default, _Filter2.default];
 	
 	    var builder = new _Builder2.default(components);
 	    builder.bootstrap({
@@ -2159,43 +2159,44 @@
 	
 	var _ComponentFinder2 = _interopRequireDefault(_ComponentFinder);
 	
-	var _EntityCollection = __webpack_require__(106);
+	var _OrderCollection = __webpack_require__(106);
 	
-	var _EntityCollection2 = _interopRequireDefault(_EntityCollection);
+	var _OrderCollection2 = _interopRequireDefault(_OrderCollection);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var EntityCollectionElement = function (_Component) {
-	    (0, _inherits3.default)(EntityCollectionElement, _Component);
+	var OrderCollectionElement = function (_Component) {
+	    (0, _inherits3.default)(OrderCollectionElement, _Component);
 	
-	    function EntityCollectionElement() {
-	        (0, _classCallCheck3.default)(this, EntityCollectionElement);
-	        return (0, _possibleConstructorReturn3.default)(this, (EntityCollectionElement.__proto__ || (0, _getPrototypeOf2.default)(EntityCollectionElement)).apply(this, arguments));
+	    function OrderCollectionElement() {
+	        (0, _classCallCheck3.default)(this, OrderCollectionElement);
+	        return (0, _possibleConstructorReturn3.default)(this, (OrderCollectionElement.__proto__ || (0, _getPrototypeOf2.default)(OrderCollectionElement)).apply(this, arguments));
 	    }
 	
-	    (0, _createClass3.default)(EntityCollectionElement, [{
+	    (0, _createClass3.default)(OrderCollectionElement, [{
 	        key: 'init',
 	        value: function init() {
 	            var _this2 = this;
 	
-	            (0, _get3.default)(EntityCollectionElement.prototype.__proto__ || (0, _getPrototypeOf2.default)(EntityCollectionElement.prototype), 'init', this).call(this);
+	            (0, _get3.default)(OrderCollectionElement.prototype.__proto__ || (0, _getPrototypeOf2.default)(OrderCollectionElement.prototype), 'init', this).call(this);
 	
-	            var parentComponent = _ComponentFinder2.default.parent(this.$node, 'entity_collection');
+	            var parentComponent = _ComponentFinder2.default.parent(this.$node, 'order_collection');
 	            var removeElementButton = _Utils2.default.single_element(this.$node, 'remove_element');
+	
 	            removeElementButton.on('click', function () {
-	                parentComponent.trigger(_EntityCollection2.default.events.REMOVE_ELEMENT, _this2.$node);
+	                parentComponent.trigger(_OrderCollection2.default.events.REMOVE_ELEMENT, _this2.$node);
 	            });
 	        }
 	    }], [{
 	        key: 'id',
 	        get: function get() {
-	            return 'EntityCollectionElement';
+	            return 'OrderCollectionElement';
 	        }
 	    }]);
-	    return EntityCollectionElement;
+	    return OrderCollectionElement;
 	}(_Component3.default);
 	
-	exports.default = EntityCollectionElement;
+	exports.default = OrderCollectionElement;
 
 /***/ }),
 /* 88 */
@@ -2564,15 +2565,15 @@
 	    REMOVE_ELEMENT: 'collection.remove_element'
 	};
 	
-	var EntityCollection = function (_Component) {
-	    (0, _inherits3.default)(EntityCollection, _Component);
+	var OrderCollection = function (_Component) {
+	    (0, _inherits3.default)(OrderCollection, _Component);
 	
-	    function EntityCollection() {
-	        (0, _classCallCheck3.default)(this, EntityCollection);
-	        return (0, _possibleConstructorReturn3.default)(this, (EntityCollection.__proto__ || (0, _getPrototypeOf2.default)(EntityCollection)).apply(this, arguments));
+	    function OrderCollection() {
+	        (0, _classCallCheck3.default)(this, OrderCollection);
+	        return (0, _possibleConstructorReturn3.default)(this, (OrderCollection.__proto__ || (0, _getPrototypeOf2.default)(OrderCollection)).apply(this, arguments));
 	    }
 	
-	    (0, _createClass3.default)(EntityCollection, [{
+	    (0, _createClass3.default)(OrderCollection, [{
 	        key: 'propTypes',
 	        value: function propTypes() {
 	            return {
@@ -2584,7 +2585,7 @@
 	        value: function init() {
 	            var _this2 = this;
 	
-	            (0, _get3.default)(EntityCollection.prototype.__proto__ || (0, _getPrototypeOf2.default)(EntityCollection.prototype), 'init', this).call(this);
+	            (0, _get3.default)(OrderCollection.prototype.__proto__ || (0, _getPrototypeOf2.default)(OrderCollection.prototype), 'init', this).call(this);
 	
 	            var entityContainer = _Utils2.default.single_element(this.$node, 'entity_container');
 	            var childItems = _ComponentFinder2.default.all_childrens(entityContainer);
@@ -2624,7 +2625,7 @@
 	    }], [{
 	        key: 'id',
 	        get: function get() {
-	            return 'EntityCollection';
+	            return 'OrderCollection';
 	        }
 	    }, {
 	        key: 'events',
@@ -2632,10 +2633,10 @@
 	            return EVENTS;
 	        }
 	    }]);
-	    return EntityCollection;
+	    return OrderCollection;
 	}(_Component3.default);
 	
-	exports.default = EntityCollection;
+	exports.default = OrderCollection;
 
 /***/ }),
 /* 107 */

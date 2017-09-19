@@ -11,6 +11,8 @@ use PaLabs\DatagridBundle\DataSource\Order\Sorter;
 
 class QueryBuilderSorter implements Sorter
 {
+    const SINGLE_FIELD_TYPE = 'single_field';
+    const MULTIPLE_FIELDS_TYPE = 'multiple_fields';
 
     public function apply($qb, OrderItem $orderItem, array $config)
     {
@@ -19,10 +21,10 @@ class QueryBuilderSorter implements Sorter
         }
 
         switch ($config['type']) {
-            case SortBuilder::SINGLE_FIELD_TYPE:
+            case self::SINGLE_FIELD_TYPE:
                 $this->applySingleField($qb, $orderItem, $config);
                 break;
-            case SortBuilder::MULTIPLE_FIELDS_TYPE:
+            case self::MULTIPLE_FIELDS_TYPE:
                 $this->applyMultipleFields($qb, $orderItem, $config);
                 break;
             default:

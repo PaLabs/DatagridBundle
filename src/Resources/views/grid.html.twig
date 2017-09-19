@@ -44,7 +44,7 @@
             {% endblock %}
 
             {% block pagination %}
-                {% if grid.dataSourceResult.pager is defined %}
+                {% if grid.dataSourceResult.totalItemsCount > 0 and grid.dataSourceResult.pager is defined %}
                     {% set pager = grid.dataSourceResult.pager %}
                     <hr/>
 

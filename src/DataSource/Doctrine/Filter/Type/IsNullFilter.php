@@ -4,8 +4,9 @@ namespace PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type;
 
 
 use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\FilterHelper;
-use PaLabs\DatagridBundle\Filter\FilterInterface;
-use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\Boolean\BooleanFilterForm;
+use PaLabs\DatagridBundle\DataSource\Filter\FilterInterface;
+use PaLabs\DatagridBundle\DataSource\Filter\Form\Boolean\BooleanFilterData;
+use PaLabs\DatagridBundle\DataSource\Filter\Form\Boolean\BooleanFilterForm;
 use Doctrine\ORM\QueryBuilder;
 
 class IsNullFilter implements FilterInterface
@@ -25,15 +26,17 @@ class IsNullFilter implements FilterInterface
         if(!$qb instanceof QueryBuilder) {
             throw new \Exception("This filter can only be applies to QueryBuilder");
         }
-
-        if ($criteria['value'] === null) {
+        if(!$criteria instanceof BooleanFilterData) {
+            throw new \Exception();
+        }
+        if (!$criteria->isEnabled()) {
             return;
         }
-        $value = $criteria['value'] == 0 ? false : true;
+
 
         $fieldName = FilterHelper::fieldName($name, $options);
 
-        if ($value) {
+        if ($criteria->getValue()) {
             $qb->andWhere(sprintf('%s IS NOT NULL', $fieldName));
         } else {
             $qb->andWhere(sprintf('%s IS NULL', $fieldName));

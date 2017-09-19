@@ -10,11 +10,11 @@ use PaLabs\DatagridBundle\DataSource\Order\Sorter;
 
 class QueryBuilderSortApplier
 {
-    private $sorters = [];
+    private $sorter;
 
     public function __construct()
     {
-        $this->sorters[QueryBuilderSorter::class] = new QueryBuilderSorter();
+        $this->sorter = new QueryBuilderSorter();
     }
 
     public function apply(QueryBuilder $queryBuilder, array $orderConfig, array $orderItems)
@@ -23,17 +23,15 @@ class QueryBuilderSortApplier
 
         foreach ($orderItems as $orderItem) {
             $orderItemConfig = $orderConfig[$orderItem->getField()];
-            $sorterClass = $orderItemConfig['sorter'];
-            if($sorterClass === null) {
+
+            if (!isset($orderItemConfig['type'])) {
                 continue;
             }
-            if(!isset($this->sorters[$sorterClass])) {
+            if ($orderItemConfig['type'] !== QueryBuilderSortApplier::class) {
                 continue;
             }
 
-            /** @var Sorter $sorter */
-            $sorter = $this->sorters[$sorterClass];
-            $sorter->apply($queryBuilder, $orderItem, $orderItemConfig);
+            $this->sorter->apply($queryBuilder, $orderItem, $orderItemConfig);
         }
 
     }

@@ -5,7 +5,7 @@ services:
     private: true
 
   pa_datagrid.filter_registry:
-    class: PaLabs\DatagridBundle\Filter\Registry\FilterRegistry
+    class: PaLabs\DatagridBundle\DataSource\Filter\Registry\FilterRegistry
     private: true
 
   pa_datagrid.field_renderer:

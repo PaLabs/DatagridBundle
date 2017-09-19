@@ -12,21 +12,21 @@ export default class Filter extends Component {
         this.fieldSelector = Utils.single_element(this.$node, 'field_selector');
         this.initHideButtons();
 
-        var self = this;
+        let self = this;
 
-        var hideButtons = Utils.single_element(this.$node, 'hide_filter_row');
+        let hideButtons = Utils.single_element(this.$node, 'hide_filter_row');
         hideButtons.each(function (idx, hideButton) {
             $(hideButton).on('click', function () {
-                var rowName = $(this).attr('data-field');
+                let rowName = $(this).attr('data-field');
                 self.hideRow(rowName);
 
             })
         });
 
-        var displayButtons = this.fieldSelector.find('li');
+        let displayButtons = this.fieldSelector.find('li');
         displayButtons.each(function (idx, displayButton) {
             $(displayButton).on('click', function () {
-                var rowName = $(this).attr('data-field');
+                let rowName = $(this).attr('data-field');
                 self.revertRowVisibility(rowName);
             });
         })
@@ -48,23 +48,23 @@ export default class Filter extends Component {
     }
 
     hideRow(rowName) {
-        var tableRow = this.filterTable.find(`tr[data-field='${rowName}']`);
+        let tableRow = this.filterTable.find(`tr[data-field='${rowName}']`);
         tableRow.hide();
         tableRow.find(":input").attr("disabled", true);
-        var rowSelector = this.fieldSelector.find(`li[data-field='${rowName}']`);
+        let rowSelector = this.fieldSelector.find(`li[data-field='${rowName}']`);
         Utils.single_element(rowSelector, 'row_visibility').prop('checked', false);
     }
 
     showRow(rowName) {
-        var tableRow = this.filterTable.find(`tr[data-field='${rowName}']`);
+        let tableRow = this.filterTable.find(`tr[data-field='${rowName}']`);
         tableRow.find(":input").attr("disabled", false);
         tableRow.show();
-        var rowSelector = this.fieldSelector.find(`li[data-field='${rowName}']`);
+        let rowSelector = this.fieldSelector.find(`li[data-field='${rowName}']`);
         Utils.single_element(rowSelector, 'row_visibility').prop('checked', true);
     }
 
     revertRowVisibility(rowName) {
-        var tableRow = this.filterTable.find(`tr[data-field='${rowName}']`);
+        let tableRow = this.filterTable.find(`tr[data-field='${rowName}']`);
         if (tableRow.is(':visible')) {
             this.hideRow(rowName);
         } else {

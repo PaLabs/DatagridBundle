@@ -4,16 +4,14 @@ namespace PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type;
 
 
 use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\FilterHelper;
-use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\IntegerFilter;
 use PaLabs\DatagridBundle\DataSource\Filter\FilterInterface;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\Integer\IntegerFilterData;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\Integer\IntegerFilterForm;
 use Doctrine\ORM\QueryBuilder;
 use PaLabs\DatagridBundle\Util\StringUtils;
 
-class IntegerHavingFilter implements FilterInterface
+class IntegerFilter implements FilterInterface
 {
-
     public function formType(): string {
         return IntegerFilterForm::class;
     }
@@ -60,7 +58,7 @@ class IntegerHavingFilter implements FilterInterface
             $query = implode(' OR ', array_map(function ($item) {
                 return '(' . $item . ')';
             }, $queryParts));
-            $qb->andHaving($query);
+            $qb->andWhere($query);
         }
     }
 }

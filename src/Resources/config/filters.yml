@@ -1,26 +1,22 @@
 services:
   pa_datagrid.filter.boolean:
-    class: PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\Boolean\BooleanFilter
+    class: PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\BooleanFilter
     tags: ['pa_datagrid.filter']
 
   pa_datagrid.filter.date:
-    class: PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\Date\DateFilter
+    class: PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\DateFilter
     tags: ['pa_datagrid.filter']
 
   pa_datagrid.filter.entity:
-    class: PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\Entity\EntityFilter
+    class: PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\EntityFilter
     tags: ['pa_datagrid.filter']
 
   pa_datagrid.filter.integer:
-    class: PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\Integer\IntegerFilter
+    class: PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\IntegerFilter
     tags: ['pa_datagrid.filter']
 
   pa_datagrid.filter.string:
-    class: PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\String\StringFilter
-    tags: ['pa_datagrid.filter']
-
-  pa_datagrid.filter.callback:
-    class: PaLabs\DatagridBundle\Filter\Type\CallbackFilter
+    class: PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\StringFilter
     tags: ['pa_datagrid.filter']
 
   pa_datagrid.filter.collection_emptiness:

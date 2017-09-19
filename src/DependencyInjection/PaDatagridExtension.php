@@ -6,8 +6,8 @@ namespace PaLabs\DatagridBundle\DependencyInjection;
 
 use PaLabs\DatagridBundle\Field\Field;
 use PaLabs\DatagridBundle\Field\Registry\FieldRegistryCompilerPass;
-use PaLabs\DatagridBundle\Filter\FilterInterface;
-use PaLabs\DatagridBundle\Filter\Registry\FilterRegistryCompilerPass;
+use PaLabs\DatagridBundle\DataSource\Filter\FilterInterface;
+use PaLabs\DatagridBundle\DataSource\Filter\Registry\FilterRegistryCompilerPass;
 use PaLabs\DatagridBundle\Grid\Export\GridExporter;
 use PaLabs\DatagridBundle\Grid\Export\GridExporterCompilerPass;
 use Symfony\Component\Config\FileLocator;

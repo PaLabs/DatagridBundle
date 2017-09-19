@@ -15,8 +15,8 @@ class BooleanForm extends AbstractType
         $resolver
             ->setDefaults([
                 'choices' => [
-                    'Да' => true,
-                    'Нет' => false
+                    'choice_yes' => true,
+                    'choice_no' => false
                 ],
                 'required' => false
             ]);

@@ -10,9 +10,13 @@ records_per_page: Records per page
 order_asc: Ascending
 order_desc: Descending
 operator_contains: Contains
+operator_not_contains: Not contains
+operator_equals: Equals
 total_items: Total %itemsCount% records
 equals: Equals
 not_equals: Not equals
+choice_yes: Yes
+choice_no: No
 
 form:
   apply: Apply

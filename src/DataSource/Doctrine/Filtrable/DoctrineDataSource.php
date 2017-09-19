@@ -10,6 +10,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use PaLabs\DatagridBundle\DataSource\AbstractConfigurableDataSource;
 use PaLabs\DatagridBundle\DataSource\ConfigurableDataSource;
 use PaLabs\DatagridBundle\DataSource\DataSourceConfiguration;
+use PaLabs\DatagridBundle\DataSource\Doctrine\Order\DoctrineSortBuilder;
 use PaLabs\DatagridBundle\DataSource\Result\DataSourcePage;
 use PaLabs\DatagridBundle\DataSource\DataSourceSettings;
 use PaLabs\DatagridBundle\DataSource\Doctrine\Order\QueryBuilderSortApplier;
@@ -19,8 +20,8 @@ use PaLabs\DatagridBundle\DataSource\Result\PagedDataSourceResultContainer;
 use PaLabs\DatagridBundle\DataSource\Result\Pager;
 use PaLabs\DatagridBundle\DataTable\AbstractConfigurableDataTable;
 use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\QueryBuilderFilterApplier;
-use PaLabs\DatagridBundle\Filter\FilterBuilder;
-use PaLabs\DatagridBundle\Filter\Registry\FilterRegistry;
+use PaLabs\DatagridBundle\DataSource\Filter\FilterBuilder;
+use PaLabs\DatagridBundle\DataSource\Filter\Registry\FilterRegistry;
 use PaLabs\DatagridBundle\Grid\GridContext;
 use PaLabs\DatagridBundle\Grid\GridOptions;
 use PaLabs\DatagridBundle\Grid\GridParameters;
@@ -117,6 +118,10 @@ abstract class DoctrineDataSource extends AbstractConfigurableDataSource
     protected function buildPageContext(array $rows, DataSourceConfiguration $configuration, GridContext $context)
     {
         return [];
+    }
+
+    protected function createSortBuilder(): SortBuilder {
+        return new DoctrineSortBuilder();
     }
 
 }

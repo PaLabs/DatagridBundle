@@ -1,15 +1,15 @@
 import Builder from './lib/Builder';
 
-import EntityCollectionElement from './component/EntityCollectionElement';
-import EntityCollection from './component/EntityCollection';
+import OrderCollectionElement from './component/OrderCollectionElement';
+import OrderCollection from './component/OrderCollection';
 import ColumnsSelector from './component/ColumnsSelector';
 import Filter from './component/Filter';
 
 
 $(document).ready(function () {
     let components = [
-        EntityCollectionElement,
-        EntityCollection,
+        OrderCollectionElement,
+        OrderCollection,
         ColumnsSelector,
         Filter
     ];

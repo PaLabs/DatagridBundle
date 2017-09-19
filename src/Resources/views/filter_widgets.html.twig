@@ -10,9 +10,9 @@
 {% block date_filter_form_widget %}
     <table width="100%">
         <tr>
-            <td>{{ form_widget(form.start) }}</td>
+            <td>{{ form_widget(form.s) }}</td>
             <td width="50px" align="center">...</td>
-            <td>{{ form_widget(form.end) }}</td>
+            <td>{{ form_widget(form.e) }}</td>
         </tr>
     </table>
 {% endblock %}
@@ -27,9 +27,9 @@
 {% endblock %}
 
 {% block integer_filter_form_widget %}
-    {{ form_widget(form.value) }}
+    {{ form_widget(form.v) }}
 {% endblock %}
 
 {% block boolean_filter_form_widget %}
-    {{ form_widget(form.value) }}
+    {{ form_widget(form.v) }}
 {% endblock %}

@@ -6,7 +6,7 @@ namespace PaLabs\DatagridBundle;
 
 use PaLabs\DatagridBundle\DependencyInjection\PaDatagridExtension;
 use PaLabs\DatagridBundle\Field\Registry\FieldRegistryCompilerPass;
-use PaLabs\DatagridBundle\Filter\Registry\FilterRegistryCompilerPass;
+use PaLabs\DatagridBundle\DataSource\Filter\Registry\FilterRegistryCompilerPass;
 use PaLabs\DatagridBundle\Grid\Export\GridExporterCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;

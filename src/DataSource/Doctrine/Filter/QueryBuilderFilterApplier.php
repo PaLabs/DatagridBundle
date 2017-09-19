@@ -4,7 +4,7 @@ namespace PaLabs\DatagridBundle\DataSource\Doctrine\Filter;
 
 
 use Doctrine\ORM\QueryBuilder;
-use PaLabs\DatagridBundle\Filter\FilterInterface;
+use PaLabs\DatagridBundle\DataSource\Filter\FilterInterface;
 
 class QueryBuilderFilterApplier
 {

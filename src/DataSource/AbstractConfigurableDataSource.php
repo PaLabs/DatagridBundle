@@ -4,11 +4,9 @@
 namespace PaLabs\DatagridBundle\DataSource;
 
 
-use PaLabs\DatagridBundle\DataSource\DataSourceSettings;
-use PaLabs\DatagridBundle\DataSource\DataSourceSettingsForm;
 use PaLabs\DatagridBundle\DataSource\Order\SortBuilder;
-use PaLabs\DatagridBundle\Filter\FilterBuilder;
-use PaLabs\DatagridBundle\Filter\Registry\FilterRegistry;
+use PaLabs\DatagridBundle\DataSource\Filter\FilterBuilder;
+use PaLabs\DatagridBundle\DataSource\Filter\Registry\FilterRegistry;
 use PaLabs\DatagridBundle\Grid\GridParameters;
 
 abstract class AbstractConfigurableDataSource implements ConfigurableDataSource
@@ -48,11 +46,11 @@ abstract class AbstractConfigurableDataSource implements ConfigurableDataSource
 
     public function configure(GridParameters $parameters): DataSourceConfiguration
     {
-        $filterBuilder = new FilterBuilder($this->filterRegistry);
+        $filterBuilder =$this->createFilterBuilder();
         $this->configureFilters($filterBuilder, $parameters);
         $filters = $filterBuilder->getFilters();
 
-        $sortBuilder = new SortBuilder();
+        $sortBuilder = $this->createSortBuilder();
         $this->configureSorting($sortBuilder, $parameters);
         $sorting = $sortBuilder->getSorting();
 
@@ -66,5 +64,13 @@ abstract class AbstractConfigurableDataSource implements ConfigurableDataSource
 
         $form = $this->getSettingsForm($parameters);
         return new DataSourceConfiguration($form, $formOptions, $formDefaults, $filters, $sorting);
+    }
+
+    protected function createSortBuilder(): SortBuilder {
+        return new SortBuilder();
+    }
+
+    protected function createFilterBuilder(): FilterBuilder {
+        return new FilterBuilder($this->filterRegistry);
     }
 }
