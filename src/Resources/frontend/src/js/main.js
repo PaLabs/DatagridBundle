@@ -1,19 +1,7 @@
 import Builder from './lib/Builder';
-
-import OrderCollectionElement from './component/OrderCollectionElement';
-import OrderCollection from './component/OrderCollection';
-import ColumnsSelector from './component/ColumnsSelector';
-import Filter from './component/Filter';
-
+import components from './component_list';
 
 $(document).ready(function () {
-    let components = [
-        OrderCollectionElement,
-        OrderCollection,
-        ColumnsSelector,
-        Filter
-    ];
-
     let builder = new Builder(components);
     builder
         .bootstrap({
