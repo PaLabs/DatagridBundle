@@ -1,6 +1,6 @@
 <?php
 
-namespace PaLabs\DatagridBundle\DataSource\Doctrine\Filtrable;
+namespace PaLabs\DatagridBundle\DataSource\Doctrine;
 
 
 use Doctrine\ORM\EntityManagerInterface;

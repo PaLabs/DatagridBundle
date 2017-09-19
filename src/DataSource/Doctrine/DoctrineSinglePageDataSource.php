@@ -1,11 +1,12 @@
 <?php
 
 
-namespace PaLabs\DatagridBundle\DataSource\Doctrine\Filtrable;
+namespace PaLabs\DatagridBundle\DataSource\Doctrine;
 
 
 use Doctrine\ORM\QueryBuilder;
 use PaLabs\DatagridBundle\DataSource\DataSourceConfiguration;
+use PaLabs\DatagridBundle\DataSource\Doctrine\DoctrineDataSource;
 use PaLabs\DatagridBundle\DataSource\Result\DataSourcePage;
 use PaLabs\DatagridBundle\DataSource\Result\DataSourceResultContainer;
 use PaLabs\DatagridBundle\Grid\GridContext;

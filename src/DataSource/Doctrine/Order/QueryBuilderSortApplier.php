@@ -22,17 +22,17 @@ class QueryBuilderSortApplier
         /** @var OrderItem[] $orderItems */
 
         foreach ($orderItems as $orderItem) {
-            $orderItemConfig = $orderConfig[$orderItem->getField()];
+            $options = $orderConfig[$orderItem->getField()]['options'];
 
-            if (!isset($orderItemConfig['type'])) {
+            if (!isset($options['sorter'])) {
                 continue;
             }
-            if ($orderItemConfig['type'] !== QueryBuilderSortApplier::class) {
+            if ($options['sorter'] !== QueryBuilderSortApplier::class) {
                 continue;
             }
 
-            $this->sorter->apply($queryBuilder, $orderItem, $orderItemConfig);
+            $this->sorter->apply($queryBuilder, $orderItem, $options);
         }
-
     }
+
 }
