@@ -53,7 +53,7 @@ class DataSourceSettingsForm extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'data_class' => \PaLabs\DatagridBundle\DataSource\DataSourceSettings::class,
+                'data_class' => DataSourceSettings::class,
                 'recordsPerPage' => [10, 20, 50, 100],
                 'enablePerPageSelector' => true
             ])
@@ -72,7 +72,7 @@ class DataSourceSettingsForm extends AbstractType
         return $sortFields;
     }
 
-    public static function urlParameters(array $filters = [], array $order = [], $perPage = null)
+    public static function urlParameters(array $filters = [], array $order = [], $perPage = null, $page = null)
     {
         $parameters = [];
         if (!empty($filters)) {
@@ -83,6 +83,9 @@ class DataSourceSettingsForm extends AbstractType
         }
         if ($perPage !== null) {
             $parameters[self::PER_PAGE_FORM_NAME] = $perPage;
+        }
+        if($page !== null) {
+            $parameters[self::PAGE_FORM_NAME] = $page;
         }
 
         return $parameters;

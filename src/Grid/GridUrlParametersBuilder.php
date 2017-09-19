@@ -9,21 +9,22 @@ use PaLabs\DatagridBundle\Grid\Form\GridForm;
 class GridUrlParametersBuilder
 {
 
-    public static function build(array $dataSourceParameters = [], array $gridSettings = [])
+    public static function build(array $dataSourceParameters = [], array $dateTableSettings = [])
     {
         $parameters = [];
+
         if (!empty($dataSourceParameters)) {
-            $parameters[Form\GridForm::DATA_SOURCE_SETTINGS_FORM_NAME] = $dataSourceParameters;
+            $parameters[GridForm::DATA_SOURCE_SETTINGS_FORM_NAME] = $dataSourceParameters;
         }
-        if(!empty($gridSettings)) {
-            $parameters[GridForm::DATA_TABLE_SETTINGS_FORM_NAME] = $gridSettings;
+        if(!empty($dateTableSettings)) {
+            $parameters[GridForm::DATA_TABLE_SETTINGS_FORM_NAME] = $dateTableSettings;
         }
 
         if(empty($parameters)) {
             return [];
         }
         return [
-            Form\GridForm::FORM_NAME => $parameters
+            GridForm::FORM_NAME => $parameters
         ];
     }
 }
