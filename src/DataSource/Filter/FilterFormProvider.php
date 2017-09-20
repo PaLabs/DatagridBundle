@@ -3,10 +3,8 @@
 namespace PaLabs\DatagridBundle\DataSource\Filter;
 
 
-interface FilterInterface
+interface FilterFormProvider
 {
     public function formType(): string;
     public function formOptions(): array;
-
-    public function apply($filtrable, string $name, $criteria, array $options = []);
 }

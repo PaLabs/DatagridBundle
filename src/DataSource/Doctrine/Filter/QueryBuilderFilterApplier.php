@@ -4,7 +4,7 @@ namespace PaLabs\DatagridBundle\DataSource\Doctrine\Filter;
 
 
 use Doctrine\ORM\QueryBuilder;
-use PaLabs\DatagridBundle\DataSource\Filter\FilterInterface;
+use PaLabs\DatagridBundle\DataSource\Filter\FilterFormProvider;
 
 class QueryBuilderFilterApplier
 {
@@ -12,10 +12,11 @@ class QueryBuilderFilterApplier
     {
         foreach ($filters as $name => $filterDesc) {
             if (!empty($filterData[$name])) {
-
-                /** @var FilterInterface $filter */
                 $filter = $filterDesc['filter'];
                 if($filter === null) {
+                    continue;
+                }
+                if(!$filter instanceof DoctrineFilterInterface) {
                     continue;
                 }
 

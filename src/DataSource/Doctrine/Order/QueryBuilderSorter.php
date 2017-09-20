@@ -9,17 +9,13 @@ use PaLabs\DatagridBundle\DataSource\Order\OrderItem;
 use PaLabs\DatagridBundle\DataSource\Order\SortBuilder;
 use PaLabs\DatagridBundle\DataSource\Order\Sorter;
 
-class QueryBuilderSorter implements Sorter
+class QueryBuilderSorter
 {
     const SINGLE_FIELD_TYPE = 'single_field';
     const MULTIPLE_FIELDS_TYPE = 'multiple_fields';
 
-    public function apply($qb, OrderItem $orderItem, array $config)
+    public function apply(QueryBuilder $qb, OrderItem $orderItem, array $config)
     {
-        if(!$qb instanceof QueryBuilder) {
-            throw new \LogicException("Can be applied only to QueryBuilder");
-        }
-
         switch ($config['type']) {
             case self::SINGLE_FIELD_TYPE:
                 $this->applySingleField($qb, $orderItem, $config);

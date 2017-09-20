@@ -4,12 +4,13 @@ namespace PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type;
 
 
 use Doctrine\ORM\QueryBuilder;
+use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\DoctrineFilterInterface;
 use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\FilterHelper;
-use PaLabs\DatagridBundle\DataSource\Filter\FilterInterface;
+use PaLabs\DatagridBundle\DataSource\Filter\FilterFormProvider;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\String\StringFilterData;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\String\StringFilterForm;
 
-class StringFilter implements FilterInterface
+class StringFilter implements FilterFormProvider, DoctrineFilterInterface
 {
     const OPERATOR_CONTAINS = 'c';
     const OPERATOR_NOT_CONTAINS = 'nc';
@@ -24,11 +25,8 @@ class StringFilter implements FilterInterface
         return [];
     }
 
-    public function apply($qb, string $name, $criteria, array $options = [])
+    public function apply(QueryBuilder $qb, string $name, $criteria, array $options = [])
     {
-        if(!$qb instanceof QueryBuilder) {
-            throw new \Exception("This filter can only be applies to QueryBuilder");
-        }
         if(!$criteria instanceof StringFilterData) {
             throw new \LogicException();
         }

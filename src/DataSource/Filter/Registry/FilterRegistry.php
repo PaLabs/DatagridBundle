@@ -4,13 +4,13 @@
 namespace PaLabs\DatagridBundle\DataSource\Filter\Registry;
 
 
-use PaLabs\DatagridBundle\DataSource\Filter\FilterInterface;
+use PaLabs\DatagridBundle\DataSource\Filter\FilterFormProvider;
 
 class FilterRegistry
 {
     private $filters = [];
 
-    public function registerFilter(FilterInterface $filter)
+    public function registerFilter(FilterFormProvider $filter)
     {
         $filterClass = get_class($filter);
 
@@ -20,7 +20,7 @@ class FilterRegistry
         $this->filters[$filterClass] = $filter;
     }
 
-    public function getFilter(string $filterClass): FilterInterface
+    public function getFilter(string $filterClass): FilterFormProvider
     {
         if (!isset($this->filters[$filterClass])) {
             throw new \Exception(sprintf("Filter has not registered, %s", $filterClass));

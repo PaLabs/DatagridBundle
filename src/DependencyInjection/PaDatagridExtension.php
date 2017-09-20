@@ -6,7 +6,7 @@ namespace PaLabs\DatagridBundle\DependencyInjection;
 
 use PaLabs\DatagridBundle\Field\Field;
 use PaLabs\DatagridBundle\Field\Registry\FieldRegistryCompilerPass;
-use PaLabs\DatagridBundle\DataSource\Filter\FilterInterface;
+use PaLabs\DatagridBundle\DataSource\Filter\FilterFormProvider;
 use PaLabs\DatagridBundle\DataSource\Filter\Registry\FilterRegistryCompilerPass;
 use PaLabs\DatagridBundle\Grid\Export\GridExporter;
 use PaLabs\DatagridBundle\Grid\Export\GridExporterCompilerPass;
@@ -19,7 +19,7 @@ class PaDatagridExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
-        $container->registerForAutoconfiguration(FilterInterface::class)
+        $container->registerForAutoconfiguration(FilterFormProvider::class)
             ->addTag(FilterRegistryCompilerPass::TAG_NAME);
 
         $container->registerForAutoconfiguration(Field::class)

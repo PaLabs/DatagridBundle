@@ -4,12 +4,13 @@ namespace PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type;
 
 
 use Doctrine\ORM\QueryBuilder;
+use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\DoctrineFilterInterface;
 use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\FilterHelper;
-use PaLabs\DatagridBundle\DataSource\Filter\FilterInterface;
+use PaLabs\DatagridBundle\DataSource\Filter\FilterFormProvider;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\Date\DateFilterData;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\Date\DateFilterForm;
 
-class DateFilter implements FilterInterface
+class DateFilter implements FilterFormProvider, DoctrineFilterInterface
 {
     public function formType(): string
     {
@@ -22,11 +23,8 @@ class DateFilter implements FilterInterface
         return [];
     }
 
-    public function apply($qb, string $name, $criteria, array $options = [])
+    public function apply(QueryBuilder $qb, string $name, $criteria, array $options = [])
     {
-        if (!$qb instanceof QueryBuilder) {
-            throw new \Exception("This filter can only be applies to QueryBuilder");
-        }
         if (!$criteria instanceof DateFilterData) {
             throw new \Exception();
         }
