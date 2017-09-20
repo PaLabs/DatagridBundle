@@ -1,0 +1,23 @@
+filter: Фильтр
+sorting: Сортировка
+table: Табица
+available_columns: Доступные столбцы
+selected_columns: Выбранные столбцы
+move_up: Вверх
+move_down: Вних
+delete: Удалить
+records_per_page: Записей на страницу
+order_asc: По возрастанию
+order_desc: По убыванию
+operator_contains: Содержится
+operator_not_contains: Не содержится
+operator_equals: Равно
+total_items: Всего %itemsCount% записей
+equals: Равно
+not_equals: Не равно
+choice_yes: Да
+choice_no: Нет
+
+form:
+  apply: Применить
+  reset: Сбросить
