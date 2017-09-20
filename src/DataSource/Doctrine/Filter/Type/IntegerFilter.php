@@ -9,6 +9,7 @@ use PaLabs\DatagridBundle\DataSource\Filter\FilterFormProvider;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\Integer\IntegerFilterData;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\Integer\IntegerFilterForm;
 use Doctrine\ORM\QueryBuilder;
+use PaLabs\DatagridBundle\DataSource\Filter\InvalidFilterDataException;
 use PaLabs\DatagridBundle\Util\StringUtils;
 
 class IntegerFilter implements FilterFormProvider, DoctrineFilterInterface
@@ -25,7 +26,7 @@ class IntegerFilter implements FilterFormProvider, DoctrineFilterInterface
     public function apply(QueryBuilder $qb, string $name, $criteria, array $options = [])
     {
         if (!$criteria instanceof IntegerFilterData) {
-            throw new \Exception();
+            throw new InvalidFilterDataException(IntegerFilterData::class, $criteria);
         }
         if (!$criteria->isEnabled()) {
             return;

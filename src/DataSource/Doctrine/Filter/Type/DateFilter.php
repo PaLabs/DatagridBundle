@@ -9,6 +9,7 @@ use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\FilterHelper;
 use PaLabs\DatagridBundle\DataSource\Filter\FilterFormProvider;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\Date\DateFilterData;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\Date\DateFilterForm;
+use PaLabs\DatagridBundle\DataSource\Filter\InvalidFilterDataException;
 
 class DateFilter implements FilterFormProvider, DoctrineFilterInterface
 {
@@ -26,7 +27,7 @@ class DateFilter implements FilterFormProvider, DoctrineFilterInterface
     public function apply(QueryBuilder $qb, string $name, $criteria, array $options = [])
     {
         if (!$criteria instanceof DateFilterData) {
-            throw new \Exception();
+            throw new InvalidFilterDataException(DateFilterData::class, $criteria);
         }
         if (!$criteria->isEnabled()) {
             return;

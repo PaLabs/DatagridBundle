@@ -9,6 +9,7 @@ use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\FilterHelper;
 use PaLabs\DatagridBundle\DataSource\Filter\FilterFormProvider;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\Boolean\BooleanFilterData;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\Boolean\BooleanFilterForm;
+use PaLabs\DatagridBundle\DataSource\Filter\InvalidFilterDataException;
 
 class BooleanFilter implements FilterFormProvider, DoctrineFilterInterface
 {
@@ -25,7 +26,7 @@ class BooleanFilter implements FilterFormProvider, DoctrineFilterInterface
     public function apply(QueryBuilder $qb, string $name, $criteria, array $options = [])
     {
         if(!$criteria instanceof BooleanFilterData) {
-            throw new \Exception();
+            throw new InvalidFilterDataException(BooleanFilterData::class, $criteria);
         }
         if (!$criteria->isEnabled()) {
             return;

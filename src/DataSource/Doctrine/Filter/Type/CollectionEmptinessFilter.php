@@ -9,6 +9,7 @@ use PaLabs\DatagridBundle\DataSource\Filter\FilterFormProvider;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\Boolean\BooleanFilterData;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\Boolean\BooleanFilterForm;
 use Doctrine\ORM\QueryBuilder;
+use PaLabs\DatagridBundle\DataSource\Filter\InvalidFilterDataException;
 
 class CollectionEmptinessFilter implements FilterFormProvider, DoctrineFilterInterface
 {
@@ -24,11 +25,8 @@ class CollectionEmptinessFilter implements FilterFormProvider, DoctrineFilterInt
 
     public function apply(QueryBuilder $qb, string $name, $criteria, array $options = [])
     {
-        if(!$qb instanceof QueryBuilder) {
-            throw new \Exception("This filter can only be applies to QueryBuilder");
-        }
         if(!$criteria instanceof BooleanFilterData) {
-            throw new \Exception();
+            throw new InvalidFilterDataException(BooleanFilterData::class, $criteria);
         }
         if (!$criteria->isEnabled()) {
             return;

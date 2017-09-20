@@ -9,6 +9,7 @@ use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\FilterHelper;
 use PaLabs\DatagridBundle\DataSource\Filter\FilterFormProvider;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\String\StringFilterData;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\String\StringFilterForm;
+use PaLabs\DatagridBundle\DataSource\Filter\InvalidFilterDataException;
 
 class StringFilter implements FilterFormProvider, DoctrineFilterInterface
 {
@@ -28,7 +29,7 @@ class StringFilter implements FilterFormProvider, DoctrineFilterInterface
     public function apply(QueryBuilder $qb, string $name, $criteria, array $options = [])
     {
         if(!$criteria instanceof StringFilterData) {
-            throw new \LogicException();
+            throw new InvalidFilterDataException(StringFilterData::class, $criteria);
         }
         if (!$criteria->isEnabled()) {
             return;
