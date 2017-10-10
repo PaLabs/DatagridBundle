@@ -16,7 +16,12 @@ class StringFilterForm extends AbstractType
     const OPERATOR_FIELD = 'o';
     const VALUE_FIELD = 'v';
 
-   public function buildForm(FormBuilderInterface $builder, array $options)
+    public static function formData(string $value, string $operator = StringFilter::OPERATOR_CONTAINS)
+    {
+        return StringFilterModelTransformer::formData(new StringFilterData($operator, $value));
+    }
+
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add(self::OPERATOR_FIELD, ChoiceType::class, [
@@ -39,7 +44,6 @@ class StringFilterForm extends AbstractType
             'translation_domain' => 'PaDatagridBundle',
         ]);
     }
-
 
 
     public function getParent()

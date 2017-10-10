@@ -16,6 +16,11 @@ class EntityFilterForm extends AbstractType
     const OPERATOR_FIELD = 'o';
     const VALUE_FIELD = 'v';
 
+    public static function formData($value, string $operator = EntityFilter::OPERATOR_EQUALS)
+    {
+        return EntityFilterModelTransformer::formData(new EntityFilterData($operator, $value));
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
