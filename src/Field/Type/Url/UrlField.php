@@ -3,12 +3,9 @@
 namespace PaLabs\DatagridBundle\Field\Type\Url;
 
 
-use PaLabs\DatagridBundle\Field\Type\FieldCheckDataTrait;
 use PaLabs\DatagridBundle\Field\FieldData;
 use PaLabs\DatagridBundle\Field\Type\HtmlOrTextField;
 use PaLabs\DatagridBundle\Field\Type\InvalidDataTypeException;
-use PaLabs\DatagridBundle\Field\Type\PaLabs;
-use PaLabs\DatagridBundle\Field\Type\Url\UrlFieldData;
 
 class UrlField extends HtmlOrTextField
 {

@@ -24,6 +24,10 @@ class StringField extends HtmlOrTextField
             throw new InvalidDataTypeException($data, $this->dataClass());
         }
 
+        if(empty($data->getValue())) {
+            return '';
+        }
+
         $result = htmlspecialchars($data->getValue());
 
         $options = $data->getRenderOptions();

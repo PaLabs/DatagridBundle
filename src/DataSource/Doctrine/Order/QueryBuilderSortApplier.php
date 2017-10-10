@@ -3,10 +3,8 @@
 namespace PaLabs\DatagridBundle\DataSource\Doctrine\Order;
 
 
-use PaLabs\DatagridBundle\DataSource\Order\OrderItem;
 use Doctrine\ORM\QueryBuilder;
-use PaLabs\DatagridBundle\DataSource\Order\SortBuilder;
-use PaLabs\DatagridBundle\DataSource\Order\Sorter;
+use PaLabs\DatagridBundle\DataSource\Order\OrderItem;
 
 class QueryBuilderSortApplier
 {

@@ -14,7 +14,7 @@ use PaLabs\DatagridBundle\Util\DateUtils;
 
 class DateField extends HtmlOrTextField
 {
-    public static function field(\DateTime $dateTime, string $locale = 'en', array $options = [])
+    public static function field(\DateTime $dateTime = null, string $locale = 'en', array $options = [])
     {
         return new DateFieldData($dateTime, $locale, $options);
     }
@@ -23,6 +23,10 @@ class DateField extends HtmlOrTextField
     {
         if (!$data instanceof DateFieldData) {
             throw new InvalidDataTypeException($data, $this->dataClass());
+        }
+
+        if($data->getDateTime() === null) {
+            return '';
         }
 
         return \IntlDateFormatter::create($data->getLocale(), \IntlDateFormatter::MEDIUM, \IntlDateFormatter::NONE)

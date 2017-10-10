@@ -11,14 +11,17 @@ class DateTimeFieldData extends BaseFieldData
     protected $dateTime;
     protected $locale;
 
-    public function __construct(\DateTime $date, string $locale = 'en', array $options = [])
+    public function __construct(\DateTime $date = null, string $locale = 'en', array $options = [])
     {
         parent::__construct($options);
         $this->dateTime = $date;
         $this->locale = $locale;
     }
 
-    public function getDateTime(): \DateTime
+    /**
+     * @return \DateTime|null
+     */
+    public function getDateTime()
     {
         return $this->dateTime;
     }
