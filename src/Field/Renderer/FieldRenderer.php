@@ -4,9 +4,6 @@ namespace PaLabs\DatagridBundle\Field\Renderer;
 
 
 use PaLabs\DatagridBundle\Field\FieldData;
-use PaLabs\DatagridBundle\Field\Renderer\FieldRenderResult;
-use PaLabs\DatagridBundle\Field\Renderer\MultiColumnFieldData;
-use PaLabs\DatagridBundle\Field\Renderer\MultiValueFieldData;
 use PaLabs\DatagridBundle\Field\Registry\FieldRegistry;
 use PaLabs\DatagridBundle\Grid\GridOptions;
 

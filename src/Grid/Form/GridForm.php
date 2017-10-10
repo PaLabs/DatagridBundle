@@ -5,7 +5,6 @@ namespace PaLabs\DatagridBundle\Grid\Form;
 
 
 use PaLabs\DatagridBundle\Form\Type\EmptyGetForm;
-use PaLabs\DatagridBundle\Grid\Form\GridFormData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

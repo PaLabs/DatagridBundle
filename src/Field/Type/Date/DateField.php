@@ -3,14 +3,9 @@
 namespace PaLabs\DatagridBundle\Field\Type\Date;
 
 
-use PaLabs\DatagridBundle\Field\Field;
 use PaLabs\DatagridBundle\Field\FieldData;
-use PaLabs\DatagridBundle\Field\Type\Date\DateFieldData;
-use PaLabs\DatagridBundle\Field\Type\FieldCheckDataTrait;
 use PaLabs\DatagridBundle\Field\Type\HtmlOrTextField;
 use PaLabs\DatagridBundle\Field\Type\InvalidDataTypeException;
-use PaLabs\DatagridBundle\Field\Type\PaLabs;
-use PaLabs\DatagridBundle\Util\DateUtils;
 
 class DateField extends HtmlOrTextField
 {

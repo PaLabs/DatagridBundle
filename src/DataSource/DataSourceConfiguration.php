@@ -4,9 +4,6 @@
 namespace PaLabs\DatagridBundle\DataSource;
 
 
-use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\QueryBuilderFilterApplier;
-use PaLabs\DatagridBundle\DataSource\Doctrine\Order\QueryBuilderSortApplier;
-
 class DataSourceConfiguration
 {
     protected $form;

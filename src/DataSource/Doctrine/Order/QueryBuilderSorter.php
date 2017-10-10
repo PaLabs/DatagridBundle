@@ -6,8 +6,6 @@ namespace PaLabs\DatagridBundle\DataSource\Doctrine\Order;
 
 use Doctrine\ORM\QueryBuilder;
 use PaLabs\DatagridBundle\DataSource\Order\OrderItem;
-use PaLabs\DatagridBundle\DataSource\Order\SortBuilder;
-use PaLabs\DatagridBundle\DataSource\Order\Sorter;
 
 class QueryBuilderSorter
 {

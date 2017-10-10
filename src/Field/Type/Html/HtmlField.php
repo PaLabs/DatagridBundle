@@ -6,7 +6,6 @@ namespace PaLabs\DatagridBundle\Field\Type\Html;
 
 use PaLabs\DatagridBundle\Field\Field;
 use PaLabs\DatagridBundle\Field\FieldData;
-use PaLabs\DatagridBundle\Field\Type\HtmlOrTextField;
 use PaLabs\DatagridBundle\Field\Type\InvalidDataTypeException;
 use PaLabs\DatagridBundle\Grid\Export\XlsxExporter;
 use PaLabs\DatagridBundle\Grid\GridOptions;

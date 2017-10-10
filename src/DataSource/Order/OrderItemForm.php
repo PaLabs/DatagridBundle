@@ -3,12 +3,10 @@
 namespace PaLabs\DatagridBundle\DataSource\Order;
 
 
-use PaLabs\DatagridBundle\DataSource\Order\OrderItem;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class OrderItemForm extends AbstractType

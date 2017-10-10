@@ -3,10 +3,8 @@
 namespace PaLabs\DatagridBundle\DataTable\Form;
 
 
-use PaLabs\DatagridBundle\DataTable\Form\ColumnsForm;
-use PaLabs\DatagridBundle\Form\Type\EmptyGetForm;
-use PaLabs\DatagridBundle\Form;
 use PaLabs\DatagridBundle\DataTable\DataTableSettings;
+use PaLabs\DatagridBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
