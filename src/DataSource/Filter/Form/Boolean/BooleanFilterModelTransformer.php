@@ -31,6 +31,11 @@ class BooleanFilterModelTransformer implements DataTransformerInterface
             return null;
         }
 
-        return new BooleanFilterData($value[BooleanFilterForm::VALUE_FIELD] == 0 ? false : true);
+        if(!isset($value[BooleanFilterForm::VALUE_FIELD])) {
+            $filterValue = null;
+        } else {
+            $filterValue = is_bool($value[BooleanFilterForm::VALUE_FIELD]) ? $value[BooleanFilterForm::VALUE_FIELD] : null;
+        }
+        return new BooleanFilterData($filterValue);
     }
 }
