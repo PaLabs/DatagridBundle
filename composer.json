@@ -6,11 +6,12 @@
     "license": "MIT",
     "require": {
         "php": "^7.0",
-        "knplabs/knp-paginator-bundle": "^2.6",
         "doctrine/common": "^2.8",
         "doctrine/orm": "^2.5",
         "symfony/form": "^3.3",
-        "symfony/doctrine-bridge": "^3.3"
+        "symfony/doctrine-bridge": "^3.3",
+        "knplabs/knp-paginator-bundle": "^2.6",
+        "symfony/templating": "^3.3"
     },
     "autoload": {
         "psr-4": {

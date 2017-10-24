@@ -9,7 +9,7 @@ use PaLabs\DatagridBundle\Field\FieldData;
 use PaLabs\DatagridBundle\Field\Type\InvalidDataTypeException;
 use PaLabs\DatagridBundle\Grid\Export\XlsxExporter;
 use PaLabs\DatagridBundle\Grid\GridOptions;
-use PHPExcel_Helper_HTML;
+use PhpOffice\PhpSpreadsheet\Helper\Html;
 
 class HtmlField implements Field
 {
@@ -60,7 +60,7 @@ class HtmlField implements Field
         if (!$data instanceof HtmlFieldData) {
             throw new InvalidDataTypeException($data, $this->dataClass());
         }
-        $wizard = new PHPExcel_Helper_HTML();
+        $wizard = new Html();
         $richText = $wizard->toRichTextObject($data->getValue());
         return $richText;
     }

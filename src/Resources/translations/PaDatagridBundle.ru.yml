@@ -1,10 +1,10 @@
 filter: Фильтр
 sorting: Сортировка
-table: Табица
+table: Таблица
 available_columns: Доступные столбцы
 selected_columns: Выбранные столбцы
 move_up: Вверх
-move_down: Вних
+move_down: Вниз
 delete: Удалить
 records_per_page: Записей на страницу
 order_asc: По возрастанию

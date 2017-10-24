@@ -7,7 +7,7 @@ use PaLabs\DatagridBundle\Field\FieldData;
 use PaLabs\DatagridBundle\Field\Type\HtmlOrTextField;
 use PaLabs\DatagridBundle\Field\Type\InvalidDataTypeException;
 use PaLabs\DatagridBundle\Util\StringUtils;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\Templating\EngineInterface;
 
 class TwigField extends HtmlOrTextField
 {

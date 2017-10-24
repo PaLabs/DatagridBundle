@@ -5,6 +5,9 @@ namespace PaLabs\DatagridBundle\DataSource;
 
 class DataSourceSettings
 {
+    const DEFAULT_PER_PAGE = 20;
+    const DEFAULT_PAGE_NUMBER = 1;
+
     /** @var  array */
     protected $filters;
 
@@ -27,19 +30,8 @@ class DataSourceSettings
         return $self
             ->setFilters([])
             ->setOrder([])
-            ->setPerPage(20)
-            ->setPage(1);
-    }
-
-    public function toUrlParams()
-    {
-        $data = ['filters' => $this->filters, 'order' => $this->order, 'perPage' => $this->perPage];
-        array_walk_recursive($data, function (&$value) {
-            if (is_object($value)) {
-                $value = $value->getId();
-            }
-        });
-        return $data;
+            ->setPerPage(self::DEFAULT_PER_PAGE)
+            ->setPage(self::DEFAULT_PAGE_NUMBER);
     }
 
     public function getOrder(): array
