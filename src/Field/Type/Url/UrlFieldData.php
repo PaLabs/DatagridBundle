@@ -12,7 +12,7 @@ class UrlFieldData extends BaseFieldData
     protected $text;
     protected $attr;
 
-    public function __construct(string $url, string $text, array $attr = [], array $options = [])
+    public function __construct(string $url = null, string $text = null, array $attr = [], array $options = [])
     {
         parent::__construct($options);
         $this->url = $url;
@@ -20,12 +20,12 @@ class UrlFieldData extends BaseFieldData
         $this->attr = $attr;
     }
 
-    public function getUrl(): string
+    public function getUrl()
     {
         return $this->url;
     }
 
-    public function getText(): string
+    public function getText()
     {
         return $this->text;
     }
