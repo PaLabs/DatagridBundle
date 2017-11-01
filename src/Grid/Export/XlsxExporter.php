@@ -6,6 +6,7 @@ namespace PaLabs\DatagridBundle\Grid\Export;
 
 use PaLabs\DatagridBundle\Field\Renderer\FieldRenderResult;
 use PaLabs\DatagridBundle\Grid\View\GridView;
+use PaLabs\DatagridBundle\Util\StringUtils;
 use PhpOffice\PhpSpreadsheet\Cell;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -62,6 +63,9 @@ class XlsxExporter implements GridExporter
                 $content->setCoordinates($coordinate);
                 $content->setWorksheet($sheet);
             } else {
+                if(is_string($content)) {
+                    $content = StringUtils::fixEncoding($content);
+                }
                 $sheet->setCellValueByColumnAndRow($columnNumber, $rowNumber, $content);
             }
             $columnNumber++;
