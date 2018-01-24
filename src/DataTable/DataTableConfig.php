@@ -6,31 +6,39 @@ namespace PaLabs\DatagridBundle\DataTable;
 
 class DataTableConfig
 {
+    protected $columns;
     protected $form;
     protected $formOptions;
     protected $formDefaults;
 
     public function __construct(
-        $settingsForm,
-        $settingsFormOptions,
-        $defaultSettings)
+        array $columns,
+        string $form,
+        array $formOptions,
+        DataTableSettings $formDefaults)
     {
-        $this->form = $settingsForm;
-        $this->formOptions = $settingsFormOptions;
-        $this->formDefaults = $defaultSettings;
+        $this->columns = $columns;
+        $this->form = $form;
+        $this->formOptions = $formOptions;
+        $this->formDefaults = $formDefaults;
     }
 
-    public function getForm()
+    public function getColumns(): array
+    {
+        return $this->columns;
+    }
+
+    public function getForm(): string
     {
         return $this->form;
     }
 
-     public function getFormOptions()
+     public function getFormOptions(): array
     {
         return $this->formOptions;
     }
 
-    public function getFormDefaults()
+    public function getFormDefaults(): DataTableSettings
     {
         return $this->formDefaults;
     }

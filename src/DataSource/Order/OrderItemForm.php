@@ -50,7 +50,9 @@ class OrderItemForm extends AbstractType
             ->setDefaults([
                 'translation_domain' => 'PaDatagridBundle',
             ])
-            ->setRequired(['sortFields']);
+            ->setRequired([
+                'sortFields'
+            ]);
     }
 
 

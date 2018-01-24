@@ -3,16 +3,11 @@
 namespace PaLabs\DatagridBundle\DataSource\Doctrine;
 
 
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
-use Knp\Component\Pager\PaginatorInterface;
 use PaLabs\DatagridBundle\DataSource\AbstractConfigurableDataSource;
 use PaLabs\DatagridBundle\DataSource\DataSourceConfiguration;
-use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\QueryBuilderFilterApplier;
 use PaLabs\DatagridBundle\DataSource\Doctrine\Order\DoctrineSortBuilder;
-use PaLabs\DatagridBundle\DataSource\Doctrine\Order\QueryBuilderSortApplier;
-use PaLabs\DatagridBundle\DataSource\Filter\Registry\FilterRegistry;
 use PaLabs\DatagridBundle\DataSource\Order\SortBuilder;
 use PaLabs\DatagridBundle\DataSource\Result\DataSourcePage;
 use PaLabs\DatagridBundle\DataSource\Result\DataSourceResultContainer;
@@ -29,19 +24,13 @@ abstract class DoctrineDataSource extends AbstractConfigurableDataSource
     protected $filterApplier;
     protected $sortApplier;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        PaginatorInterface $paginator,
-        QueryBuilderFilterApplier $filterApplier,
-        QueryBuilderSortApplier $sortApplier,
-        FilterRegistry $filterRegistry)
+    public function __construct(DoctrineDataSourceServices $services)
     {
-        parent::__construct($filterRegistry);
-        $this->em = $em;
-        $this->paginator = $paginator;
-        $this->filterApplier = $filterApplier;
-        $this->sortApplier = $sortApplier;
-        $this->filterRegistry = $filterRegistry;
+        parent::__construct($services->getFilterRegistry());
+        $this->em = $services->getEm();
+        $this->paginator = $services->getPaginator();
+        $this->filterApplier = $services->getFilterApplier();
+        $this->sortApplier = $services->getSortApplier();
     }
 
     protected abstract function createQuery(GridContext $context);

@@ -26,8 +26,12 @@ class SettingsForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(['data_class' => DataTableSettings::class])
-            ->setRequired(['fields']);
+            ->setDefaults([
+                'data_class' => DataTableSettings::class
+            ])
+            ->setRequired([
+                'fields'
+            ]);
     }
 
 }

@@ -17,7 +17,7 @@ class ColumnMakerCaller
     {
         foreach ($columns as $columnName => $column) {
             /** @var \PaLabs\DatagridBundle\DataTable\Column\Column $column */
-            $columnMaker = $column->columnMaker;
+            $columnMaker = $column->getColumnMaker();
 
             $r = new \ReflectionFunction($columnMaker);
             $params = $r->getParameters();

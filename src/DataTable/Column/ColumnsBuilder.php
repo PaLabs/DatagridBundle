@@ -7,7 +7,7 @@ class ColumnsBuilder
 {
     private $columns = [];
 
-    public function add($name, Column $column)
+    public function add(string $name, Column $column)
     {
         if (array_key_exists($name, $this->columns)) {
             throw new \Exception(sprintf('Column already exists in grid fields, name=%s', $name));
@@ -23,6 +23,7 @@ class ColumnsBuilder
             if (!isset($options[$name])) {
                 throw new \Exception(sprintf("Options is not set form column %s", $name));
             }
+
             $columnOptions = $options[$name];
             if (is_string($columnOptions)) {
                 $columnOptions = ['label' => $columnOptions];

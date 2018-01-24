@@ -8,24 +8,14 @@ class DataTableSettings
     /** @var string[] */
     protected $selectedFields = [];
 
-    /**
-     * @return self
-     */
-    public static function defaultSettings()
+    public function __construct(array $selectedFields)
     {
-        return (new static())
-            ->setSelectedFields(['id']);
+        $this->selectedFields = $selectedFields;
     }
 
     public function getSelectedFields(): array
     {
         return $this->selectedFields;
-    }
-
-    public function setSelectedFields(array $selectedFields)
-    {
-        $this->selectedFields = $selectedFields;
-        return $this;
     }
 
 }

@@ -53,7 +53,9 @@ class ColumnsForm extends AbstractType
             ->setDefaults([
                 'required' => false,
             ])
-            ->setRequired(['fields']);
+            ->setRequired([
+                'fields'
+            ]);
     }
 
 

@@ -34,7 +34,7 @@ class NumberingColumn extends Column
             'need_display' => function (GridContext $context) {
                 return $context->getOptions()->getRenderFormat() == GridOptions::RENDER_FORMAT_HTML;
             },
-            'header_builder' => function (string $label, GridContext $context) {
+            'header_builder' => function () {
                 return StringField::field('#', []);
             }
         ];
