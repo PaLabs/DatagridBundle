@@ -8,7 +8,7 @@ class DataTableSettings
     /** @var string[] */
     protected $selectedFields = [];
 
-    public function __construct(array $selectedFields)
+    public function __construct(array $selectedFields = [])
     {
         $this->selectedFields = $selectedFields;
     }
@@ -17,5 +17,13 @@ class DataTableSettings
     {
         return $this->selectedFields;
     }
+
+    public function setSelectedFields(array $selectedFields): self
+    {
+        $this->selectedFields = $selectedFields;
+        return $this;
+    }
+
+
 
 }
