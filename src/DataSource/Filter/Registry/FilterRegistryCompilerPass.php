@@ -10,16 +10,15 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class FilterRegistryCompilerPass implements CompilerPassInterface
 {
-    const SERVICE_ID = 'pa_datagrid.filter_registry';
     const TAG_NAME = 'pa_datagrid.filter';
 
     public function process(ContainerBuilder $container)
     {
-        if (!$container->has(self::SERVICE_ID)) {
-            throw new \Exception(sprintf("Service %s is not registered", self::SERVICE_ID));
+        if (!$container->has(FilterRegistry::class)) {
+            throw new \Exception(sprintf("Service %s is not registered", FilterRegistry::class));
         }
 
-        $fieldRegistryDefinition = $container->findDefinition(self::SERVICE_ID);
+        $fieldRegistryDefinition = $container->findDefinition(FilterRegistry::class);
 
         foreach ($container->findTaggedServiceIds(self::TAG_NAME) as $id => $tags) {
             $fieldRegistryDefinition->addMethodCall('registerFilter', [new Reference($id)]);

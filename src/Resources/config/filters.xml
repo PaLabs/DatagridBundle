@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\BooleanFilter"
+                 class="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\BooleanFilter" public="false">
+            <tag name="pa_datagrid.filter"/>
+        </service>
+
+        <service id="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\DateFilter"
+                 class="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\DateFilter" public="false">
+            <tag name="pa_datagrid.filter"/>
+        </service>
+
+        <service id="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\EntityFilter"
+                 class="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\EntityFilter" public="false">
+            <tag name="pa_datagrid.filter"/>
+        </service>
+
+        <service id="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\IntegerFilter"
+                 class="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\IntegerFilter" public="false">
+            <tag name="pa_datagrid.filter"/>
+        </service>
+
+        <service id="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\StringFilter"
+                 class="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\StringFilter" public="false">
+            <tag name="pa_datagrid.filter"/>
+        </service>
+
+        <service id="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\CollectionEmptinessFilter"
+                 class="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\CollectionEmptinessFilter" public="false">
+            <tag name="pa_datagrid.filter"/>
+        </service>
+
+        <service id="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\IntegerHavingFilter"
+                 class="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\IntegerHavingFilter" public="false">
+            <tag name="pa_datagrid.filter"/>
+        </service>
+
+        <service id="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\IsNullFilter"
+                 class="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\IsNullFilter" public="false">
+            <tag name="pa_datagrid.filter"/>
+        </service>
+
+
+    </services>
+</container>

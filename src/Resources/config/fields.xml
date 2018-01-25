@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="PaLabs\DatagridBundle\Field\Type\Boolean\BooleanField"
+                 class="PaLabs\DatagridBundle\Field\Type\Boolean\BooleanField" public="false">
+            <tag name="pa_datagrid.field"/>
+        </service>
+
+        <service id="PaLabs\DatagridBundle\Field\Type\Date\DateField"
+                 class="PaLabs\DatagridBundle\Field\Type\Date\DateField" public="false">
+            <tag name="pa_datagrid.field"/>
+        </service>
+
+        <service id="PaLabs\DatagridBundle\Field\Type\DateTime\DateTimeField"
+                 class="PaLabs\DatagridBundle\Field\Type\DateTime\DateTimeField" public="false">
+            <tag name="pa_datagrid.field"/>
+        </service>
+
+        <service id="PaLabs\DatagridBundle\Field\Type\String\StringField"
+                 class="PaLabs\DatagridBundle\Field\Type\String\StringField" public="false">
+            <tag name="pa_datagrid.field"/>
+        </service>
+
+        <service id="PaLabs\DatagridBundle\Field\Type\Html\HtmlField"
+                 class="PaLabs\DatagridBundle\Field\Type\Html\HtmlField" public="false">
+            <tag name="pa_datagrid.field"/>
+        </service>
+
+        <service id="PaLabs\DatagridBundle\Field\Type\Twig\TwigField"
+                 class="PaLabs\DatagridBundle\Field\Type\Twig\TwigField" public="false">
+            <argument type="service" id="templating"/>
+            <tag name="pa_datagrid.field"/>
+        </service>
+
+        <service id="PaLabs\DatagridBundle\Field\Type\Url\UrlField"
+                 class="PaLabs\DatagridBundle\Field\Type\Url\UrlField" public="true">
+            <tag name="pa_datagrid.field"/>
+        </service>
+    </services>
+
+</container>

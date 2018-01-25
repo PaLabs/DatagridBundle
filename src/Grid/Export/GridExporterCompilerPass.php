@@ -10,16 +10,15 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class GridExporterCompilerPass implements CompilerPassInterface
 {
-    const SERVICE_ID = 'pa_datagrid.exporter';
     const TAG_NAME = 'pa_datagrid.exporter';
 
     public function process(ContainerBuilder $container)
     {
-        if (!$container->has(self::SERVICE_ID)) {
-            throw new \Exception(sprintf("Service %s is not registered", self::SERVICE_ID));
+        if (!$container->has(GridExporterFacade::class)) {
+            throw new \Exception(sprintf("Service %s is not registered", GridExporterFacade::class));
         }
 
-        $fieldRegistryDefinition = $container->findDefinition(self::SERVICE_ID);
+        $fieldRegistryDefinition = $container->findDefinition(GridExporterFacade::class);
 
         foreach ($container->findTaggedServiceIds(self::TAG_NAME) as $id => $tags) {
             $fieldRegistryDefinition->addMethodCall('registerExporter', [new Reference($id)]);

@@ -7,7 +7,9 @@ use Doctrine\ORM\QueryBuilder;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use PaLabs\DatagridBundle\DataSource\AbstractConfigurableDataSource;
 use PaLabs\DatagridBundle\DataSource\DataSourceConfiguration;
+use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\QueryBuilderFilterApplier;
 use PaLabs\DatagridBundle\DataSource\Doctrine\Order\DoctrineSortBuilder;
+use PaLabs\DatagridBundle\DataSource\Doctrine\Order\QueryBuilderSortApplier;
 use PaLabs\DatagridBundle\DataSource\Order\SortBuilder;
 use PaLabs\DatagridBundle\DataSource\Result\DataSourcePage;
 use PaLabs\DatagridBundle\DataSource\Result\DataSourceResultContainer;
@@ -29,8 +31,8 @@ abstract class DoctrineDataSource extends AbstractConfigurableDataSource
         parent::__construct($services->getFilterRegistry());
         $this->em = $services->getEm();
         $this->paginator = $services->getPaginator();
-        $this->filterApplier = $services->getFilterApplier();
-        $this->sortApplier = $services->getSortApplier();
+        $this->filterApplier = new QueryBuilderFilterApplier();
+        $this->sortApplier = new QueryBuilderSortApplier();
     }
 
     protected abstract function createQuery(GridContext $context);

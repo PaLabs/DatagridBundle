@@ -14,22 +14,16 @@ class DoctrineDataSourceServices
 {
     protected $em;
     protected $paginator;
-    protected $filterApplier;
-    protected $sortApplier;
     protected $filterRegistry;
 
     public function __construct(
         EntityManagerInterface $em,
         PaginatorInterface $paginator,
-        QueryBuilderFilterApplier $filterApplier,
-        QueryBuilderSortApplier $sortApplier,
         FilterRegistry $filterRegistry
     )
     {
         $this->em = $em;
         $this->paginator = $paginator;
-        $this->filterApplier = $filterApplier;
-        $this->sortApplier = $sortApplier;
         $this->filterRegistry = $filterRegistry;
     }
 
@@ -41,16 +35,6 @@ class DoctrineDataSourceServices
     public function getPaginator(): PaginatorInterface
     {
         return $this->paginator;
-    }
-
-    public function getFilterApplier(): QueryBuilderFilterApplier
-    {
-        return $this->filterApplier;
-    }
-
-    public function getSortApplier(): QueryBuilderSortApplier
-    {
-        return $this->sortApplier;
     }
 
     public function getFilterRegistry(): FilterRegistry

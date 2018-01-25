@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="PaLabs\DatagridBundle\Field\Registry\FieldRegistry"
+                 class="PaLabs\DatagridBundle\Field\Registry\FieldRegistry" public="false"/>
+
+        <service id="PaLabs\DatagridBundle\DataSource\Filter\Registry\FilterRegistry"
+                 class="PaLabs\DatagridBundle\DataSource\Filter\Registry\FilterRegistry" public="false"/>
+
+        <service id="PaLabs\DatagridBundle\Field\Renderer\FieldRenderer"
+                 class="PaLabs\DatagridBundle\Field\Renderer\FieldRenderer" public="false">
+            <argument type="service" id="PaLabs\DatagridBundle\Field\Registry\FieldRegistry" />
+        </service>
+
+        <service id="PaLabs\DatagridBundle\Grid\View\GridViewBuilder"
+                 class="PaLabs\DatagridBundle\Grid\View\GridViewBuilder" public="false">
+            <argument type="service" id="form.factory"/>
+            <argument type="service" id="PaLabs\DatagridBundle\Field\Renderer\FieldRenderer"/>
+        </service>
+
+        <service id="PaLabs\DatagridBundle\Grid\Export\XlsxExporter"
+                 class="PaLabs\DatagridBundle\Grid\Export\XlsxExporter" public="false">
+            <tag name="pa_datagrid.exporter"/>
+        </service>
+
+        <service id="PaLabs\DatagridBundle\Grid\Export\GridExporterFacade"
+                 class="PaLabs\DatagridBundle\Grid\Export\GridExporterFacade" public="false" />
+
+        <service id="PaLabs\DatagridBundle\DataSource\Doctrine\DoctrineDataSourceServices"
+                 class="PaLabs\DatagridBundle\DataSource\Doctrine\DoctrineDataSourceServices" public="false">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="knp_paginator"/>
+            <argument type="service" id="PaLabs\DatagridBundle\DataSource\Filter\Registry\FilterRegistry"/>
+        </service>
+
+
+    </services>
+
+</container>
