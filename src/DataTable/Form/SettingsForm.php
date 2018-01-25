@@ -11,7 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SettingsForm extends AbstractType
 {
-    const FIELDS_FORM_NAME = 'f';
+    const FIELDS_FORM_NAME = 'fi';
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
