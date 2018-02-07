@@ -11,22 +11,21 @@ class ColumnOptions
     protected $label;
     protected $group;
     protected $required;
-    protected $needDisplayCallback;
+    protected $needDisplayChecker;
     protected $headerBuilder;
 
     public function __construct(
         string $label,
         string $group = '',
         bool $required = false,
-        callable $headerOptionsCallback = null,
-        callable $needDisplayCallback = null,
+        callable $needDisplayChecker = null,
         callable $headerBuilder = null)
     {
         $this->label = $label;
         $this->group = $group;
         $this->required = $required;
 
-        $this->needDisplayCallback = $needDisplayCallback ?? function () {
+        $this->needDisplayChecker = $needDisplayChecker ?? function () {
                 return true;
             };
         $this->headerBuilder = $headerBuilder ?? function () {
@@ -60,9 +59,9 @@ class ColumnOptions
         return $this->required;
     }
 
-    public function getNeedDisplayCallback(): ?callable
+    public function getNeedDisplayChecker(): ?callable
     {
-        return $this->needDisplayCallback;
+        return $this->needDisplayChecker;
     }
 
     public function getHeaderBuilder(): ?callable

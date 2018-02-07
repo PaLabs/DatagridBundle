@@ -41,7 +41,7 @@ class DisplayColumnsBuilder
         }, $selectedColumnNames);
 
         $selectedColumns = array_filter($selectedColumns, function(Column $column) use ($context) {
-            $callback = $column->getOptions()->getNeedDisplayCallback();
+            $callback = $column->getOptions()->getNeedDisplayChecker();
             return $callback($context) === true;
         });
 
