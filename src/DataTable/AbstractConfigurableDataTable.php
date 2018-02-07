@@ -128,12 +128,13 @@ abstract class AbstractConfigurableDataTable implements ConfigurableDataTable
     protected function displayFields(array $columns, GridParameters $parameters)
     {
         $fields = [];
-        foreach ($columns as $name => $field) {
-            /** @var \PaLabs\DatagridBundle\DataTable\Column\Column $field */
-            if (!$field->isRequired()) {
+        foreach ($columns as $name => $column) {
+            /** @var \PaLabs\DatagridBundle\DataTable\Column\Column $column */
+            if (!$column->isRequired()) {
                 $fields[] = [
                     'name' => $name,
-                    'label' => $field->getColumnListLabel()
+                    'label' => $column->getColumnListLabel(),
+                    'group' => $column->getGroup()
                 ];
             }
         }

@@ -43,8 +43,17 @@ class ColumnsForm extends AbstractType
             $fieldLabels[$field['name']] = $field['label'];
         }
 
-        $view->vars['fields'] = $options['fields'];
+        $view->vars['fields'] = $this->groupFields($options['fields']);
         $view->vars['fieldLabels'] = $fieldLabels;
+    }
+
+    protected function groupFields(array $fields) {
+        $fieldGroups = [];
+
+        foreach($fields as $field) {
+            $fieldGroups[$field['group']][] = $field;
+        }
+        return $fieldGroups;
     }
 
     public function configureOptions(OptionsResolver $resolver)

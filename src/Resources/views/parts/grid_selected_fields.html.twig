@@ -18,8 +18,12 @@
                             multiple="multiple"
                             size="10"
                             style="width: 100%">
-                        {% for field in availableFields %}#}
-                            <option value="{{ field.name }}">{{ field.label }}</option>
+                        {% for fieldGroup, fields in availableFields %}
+                            {% if fieldGroup is not empty %}<optgroup label="{{ fieldGroup }}">{% endif %}
+                                {% for field in fields %}#}
+                                    <option value="{{ field.name }}">{{ field.label }}</option>
+                                {% endfor %}
+                            {% if fieldGroup is not empty %}</optgroup>{% endif %}
                         {% endfor %}
                     </select>
                 </td>
@@ -31,11 +35,13 @@
                             multiple="multiple"
                             size="10"
                             style="width: 100%">
+
                         {% for fieldName in selectedFields %}
                             {% if fieldLabels[fieldName] is defined %}
                                 <option value="{{ fieldName }}">{{ fieldLabels[fieldName] }}</option>
                             {% endif %}
                         {% endfor %}
+
                     </select>
                 </td>
                 <td align="center">
@@ -44,10 +50,12 @@
                                                               style="width: 100%">{{ 'move_up'|trans({}, 'PaDatagridBundle') }}</span>
                     <br/>
                     <span class="btn btn-default"
-                          data-component-role="move_down_column_button" style="width: 100%">{{ 'move_down'|trans({}, 'PaDatagridBundle') }}</span>
+                          data-component-role="move_down_column_button"
+                          style="width: 100%">{{ 'move_down'|trans({}, 'PaDatagridBundle') }}</span>
                     <br/>
                     <span class="btn btn-default"
-                          data-component-role="del_column_button" style="width: 100%">{{ 'delete'|trans({}, 'PaDatagridBundle') }}</span>
+                          data-component-role="del_column_button"
+                          style="width: 100%">{{ 'delete'|trans({}, 'PaDatagridBundle') }}</span>
                 </td>
             </tr>
         </table>

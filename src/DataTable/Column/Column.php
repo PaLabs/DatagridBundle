@@ -12,6 +12,7 @@ class Column
     protected $headerOptionsCallback;
     protected $columnMaker;
     protected $headerBuilder;
+    protected $group;
 
     public function __construct(callable $columnMaker, array $parameters) {
         $this->columnMaker = $columnMaker;
@@ -22,6 +23,7 @@ class Column
         $this->headerOptionsCallback = $parameters['header_options'] ?? null;
         $this->needDisplayCallback = $parameters['need_display'] ?? null;
         $this->headerBuilder = $parameters['header_builder'] ?? null;
+        $this->group = $parameters['group'] ?? '';
     }
 
     public function getHeaderLabel(): string
@@ -58,6 +60,12 @@ class Column
     {
         return $this->headerBuilder;
     }
+
+    public function getGroup(): string
+    {
+        return $this->group;
+    }
+
 
 
 }
