@@ -5,6 +5,7 @@ namespace PaLabs\DatagridBundle\DataTable\Column\Type;
 
 
 use PaLabs\DatagridBundle\DataTable\Column\Column;
+use PaLabs\DatagridBundle\DataTable\Column\ColumnOptions;
 use PaLabs\DatagridBundle\DataTable\ColumnMakerContext;
 use PaLabs\DatagridBundle\Field\Type\String\StringField;
 use PaLabs\DatagridBundle\Grid\GridContext;
@@ -12,6 +13,7 @@ use PaLabs\DatagridBundle\Grid\GridOptions;
 
 class NumberingColumn extends Column
 {
+    const FIELD_NAME = 'numbering';
 
     public function __construct(array $columnParameters = [])
     {
@@ -23,7 +25,7 @@ class NumberingColumn extends Column
         $parameters = array_merge($columnParameters, $this->defaultParameters());
 
 
-        parent::__construct($columnMaker, $parameters);
+        parent::__construct('numbering', $columnMaker, ColumnOptions::fromArray($parameters));
     }
 
     private function defaultParameters()
@@ -35,7 +37,7 @@ class NumberingColumn extends Column
                 return $context->getOptions()->getRenderFormat() == GridOptions::RENDER_FORMAT_HTML;
             },
             'header_builder' => function () {
-                return StringField::field('#', []);
+                return StringField::field('#');
             }
         ];
     }

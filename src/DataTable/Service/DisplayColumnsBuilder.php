@@ -12,39 +12,41 @@ class DisplayColumnsBuilder
 
     public function build(array $columns, GridContext $context)
     {
-        $selectedFields = $context->getDataTableSettings()->getSelectedFields();
+        $selectedColumnNames = $context->getDataTableSettings()->getSelectedFields();
 
-        $displayFields = [];
-        foreach ($columns as $fieldName => $field) {
-            /** @var \PaLabs\DatagridBundle\DataTable\Column\Column $field */
-            if ($field->isRequired() && $this->needDisplayField($field, $context)) {
-                $displayFields[] = $fieldName;
-            }
-        }
-
-        foreach ($selectedFields as $field) {
-            /** @var string $field */
-            if (!array_key_exists($field, $columns)) {
-                throw new \LogicException(sprintf("Unknown column field: %s", $field));
-            }
-
-            /** @var \PaLabs\DatagridBundle\DataTable\Column\Column $fieldDesc */
-            $fieldDesc = $columns[$field];
-
-            if ($this->needDisplayField($fieldDesc, $context)) {
-                $displayFields[] = $field;
-            }
-        }
-
-        return $displayFields;
+        return array_merge(
+            $this->requiredColumnNames($columns),
+            $this->selectedColumnNames($columns, $selectedColumnNames, $context)
+        );
     }
 
-    private function needDisplayField(Column $field, GridContext $context)
+    private function requiredColumnNames(array $columns): array
     {
-        if ($field->getNeedDisplayCallback() === null) {
-            return true;
-        }
-        $callback = $field->getNeedDisplayCallback();
-        return $callback($context) === true;
+        $requiredColumns = array_filter($columns, function(Column $column){
+            return $column->getOptions()->isRequired();
+        });
+
+        return array_map(function(Column $column){
+            return $column->getName();
+        }, $requiredColumns);
+    }
+
+    private function selectedColumnNames(array $columns, array $selectedColumnNames, GridContext $context): array
+    {
+        $selectedColumns = array_map(function(string $columnName) use ($columns) {
+            if (!array_key_exists($columnName, $columns)) {
+                throw new \LogicException(sprintf("Unknown column field: %s", $columnName));
+            }
+            return $columns[$columnName];
+        }, $selectedColumnNames);
+
+        $selectedColumns = array_filter($selectedColumns, function(Column $column) use ($context) {
+            $callback = $column->getOptions()->getNeedDisplayCallback();
+            return $callback($context) === true;
+        });
+
+        return array_map(function(Column $column){
+            return $column->getName();
+        }, $selectedColumns);
     }
 }

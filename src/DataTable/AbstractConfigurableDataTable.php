@@ -3,13 +3,13 @@
 namespace PaLabs\DatagridBundle\DataTable;
 
 
-use PaLabs\DatagridBundle\DataTable\Column\ColumnsBuilder;
 use PaLabs\DatagridBundle\DataSource\Result\DataSourcePage;
 use PaLabs\DatagridBundle\DataSource\Result\DataSourceResultContainer;
+use PaLabs\DatagridBundle\DataTable\Column\Column;
+use PaLabs\DatagridBundle\DataTable\Column\ColumnsBuilder;
 use PaLabs\DatagridBundle\DataTable\Form\SettingsForm;
 use PaLabs\DatagridBundle\DataTable\Service\ColumnMakerCaller;
 use PaLabs\DatagridBundle\DataTable\Service\DisplayColumnsBuilder;
-use PaLabs\DatagridBundle\Field\Type\String\StringField;
 use PaLabs\DatagridBundle\Grid\GridContext;
 use PaLabs\DatagridBundle\Grid\GridParameters;
 
@@ -46,10 +46,10 @@ abstract class AbstractConfigurableDataTable implements ConfigurableDataTable
         GridContext $context): DataTableResultContainer
     {
         $columns = $config->getColumns();
-        $displayFields = (new DisplayColumnsBuilder())->build($columns, $context);
+        $displayColumnNames = (new DisplayColumnsBuilder())->build($columns, $context);
 
-        $header = $this->buildHeader($context, $columns, $displayFields);
-        $rows = $this->buildRows($container, $context, $columns, $displayFields);
+        $header = $this->buildHeader($context, $columns, $displayColumnNames);
+        $rows = $this->buildRows($container, $context, $columns, $displayColumnNames);
 
         return new DataTableResultContainer($header, $rows);
     }
@@ -58,14 +58,14 @@ abstract class AbstractConfigurableDataTable implements ConfigurableDataTable
         DataSourceResultContainer $container,
         GridContext $context,
         array $columns,
-        array $displayFields)
+        array $displayColumnNames)
     {
         $loopIndex = 0;
         $columnMakersCaller = new ColumnMakerCaller($columns);
 
         foreach ($container->getPages() as $page) {
             foreach ($page->getRows() as $rowData) {
-                yield $this->buildRow($rowData, $loopIndex, $page, $context, $columnMakersCaller, $columns, $displayFields);
+                yield $this->buildRow($rowData, $loopIndex, $page, $context, $columnMakersCaller, $columns, $displayColumnNames);
                 $loopIndex++;
             }
         }
@@ -79,31 +79,25 @@ abstract class AbstractConfigurableDataTable implements ConfigurableDataTable
         GridContext $context,
         ColumnMakerCaller $columnMakersCaller,
         array $columns,
-        array $displayFields)
+        array $displayColumnNames)
     {
-        return array_map(function (string $fieldName) use ($columnMakersCaller, $columns, $rowData, $loopIndex, $page, $context) {
+        return array_map(function (string $columnName) use ($columnMakersCaller, $columns, $rowData, $loopIndex, $page, $context) {
             /** @var \PaLabs\DatagridBundle\DataTable\Column\Column $column * */
-            $column = $columns[$fieldName];
-            $columnMaker = $column->getColumnMaker();
+            $column = $columns[$columnName];
             $columnMakerContext = new ColumnMakerContext($rowData, $loopIndex, $page, $context);
 
-            return $columnMakersCaller->call($fieldName, $columnMaker, $columnMakerContext);
-        }, $displayFields);
+            return $columnMakersCaller->call($column, $columnMakerContext);
+        }, $displayColumnNames);
     }
 
-    public function buildHeader(GridContext $context, array $columns, array $displayFields)
+    public function buildHeader(GridContext $context, array $columns, array $displayColumnNames)
     {
-        $headerRow = array_map(function ($fieldName) use ($columns, $context) {
+        $headerRow = array_map(function ($columnName) use ($columns, $context) {
             /** @var \PaLabs\DatagridBundle\DataTable\Column\Column $field * */
-            $field = $columns[$fieldName];
-
-            if ($field->getHeaderBuilder() !== null) {
-                $builder = $field->getHeaderBuilder();
-                return $builder($context, $fieldName);
-            } else {
-                return StringField::field($field->getHeaderLabel());
-            }
-        }, $displayFields);
+            $field = $columns[$columnName];
+            $builder = $field->getOptions()->getHeaderBuilder();
+            return $builder($context, $columnName);
+        }, $displayColumnNames);
 
         return [$headerRow];
     }
@@ -127,18 +121,17 @@ abstract class AbstractConfigurableDataTable implements ConfigurableDataTable
 
     protected function displayFields(array $columns, GridParameters $parameters)
     {
-        $fields = [];
-        foreach ($columns as $name => $column) {
-            /** @var \PaLabs\DatagridBundle\DataTable\Column\Column $column */
-            if (!$column->isRequired()) {
-                $fields[] = [
-                    'name' => $name,
-                    'label' => $column->getColumnListLabel(),
-                    'group' => $column->getGroup()
-                ];
-            }
-        }
-        return $fields;
+        $columns = array_filter($columns, function(Column $column){
+            return !$column->getOptions()->isRequired();
+        });
+
+        return array_map(function(Column $column){
+            return [
+                'name' => $column->getName(),
+                'label' => $column->getOptions()->getLabel(),
+                'group' => $column->getOptions()->getGroup()
+            ];
+        }, $columns);
     }
 
 

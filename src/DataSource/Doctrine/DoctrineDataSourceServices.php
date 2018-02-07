@@ -6,8 +6,6 @@ namespace PaLabs\DatagridBundle\DataSource\Doctrine;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
-use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\QueryBuilderFilterApplier;
-use PaLabs\DatagridBundle\DataSource\Doctrine\Order\QueryBuilderSortApplier;
 use PaLabs\DatagridBundle\DataSource\Filter\Registry\FilterRegistry;
 
 class DoctrineDataSourceServices

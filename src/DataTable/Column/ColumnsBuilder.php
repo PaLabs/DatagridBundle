@@ -7,13 +7,13 @@ class ColumnsBuilder
 {
     private $columns = [];
 
-    public function add(string $name, Column $column)
+    public function add(Column $column)
     {
-        if (array_key_exists($name, $this->columns)) {
-            throw new \Exception(sprintf('Column already exists in grid fields, name=%s', $name));
+        if (array_key_exists($column->getName(), $this->columns)) {
+            throw new \Exception(sprintf('Column already exists in grid fields, name=%s', $column->getName()));
         }
 
-        $this->columns[$name] = $column;
+        $this->columns[$column->getName()] = $column;
         return $this;
     }
 
@@ -24,12 +24,21 @@ class ColumnsBuilder
                 throw new \Exception(sprintf("Options is not set form column %s", $name));
             }
 
-            $columnOptions = $options[$name];
-            if (is_string($columnOptions)) {
-                $columnOptions = ['label' => $columnOptions];
-            }
+            $columnOptions = $this->createColumnOptions($options[$name]);
 
-            $this->add($name, new Column($callback, $columnOptions));
+            $this->add(new Column($name, $callback, $columnOptions));
+        }
+    }
+
+    protected function createColumnOptions($value) {
+        if (is_string($value)) {
+            return new ColumnOptions($value);
+        } else if(is_array($value)) {
+            return ColumnOptions::fromArray($value);
+        } else if($value instanceof ColumnOptions) {
+            return $value;
+        } else {
+            throw new \Exception("Unknown type of column options");
         }
     }
 

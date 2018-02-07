@@ -4,6 +4,7 @@
 namespace PaLabs\DatagridBundle\DataTable\Service;
 
 
+use PaLabs\DatagridBundle\DataTable\Column\Column;
 use PaLabs\DatagridBundle\DataTable\ColumnMakerContext;
 
 class ColumnMakerCaller
@@ -15,7 +16,7 @@ class ColumnMakerCaller
 
     public function __construct(array $columns)
     {
-        foreach ($columns as $columnName => $column) {
+        foreach ($columns as $column) {
             /** @var \PaLabs\DatagridBundle\DataTable\Column\Column $column */
             $columnMaker = $column->getColumnMaker();
 
@@ -27,14 +28,16 @@ class ColumnMakerCaller
                 $callType = self::CALL_TYPE_ONLY_CONTEXT;
 
             }
-            $this->columnMakersCallTypes[$columnName] = $callType;
+            $this->columnMakersCallTypes[$column->getName()] = $callType;
 
         }
     }
 
-    public function call(string $columnName, callable $columnMaker, ColumnMakerContext $context)
+    public function call(Column $column, ColumnMakerContext $context)
     {
-        switch ($this->columnMakersCallTypes[$columnName]) {
+        $columnMaker = $column->getColumnMaker();
+
+        switch ($this->columnMakersCallTypes[$column->getName()]) {
             case self::CALL_TYPE_DEFAULT:
                 $row = $context->getRow();
                 if (is_array($row) && isset($row[0]) && is_object($row[0])) {
@@ -46,7 +49,7 @@ class ColumnMakerCaller
             case self::CALL_TYPE_ONLY_CONTEXT:
                 return $columnMaker($context);
             default:
-                throw new \Exception(sprintf("Unknown call type: %s", $this->columnMakersCallTypes[$columnName]));
+                throw new \Exception(sprintf("Unknown call type: %s", $this->columnMakersCallTypes[$column->getName()]));
         }
 
     }
