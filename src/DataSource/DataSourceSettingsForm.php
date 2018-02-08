@@ -67,7 +67,12 @@ class DataSourceSettingsForm extends AbstractType
     {
         $sortFields = [];
         foreach ($sorting as $name => $options) {
-            $sortFields[$options['label']] = $name;
+            if(empty($options['group'])) {
+                $sortFields[$options['label']] = $name;
+            } else {
+                $sortFields[$options['group']][$options['label']] = $name;
+            }
+
         }
         return $sortFields;
     }

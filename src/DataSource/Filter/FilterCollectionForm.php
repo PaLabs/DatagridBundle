@@ -6,6 +6,8 @@ namespace PaLabs\DatagridBundle\DataSource\Filter;
 use PaLabs\DatagridBundle\Form\Type\EmptyGetForm;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class FilterCollectionForm extends AbstractType

@@ -17,6 +17,7 @@ class BaseFilterForm extends AbstractType
         $data = $form->getData();
 
         $view->vars['default'] = $options['default'];
+        $view->vars['group'] = $options['group'];
         $view->vars['filter_enabled'] = $data !== null && $data->isEnabled();
     }
 
@@ -25,7 +26,8 @@ class BaseFilterForm extends AbstractType
     {
         $resolver->setDefaults([
             'required' => false,
-            'default' => false
+            'default' => false,
+            'group' => ''
         ]);
 
     }

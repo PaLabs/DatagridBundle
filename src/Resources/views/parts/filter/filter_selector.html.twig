@@ -1,4 +1,11 @@
 {% set filterForm = grid.form.ds.f %}
+{% set groups = {} %}
+{% for fieldName, field in  filterForm.children %}
+    {% set groupName = field.vars['group'] %}
+    {% set groupFields = groups[groupName]|default([])|merge([fieldName]) %}
+    {% set groups = groups | merge( { (groupName): groupFields }) %}
+{% endfor %}
+
 
 <span class="dropdown" data-component-role="field_selector">
     <button class="btn btn-default dropdown-toggle"
@@ -12,13 +19,22 @@
     </button>
 
     <ul class="dropdown-menu" aria-labelledby="field_selector_button">
-        {% for fieldName, field in filterForm.children %}
-            <li data-field="{{ fieldName }}">
-        <a href="#">
+        {% for group, fieldNames in groups %}
+            {% if group is not empty %}
+                <li><span style="padding-left: 10px;">{{ group|trans }}</span>
+                <ul style="list-style-type: none;">
+            {% endif %}
+            {% for fieldName in  fieldNames %}
+                <li data-field="{{ fieldName }}">
+        <a href="#" style="color: #777;">
         <input type="checkbox" data-component-role="row_visibility"/>
-            {{ field.vars.label|trans }}
+            {{ filterForm.children[fieldName].vars.label|trans }}
         </a>
         </li>
+            {% endfor %}
+            {% if group is not empty %}
+                </ul></li>
+            {% endif %}
         {% endfor %}
     </ul>
 </span>

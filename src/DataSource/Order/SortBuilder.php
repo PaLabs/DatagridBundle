@@ -8,11 +8,12 @@ class SortBuilder
 {
     protected $sorting = [];
 
-    public function add(string $name, string $label, array $options = [])
+    public function add(string $name, string $label, string $group = '', array $options = [])
     {
         $this->checkOrderItemExists($name);
         $this->sorting[$name] = [
             'label' => $label,
+            'group' => $group,
             'options' => $options
         ];
         return $this;
