@@ -15,15 +15,19 @@ class DisplayColumnsBuilder
         $selectedColumnNames = $context->getDataTableSettings()->getSelectedFields();
 
         return array_merge(
-            $this->requiredColumnNames($columns),
+            $this->requiredColumnNames($columns, $context),
             $this->selectedColumnNames($columns, $selectedColumnNames, $context)
         );
     }
 
-    private function requiredColumnNames(array $columns): array
+    private function requiredColumnNames(array $columns, GridContext $context): array
     {
         $requiredColumns = array_filter($columns, function(Column $column){
             return $column->getOptions()->isRequired();
+        });
+        $requiredColumns = array_filter($requiredColumns, function(Column $column) use ($context) {
+            $callback = $column->getOptions()->getNeedDisplayChecker();
+            return $callback($context) === true;
         });
 
         return array_map(function(Column $column){
