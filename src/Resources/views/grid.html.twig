@@ -38,9 +38,7 @@
         <div class="box-body">
 
             {% block data_table %}
-                <div class="table-responsive">
-                    {% include '@PaDatagrid/parts/data_table.html.twig' %}
-                </div>
+                {% include '@PaDatagrid/parts/data_table.html.twig' %}
             {% endblock %}
 
             {% block pagination %}

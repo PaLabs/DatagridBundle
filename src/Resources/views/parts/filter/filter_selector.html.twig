@@ -22,18 +22,19 @@
         {% for group, fieldNames in groups %}
             {% if group is not empty %}
                 <li><span style="padding-left: 10px;">{{ group|trans }}</span>
-                <ul style="list-style-type: none;">
+                <ul style="list-style-type: none; padding-left: 25px;">
             {% endif %}
             {% for fieldName in  fieldNames %}
-                <li data-field="{{ fieldName }}">
-        <a href="#" style="color: #777;">
-        <input type="checkbox" data-component-role="row_visibility"/>
-            {{ filterForm.children[fieldName].vars.label|trans }}
-        </a>
-        </li>
+                <li data-field="{{ fieldName }}" style="white-space: nowrap;padding-right: 10px;">
+                    <a href="#" style="color: #777;">
+                    <input type="checkbox" data-component-role="row_visibility"/>
+                        {{ filterForm.children[fieldName].vars.label|trans }}
+                    </a>
+                </li>
             {% endfor %}
             {% if group is not empty %}
-                </ul></li>
+                </ul>
+                </li>
             {% endif %}
         {% endfor %}
     </ul>
