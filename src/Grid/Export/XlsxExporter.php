@@ -7,11 +7,11 @@ namespace PaLabs\DatagridBundle\Grid\Export;
 use PaLabs\DatagridBundle\Field\Renderer\FieldRenderResult;
 use PaLabs\DatagridBundle\Grid\View\GridView;
 use PaLabs\DatagridBundle\Util\StringUtils;
-use PhpOffice\PhpSpreadsheet\Cell;
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class XlsxExporter implements GridExporter
@@ -53,12 +53,12 @@ class XlsxExporter implements GridExporter
 
     private function exportRow($row, $rowNumber, Worksheet $sheet)
     {
-        $columnNumber = 0;
+        $columnNumber = 1;
         /** @var FieldRenderResult[] $row */
         foreach ($row as $value) {
             $content = $value->getRenderedContent();
             if ($content instanceof MemoryDrawing) {
-                $columnLetter = Cell::stringFromColumnIndex($columnNumber);
+                $columnLetter = Coordinate::stringFromColumnIndex($columnNumber);
                 $coordinate = $columnLetter . $rowNumber;
                 $content->setCoordinates($coordinate);
                 $content->setWorksheet($sheet);
