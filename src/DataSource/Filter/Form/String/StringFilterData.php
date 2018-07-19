@@ -24,12 +24,24 @@ class StringFilterData implements FilterDataInterface
         return !empty($this->value);
     }
 
+    public function toUrlParams(): array
+    {
+        if(!$this->isEnabled()) {
+            return [];
+        }
+
+        return [
+            StringFilterForm::OPERATOR_FIELD => $this->operator,
+            StringFilterForm::VALUE_FIELD => $this->value
+        ];
+    }
+
     public function getOperator(): string
     {
         return $this->operator;
     }
 
-    public function getValue()
+    public function getValue(): ?string
     {
         return $this->value;
     }

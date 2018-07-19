@@ -16,8 +16,12 @@ class FilterBuilder
     }
 
 
-    public function add(string $name, string $filterType,
-                        array $formOptions = [], string $formType = null, array $filterOptions = [])
+    public function add(
+        string $name,
+        string $filterType,
+        array $formOptions = [],
+        string $formType = null,
+        array $filterOptions = [])
     {
         if (isset($this->filters[$name])) {
             throw new \Exception(sprintf("Filter already set, name=%s", $name));
@@ -36,7 +40,8 @@ class FilterBuilder
         return $this;
     }
 
-    public function addExisting(string $name, array $filterConfig) {
+    public function addExisting(string $name, array $filterConfig)
+    {
         if (isset($this->filters[$name])) {
             throw new \Exception(sprintf("Filter already set, name=%s", $name));
         }

@@ -24,18 +24,20 @@ class DateFilterData implements FilterDataInterface
         return $this->startDate !== null || $this->endDate !== null;
     }
 
-    /**
-     * @return \DateTime|null
-     */
-    public function getStartDate()
+    public function toUrlParams(): array
+    {
+        return [
+            DateFilterForm::START_FIELD => $this->startDate,
+            DateFilterForm::END_FIELD => $this->endDate
+        ];
+    }
+
+    public function getStartDate(): ?\DateTime
     {
         return $this->startDate;
     }
 
-    /**
-     * @return \DateTime|null
-     */
-    public function getEndDate()
+    public function getEndDate(): ?\DateTime
     {
         return $this->endDate;
     }

@@ -21,6 +21,17 @@ class IntegerFilterData implements FilterDataInterface
         return !empty($this->value);
     }
 
+    public function toUrlParams(): array
+    {
+        if(empty($this->value)) {
+            return [];
+        }
+
+        return [
+            IntegerFilterForm::VALUE_FIELD => $this->value,
+        ];
+    }
+
     public function getValue()
     {
         return $this->value;

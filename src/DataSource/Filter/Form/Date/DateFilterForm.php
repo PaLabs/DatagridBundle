@@ -14,10 +14,6 @@ class DateFilterForm extends AbstractType
     const START_FIELD = 's';
     const END_FIELD = 'e';
 
-    public static function formData(\DateTime $startDate = null, \DateTime $endDate = null) {
-        return DateFilterModelTransformer::formData(new DateFilterData($startDate, $endDate));
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder

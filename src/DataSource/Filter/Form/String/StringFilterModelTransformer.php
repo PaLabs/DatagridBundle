@@ -9,13 +9,6 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class StringFilterModelTransformer implements DataTransformerInterface
 {
-    public static function formData(StringFilterData $value) {
-        return [
-            StringFilterForm::OPERATOR_FIELD => $value->getOperator(),
-            StringFilterForm::VALUE_FIELD => $value->getValue()
-        ];
-    }
-
     public function transform($value) {
         if ($value == null) {
             return null;
@@ -24,7 +17,7 @@ class StringFilterModelTransformer implements DataTransformerInterface
             throw new TransformationFailedException();
         }
 
-        return self::formData($value);
+        return $value->toUrlParams();
     }
 
     public function reverseTransform($value) {

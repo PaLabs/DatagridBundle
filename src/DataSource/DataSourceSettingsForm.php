@@ -77,26 +77,6 @@ class DataSourceSettingsForm extends AbstractType
         return $sortFields;
     }
 
-    public static function urlParameters(array $filters = [], array $order = [], $perPage = null, $page = null)
-    {
-        $parameters = [];
-        if (!empty($filters)) {
-            $parameters[self::FILTERS_FORM_NAME] = $filters;
-        }
-        if (!empty($order)) {
-            $parameters[self::ORDER_FORM_NAME] = $order;
-        }
-        if ($perPage !== null) {
-            $parameters[self::PER_PAGE_FORM_NAME] = $perPage;
-        }
-        if($page !== null) {
-            $parameters[self::PAGE_FORM_NAME] = $page;
-        }
-
-        return $parameters;
-    }
-
-
     private function perPageChoices(array $recordsPerPage)
     {
         $result = [];

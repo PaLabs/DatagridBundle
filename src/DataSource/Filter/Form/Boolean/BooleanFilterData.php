@@ -16,7 +16,7 @@ class BooleanFilterData implements FilterDataInterface
         $this->value = $value;
     }
 
-    public function getValue()
+    public function getValue(): ?bool
     {
         return $this->value;
     }
@@ -25,5 +25,16 @@ class BooleanFilterData implements FilterDataInterface
     public function isEnabled(): bool
     {
         return is_bool($this->value);
+    }
+
+    public function toUrlParams(): array
+    {
+        if($this->value === null) {
+            return [];
+        }
+
+        return [
+            BooleanFilterForm::VALUE_FIELD => $this->value,
+        ];
     }
 }

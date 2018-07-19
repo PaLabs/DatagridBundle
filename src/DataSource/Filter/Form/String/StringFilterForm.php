@@ -16,11 +16,6 @@ class StringFilterForm extends AbstractType
     const OPERATOR_FIELD = 'o';
     const VALUE_FIELD = 'v';
 
-    public static function formData(string $value, string $operator = StringFilter::OPERATOR_CONTAINS)
-    {
-        return StringFilterModelTransformer::formData(new StringFilterData($operator, $value));
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder

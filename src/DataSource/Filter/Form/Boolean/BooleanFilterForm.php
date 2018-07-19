@@ -12,10 +12,6 @@ class BooleanFilterForm extends AbstractType
 {
     const VALUE_FIELD = 'v';
 
-    public static function formData(bool $value) {
-        return BooleanFilterModelTransformer::formData(new BooleanFilterData($value));
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder

@@ -9,13 +9,6 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class EntityFilterModelTransformer implements DataTransformerInterface
 {
-    public static function formData(EntityFilterData $value) {
-        return [
-            EntityFilterForm::OPERATOR_FIELD => $value->getOperator(),
-            EntityFilterForm::VALUE_FIELD => $value->getValue()
-        ];
-    }
-
     public function transform($value) {
         if ($value == null) {
             return null;
@@ -24,7 +17,7 @@ class EntityFilterModelTransformer implements DataTransformerInterface
             throw new TransformationFailedException();
         }
 
-        return self::formData($value);
+        return $value->toUrlParams();
     }
 
     public function reverseTransform($value) {

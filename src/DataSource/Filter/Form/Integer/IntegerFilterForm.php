@@ -12,10 +12,6 @@ class IntegerFilterForm extends AbstractType
 {
     const VALUE_FIELD = 'v';
 
-    public static function formData(string $value) {
-        return IntegerFilterModelTransformer::formData(new IntegerFilterData($value));
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder

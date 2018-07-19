@@ -11,7 +11,7 @@ class EntityFilterData implements FilterDataInterface
     /** @var  string */
     protected $operator;
 
-    /** @var  object */
+    /** @var  EntityInterface */
     protected $value;
 
     public function __construct(string $operator, $value = null)
@@ -22,6 +22,17 @@ class EntityFilterData implements FilterDataInterface
 
     public function isEnabled(): bool {
         return !empty($this->value);
+    }
+
+    public function toUrlParams(): array
+    {
+        if(!$this->isEnabled()) {
+            return [];
+        }
+        return [
+            EntityFilterForm::OPERATOR_FIELD => $this->operator,
+            EntityFilterForm::VALUE_FIELD => $this->value->getId()
+        ];
     }
 
     public function getOperator(): string
