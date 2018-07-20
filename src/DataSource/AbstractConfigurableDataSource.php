@@ -4,20 +4,12 @@
 namespace PaLabs\DatagridBundle\DataSource;
 
 
-use PaLabs\DatagridBundle\DataSource\Order\SortBuilder;
 use PaLabs\DatagridBundle\DataSource\Filter\FilterBuilder;
-use PaLabs\DatagridBundle\DataSource\Filter\Registry\FilterRegistry;
+use PaLabs\DatagridBundle\DataSource\Order\SortBuilder;
 use PaLabs\DatagridBundle\Grid\GridParameters;
 
 abstract class AbstractConfigurableDataSource implements ConfigurableDataSource
 {
-
-    protected $filterRegistry;
-
-    public function __construct(FilterRegistry $filterRegistry)
-    {
-        $this->filterRegistry = $filterRegistry;
-    }
 
     protected function configureFilters(FilterBuilder $builder, GridParameters $parameters)
     {
@@ -29,17 +21,17 @@ abstract class AbstractConfigurableDataSource implements ConfigurableDataSource
 
     }
 
-    protected function getSettingsForm(GridParameters $parameters): string
+    protected function settingsForm(GridParameters $parameters): string
     {
         return DataSourceSettingsForm::class;
     }
 
-    protected function getSettingsFormOptions(GridParameters $parameters): array
+    protected function settingsFormOptions(GridParameters $parameters): array
     {
         return [];
     }
 
-    protected function getDefaultSettings(GridParameters $parameters) : DataSourceSettings
+    protected function defaultSettings(GridParameters $parameters) : DataSourceSettings
     {
         return DataSourceSettings::defaultSettings();
     }
@@ -58,11 +50,11 @@ abstract class AbstractConfigurableDataSource implements ConfigurableDataSource
             'filters' => $filters,
             'sorting' => $sorting
         ];
-        $extendedOptions = $this->getSettingsFormOptions($parameters);
+        $extendedOptions = $this->settingsFormOptions($parameters);
         $formOptions = array_merge($defaultOptions, $extendedOptions);
-        $formDefaults = $this->getDefaultSettings($parameters);
+        $formDefaults = $this->defaultSettings($parameters);
 
-        $form = $this->getSettingsForm($parameters);
+        $form = $this->settingsForm($parameters);
         return new DataSourceConfiguration($form, $formOptions, $formDefaults, $filters, $sorting);
     }
 
@@ -71,6 +63,6 @@ abstract class AbstractConfigurableDataSource implements ConfigurableDataSource
     }
 
     protected function createFilterBuilder(): FilterBuilder {
-        return new FilterBuilder($this->filterRegistry);
+        return new FilterBuilder();
     }
 }

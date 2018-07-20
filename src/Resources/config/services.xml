@@ -30,14 +30,29 @@
         <service id="PaLabs\DatagridBundle\Grid\Export\GridExporterFacade"
                  class="PaLabs\DatagridBundle\Grid\Export\GridExporterFacade" public="false" />
 
+        <service id="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\QueryBuilderFilterApplier"
+            class="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\QueryBuilderFilterApplier" public="false">
+            <argument type="service" id="PaLabs\DatagridBundle\DataSource\Filter\Registry\FilterRegistry"/>
+        </service>
+
+        <service id="PaLabs\DatagridBundle\DataSource\Doctrine\Order\QueryBuilderSortApplier"
+        class="PaLabs\DatagridBundle\DataSource\Doctrine\Order\QueryBuilderSortApplier" public="false">
+        </service>
+
         <service id="PaLabs\DatagridBundle\DataSource\Doctrine\DoctrineDataSourceServices"
                  class="PaLabs\DatagridBundle\DataSource\Doctrine\DoctrineDataSourceServices" public="false">
             <argument type="service" id="doctrine.orm.entity_manager"/>
             <argument type="service" id="knp_paginator"/>
-            <argument type="service" id="PaLabs\DatagridBundle\DataSource\Filter\Registry\FilterRegistry"/>
+            <argument type="service" id="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\QueryBuilderFilterApplier"/>
+            <argument type="service" id="PaLabs\DatagridBundle\DataSource\Doctrine\Order\QueryBuilderSortApplier"/>
         </service>
 
 
+        <service id="PaLabs\DatagridBundle\DataSource\Filter\FilterCollectionForm"
+        class="PaLabs\DatagridBundle\DataSource\Filter\FilterCollectionForm" public="false">
+            <argument type="service" id="PaLabs\DatagridBundle\DataSource\Filter\Registry\FilterRegistry"/>
+            <tag name="form.type"/>
+        </service>
     </services>
 
 </container>

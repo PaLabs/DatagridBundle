@@ -7,9 +7,7 @@ use Doctrine\ORM\QueryBuilder;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use PaLabs\DatagridBundle\DataSource\AbstractConfigurableDataSource;
 use PaLabs\DatagridBundle\DataSource\DataSourceConfiguration;
-use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\QueryBuilderFilterApplier;
 use PaLabs\DatagridBundle\DataSource\Doctrine\Order\DoctrineSortBuilder;
-use PaLabs\DatagridBundle\DataSource\Doctrine\Order\QueryBuilderSortApplier;
 use PaLabs\DatagridBundle\DataSource\Order\SortBuilder;
 use PaLabs\DatagridBundle\DataSource\Result\DataSourcePage;
 use PaLabs\DatagridBundle\DataSource\Result\DataSourceResultContainer;
@@ -28,17 +26,16 @@ abstract class DoctrineDataSource extends AbstractConfigurableDataSource
 
     public function __construct(DoctrineDataSourceServices $services)
     {
-        parent::__construct($services->getFilterRegistry());
         $this->em = $services->getEm();
         $this->paginator = $services->getPaginator();
-        $this->filterApplier = new QueryBuilderFilterApplier();
-        $this->sortApplier = new QueryBuilderSortApplier();
+        $this->filterApplier = $services->getFilterApplier();
+        $this->sortApplier = $services->getSortApplier();
     }
 
     protected abstract function createQuery(GridContext $context);
 
 
-    public function rows(DataSourceConfiguration $configuration, GridContext $context) : DataSourceResultContainer
+    public function rows(DataSourceConfiguration $configuration, GridContext $context): DataSourceResultContainer
     {
         $queryBuilder = $this->createQuery($context);
         $this->applyFilterSorting($queryBuilder, $configuration, $context);
@@ -49,7 +46,7 @@ abstract class DoctrineDataSource extends AbstractConfigurableDataSource
             case GridOptions::PAGING_TYPE_SINGLE_PAGE:
                 return $this->allPagesRows($queryBuilder, $configuration, $context);
             default:
-                throw new \Exception(sprintf("Unsupported context type: %s",$context->getOptions()->getPagingType()));
+                throw new \Exception(sprintf("Unsupported context type: %s", $context->getOptions()->getPagingType()));
         }
 
     }
@@ -106,7 +103,8 @@ abstract class DoctrineDataSource extends AbstractConfigurableDataSource
         return [];
     }
 
-    protected function createSortBuilder(): SortBuilder {
+    protected function createSortBuilder(): SortBuilder
+    {
         return new DoctrineSortBuilder();
     }
 

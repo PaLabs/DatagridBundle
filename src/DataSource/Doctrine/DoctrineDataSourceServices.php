@@ -6,23 +6,28 @@ namespace PaLabs\DatagridBundle\DataSource\Doctrine;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\QueryBuilderFilterApplier;
+use PaLabs\DatagridBundle\DataSource\Doctrine\Order\QueryBuilderSortApplier;
 use PaLabs\DatagridBundle\DataSource\Filter\Registry\FilterRegistry;
 
 class DoctrineDataSourceServices
 {
     protected $em;
     protected $paginator;
-    protected $filterRegistry;
+    protected $filterApplier;
+    protected $sortApplier;
 
     public function __construct(
         EntityManagerInterface $em,
         PaginatorInterface $paginator,
-        FilterRegistry $filterRegistry
+        QueryBuilderFilterApplier $filterApplier,
+        QueryBuilderSortApplier $sortApplier
     )
     {
         $this->em = $em;
         $this->paginator = $paginator;
-        $this->filterRegistry = $filterRegistry;
+        $this->filterApplier = $filterApplier;
+        $this->sortApplier = $sortApplier;
     }
 
     public function getEm(): EntityManagerInterface
@@ -35,10 +40,16 @@ class DoctrineDataSourceServices
         return $this->paginator;
     }
 
-    public function getFilterRegistry(): FilterRegistry
+    public function getFilterApplier(): QueryBuilderFilterApplier
     {
-        return $this->filterRegistry;
+        return $this->filterApplier;
     }
+
+    public function getSortApplier(): QueryBuilderSortApplier
+    {
+        return $this->sortApplier;
+    }
+
 
 
 }

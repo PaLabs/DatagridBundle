@@ -5,6 +5,10 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="PaLabs\DatagridBundle\DataSource\Filter\NoOpFilter"
+                 class="PaLabs\DatagridBundle\DataSource\Filter\NoOpFilter" public="false">
+            <tag name="pa_datagrid.filter"/>
+        </service>
         <service id="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\BooleanFilter"
                  class="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\BooleanFilter" public="false">
             <tag name="pa_datagrid.filter"/>

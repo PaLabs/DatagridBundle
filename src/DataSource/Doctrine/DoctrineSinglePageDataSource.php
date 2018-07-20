@@ -33,7 +33,7 @@ abstract class DoctrineSinglePageDataSource extends DoctrineDataSource
         return $result;
     }
 
-    protected function getSettingsFormOptions(GridParameters $parameters): array
+    protected function settingsFormOptions(GridParameters $parameters): array
     {
         return [
             'enablePerPageSelector' => false
