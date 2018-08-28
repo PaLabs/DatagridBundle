@@ -48,6 +48,15 @@ class GridDataSourceUrlParameters
         return $this;
     }
 
+    public function addFilters(array $filters): self {
+        foreach($filters as $name => $filterData) {
+            if($filterData !== null) {
+                $this->addFilter($name, $filterData);
+            }
+        }
+        return $this;
+    }
+
     public function addOrder(OrderItem $orderItem): self
     {
         $this->order[] = [
