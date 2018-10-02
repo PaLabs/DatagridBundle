@@ -24,6 +24,8 @@ class StringFilterForm extends AbstractType
                     'operator_contains' => StringFilter::OPERATOR_CONTAINS,
                     'operator_not_contains' => StringFilter::OPERATOR_NOT_CONTAINS,
                     'operator_equals' => StringFilter::OPERATOR_EQUALS,
+                    'operator_empty' => StringFilter::OPERATOR_EMPTY,
+                    'operator_not_empty' => StringFilter::OPERATOR_NOT_EMPTY,
                 ]
             ])
             ->add(self::VALUE_FIELD, TextType::class, [

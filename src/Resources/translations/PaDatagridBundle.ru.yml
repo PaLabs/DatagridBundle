@@ -11,6 +11,8 @@ order_asc: По возрастанию
 order_desc: По убыванию
 operator_contains: Содержится
 operator_not_contains: Не содержится
+operator_empty: Пусто
+operator_not_empty: Не пусто
 operator_equals: Равно
 total_items: Всего %itemsCount% записей
 equals: Равно

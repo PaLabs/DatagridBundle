@@ -4,6 +4,7 @@
 namespace PaLabs\DatagridBundle\DataSource\Filter\Form\String;
 
 
+use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\StringFilter;
 use PaLabs\DatagridBundle\DataSource\Filter\FilterDataInterface;
 
 class StringFilterData implements FilterDataInterface
@@ -21,6 +22,9 @@ class StringFilterData implements FilterDataInterface
     }
 
     public function isEnabled(): bool {
+        if(in_array($this->operator, [StringFilter::OPERATOR_EMPTY, StringFilter::OPERATOR_NOT_EMPTY])) {
+            return true;
+        }
         return !empty($this->value);
     }
 

@@ -22,7 +22,9 @@ class EntityFilterForm extends AbstractType
             ->add(self::OPERATOR_FIELD, ChoiceType::class, [
                 'choices' => [
                     'equals' => EntityFilter::OPERATOR_EQUALS,
-                    'not_equals' => EntityFilter::OPERATOR_NOT_EQUALS
+                    'not_equals' => EntityFilter::OPERATOR_NOT_EQUALS,
+                    'operator_empty' => EntityFilter::OPERATOR_EMPTY,
+                    'operator_not_empty' => EntityFilter::OPERATOR_NOT_EMPTY,
                 ]
             ])
             ->add(self::VALUE_FIELD, $options['entity_form'],

@@ -15,6 +15,8 @@ class EntityFilter implements FilterFormProvider, DoctrineFilterInterface
 {
     const OPERATOR_EQUALS = 'e';
     const OPERATOR_NOT_EQUALS = 'ne';
+    const OPERATOR_EMPTY = 'em';
+    const OPERATOR_NOT_EMPTY = 'nem';
 
     public function formType(): string
     {
@@ -46,6 +48,12 @@ class EntityFilter implements FilterFormProvider, DoctrineFilterInterface
             case self::OPERATOR_NOT_EQUALS:
                 $qb->andWhere(sprintf('%s != :%s', $fieldName, $parameterName))
                     ->setParameter($parameterName, $criteria->getValue());
+                break;
+            case self::OPERATOR_EMPTY:
+                $qb->andWhere(sprintf('%s IS NULL', $fieldName));
+                break;
+            case self::OPERATOR_NOT_EMPTY:
+                $qb->andWhere(sprintf('%s IS NOT NULL', $fieldName));
                 break;
             default:
                 throw new \Exception(sprintf("Unknown operator: %s", $criteria->getOperator()));
