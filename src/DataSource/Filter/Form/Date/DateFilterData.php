@@ -26,7 +26,7 @@ class DateFilterData implements FilterDataInterface
     }
 
     public function isEnabled(): bool {
-        if(in_array($this->period, [DateFilter::OPERATOR_CURRENT_DAY, DateFilter::OPERATOR_CURRENT_YEAR])) {
+        if(in_array($this->period, DateFilter::PERIOD_OPERATORS)) {
             return true;
         }
         return $this->startDate !== null || $this->endDate !== null;

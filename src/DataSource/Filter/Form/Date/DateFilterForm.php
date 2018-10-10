@@ -24,6 +24,8 @@ class DateFilterForm extends AbstractType
                 'choices' => [
                     'operator_interval' => DateFilter::OPERATOR_INTERVAL,
                     'operator_current_day' => DateFilter::OPERATOR_CURRENT_DAY,
+                    'operator_yesterday' => DateFilter::OPERATOR_YESTERDAY,
+                    'operator_current_week' => DateFilter::OPERATOR_CURRENT_WEEK,
                     'operator_current_year' => DateFilter::OPERATOR_CURRENT_YEAR
                 ]
             ])

@@ -20,11 +20,26 @@ export default class GridStringFilter extends Component {
 
     _processType() {
         const optionValue = this.typeSelector.find('option:selected').val();
-        if (['em', 'nem'].includes(optionValue)) {
-            this.searchField.hide();
-        } else {
-            this.searchField.show();
+        switch (optionValue) {
+            case 'em':
+            case 'nem':
+                this._expandOperator();
+
+                break;
+            default:
+                this._collapseOperator();
+                break;
         }
+    }
+
+    _expandOperator() {
+        this.searchField.hide();
+        this.typeSelector.removeClass('col-md-3').addClass('col-md-12');
+    }
+
+    _collapseOperator() {
+        this.searchField.show();
+        this.typeSelector.removeClass('col-md-12').addClass('col-md-3');
     }
 
 }

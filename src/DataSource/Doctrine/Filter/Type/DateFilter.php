@@ -15,7 +15,16 @@ class DateFilter implements FilterFormProvider, DoctrineFilterInterface
 {
     const OPERATOR_INTERVAL = 'i';
     const OPERATOR_CURRENT_DAY = 'cd';
+    const OPERATOR_YESTERDAY = 'yd';
+    const OPERATOR_CURRENT_WEEK = 'cw';
     const OPERATOR_CURRENT_YEAR = 'cy';
+
+    const PERIOD_OPERATORS = [
+        self::OPERATOR_CURRENT_DAY,
+        self::OPERATOR_YESTERDAY,
+        self::OPERATOR_CURRENT_WEEK,
+        self::OPERATOR_CURRENT_YEAR
+    ];
 
     public function formType(): string
     {
@@ -42,9 +51,14 @@ class DateFilter implements FilterFormProvider, DoctrineFilterInterface
 
         switch ($criteria->getPeriod()) {
             case DateFilter::OPERATOR_CURRENT_DAY:
-                return $this->applyCurrentDay($qb, $fieldName, $parameterName);
+                return $this->applyPeriod($qb, $fieldName, $parameterName, (new \DateTime('today')));
+            case DateFilter::OPERATOR_YESTERDAY:
+                return $this->applyPeriod($qb, $fieldName, $parameterName, (new \DateTime('yesterday')));
+            case DateFilter::OPERATOR_CURRENT_WEEK:
+                return $this->applyPeriod($qb, $fieldName, $parameterName, (new \DateTime('this week')));
             case DateFilter::OPERATOR_CURRENT_YEAR:
-                return $this->applyCurrentYear($qb, $fieldName, $parameterName);
+                return $this->applyPeriod($qb, $fieldName, $parameterName,
+                    (new \DateTime(sprintf('first day of january %d', (new \DateTime())->format('Y')))));
             case DateFilter::OPERATOR_INTERVAL:
                 return $this->applyInterval($qb, $criteria, $fieldName, $parameterName);
             default:
@@ -68,16 +82,10 @@ class DateFilter implements FilterFormProvider, DoctrineFilterInterface
         }
     }
 
-    private function applyCurrentDay(QueryBuilder $qb, string $fieldName, string $parameterName)
+    private function applyPeriod(QueryBuilder $qb, string $fieldName, string $parameterName, \DateTime $startDate)
     {
         $qb->andWhere(sprintf('%s >= :%s', $fieldName, $parameterName))
-            ->setParameter($parameterName, (new \DateTime('today')));
-    }
-
-    private function applyCurrentYear(QueryBuilder $qb, string $fieldName, string $parameterName)
-    {
-        $qb->andWhere(sprintf('%s >= :%s', $fieldName, $parameterName))
-            ->setParameter($parameterName, (new \DateTime(sprintf('first day of january %d', (new \DateTime())->format('Y')))));
+            ->setParameter($parameterName, $startDate);
     }
 
 }

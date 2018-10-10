@@ -22,13 +22,25 @@ export default class GridDateFilter extends Component {
         const optionValue = this.typeSelector.find('option:selected').val();
         switch (optionValue) {
             case 'cd':
+            case 'yd':
+            case 'cw':
             case 'cy':
-                this.dates.hide();
+                this._expandOperator();
                 break;
             default:
-                this.dates.show();
+                this._collapseOperator();
                 break;
         }
+    }
+
+    _expandOperator() {
+        this.dates.hide();
+        this.typeSelector.removeClass('col-md-3').addClass('col-md-12');
+    }
+
+    _collapseOperator() {
+        this.dates.show();
+        this.typeSelector.removeClass('col-md-12').addClass('col-md-3');
     }
 
 }
