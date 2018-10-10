@@ -1,29 +1,40 @@
 {% block string_filter_form_widget %}
-    <table width="100%">
-        <tr>
-            <td width="150px">{{ form_widget(form.o) }}</td>
-            <td style="padding-left: 10px">{{ form_widget(form.v) }}</td>
-        </tr>
-    </table>
+    <div class="row" data-widget="grid_string_filter">
+        <div class="col-md-3" data-component-role="type_selector">
+            {{ form_widget(form.o) }}
+        </div>
+        <div class="col-md-9" data-component-role="search_field">
+            {{ form_widget(form.v) }}
+        </div>
+    </div>
 {% endblock %}
 
 {% block date_filter_form_widget %}
-    <table width="100%">
-        <tr>
-            <td>{{ form_widget(form.s) }}</td>
-            <td width="50px" align="center">...</td>
-            <td>{{ form_widget(form.e) }}</td>
-        </tr>
-    </table>
+    <div class="row" data-widget="grid_date_filter">
+        <div class="col-md-3" data-component-role="type_selector">
+            {{ form_widget(form.o) }}
+        </div>
+        <div class="col-md-9">
+            <table width="100%" data-component-role="dates">
+                <tr>
+                    <td>{{ form_widget(form.s) }}</td>
+                    <td width="50px" align="center">...</td>
+                    <td>{{ form_widget(form.e) }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
 {% endblock %}
 
 {% block entity_filter_form_widget %}
-    <table width="100%">
-        <tr>
-            <td width="150px">{{ form_widget(form.o) }}</td>
-            <td style="padding-left: 10px">{{ form_widget(form.v) }}</td>
-        </tr>
-    </table>
+    <div class="row" data-widget="grid_entity_filter">
+        <div class="col-md-3" data-component-role="type_selector">
+            {{ form_widget(form.o) }}
+        </div>
+        <div class="col-md-9" data-component-role="search_field">
+            {{ form_widget(form.v) }}
+        </div>
+    </div>
 {% endblock %}
 
 {% block integer_filter_form_widget %}

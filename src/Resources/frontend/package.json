@@ -1,28 +1,20 @@
 {
-  "name": "DatagridBundle-frontend",
-  "version": "0.1.0",
-  "description": "NOTES =====",
-  "main": "",
-  "dependencies": {
-  },
   "devDependencies": {
-    "babel-core": "^6.1.21",
-    "babel-loader": "^6.2.2",
-    "babel-plugin-transform-runtime": "^6.4.3",
-    "babel-polyfill": "^6.1.19",
-    "babel-preset-es2015": "^6.1.18",
-    "babel-runtime": "^6.3.19",
-    "css-loader": "^0.23.0",
-    "exports-loader": "^0.6.2",
-    "extract-text-webpack-plugin": "^0.9.1",
-    "file-loader": "^0.8.4",
-    "less": "^2.5.3",
-    "less-loader": "^2.2.1",
-    "nunjucks": "^2.1.0",
-    "nunjucks-loader": "^2.2.1",
-    "style-loader": "^0.13.0",
-    "url-loader": "^0.5.6",
-    "webpack": "^1.12.6",
-    "es6-promise": "^3.0.2"
+    "@symfony/webpack-encore": "^0.15.0",
+    "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.28.7",
+    "file-loader": "^0.11.2",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.5",
+    "url-loader": "^0.5.9",
+    "webpack-vendor-chunk-plugin": "^1.0.0",
+
+    "jquery": "^3.2.1"
+  },
+  "scripts": {
+    "dev-server": "./node_modules/.bin/encore dev-server",
+    "dev": "./node_modules/.bin/encore dev",
+    "watch": "./node_modules/.bin/encore dev --watch",
+    "prod": "./node_modules/.bin/encore production"
   }
 }

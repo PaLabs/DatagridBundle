@@ -14,6 +14,9 @@ operator_not_contains: Не содержится
 operator_empty: Пусто
 operator_not_empty: Не пусто
 operator_equals: Равно
+operator_interval: Интервал
+operator_current_day: Этот день
+operator_current_year: Этот год
 total_items: Всего %itemsCount% записей
 equals: Равно
 not_equals: Не равно
