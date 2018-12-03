@@ -11,12 +11,12 @@ use PaLabs\DatagridBundle\Grid\GridParameters;
 abstract class AbstractConfigurableDataSource implements ConfigurableDataSource
 {
 
-    protected function configureFilters(FilterBuilder $builder, GridParameters $parameters)
+    protected function configureFilters(FilterBuilder $builder, GridParameters $parameters):void
     {
 
     }
 
-    protected function configureSorting(SortBuilder $builder, GridParameters $parameters)
+    protected function configureSorting(SortBuilder $builder, GridParameters $parameters): void
     {
 
     }

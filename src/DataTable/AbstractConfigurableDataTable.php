@@ -58,7 +58,7 @@ abstract class AbstractConfigurableDataTable implements ConfigurableDataTable
         DataSourceResultContainer $container,
         GridContext $context,
         array $columns,
-        array $displayColumnNames)
+        array $displayColumnNames): iterable
     {
         $loopIndex = 0;
         $columnMakersCaller = new ColumnMakerCaller($columns);
@@ -79,7 +79,7 @@ abstract class AbstractConfigurableDataTable implements ConfigurableDataTable
         GridContext $context,
         ColumnMakerCaller $columnMakersCaller,
         array $columns,
-        array $displayColumnNames)
+        array $displayColumnNames): array
     {
         return array_map(function (string $columnName) use ($columnMakersCaller, $columns, $rowData, $loopIndex, $page, $context) {
             /** @var \PaLabs\DatagridBundle\DataTable\Column\Column $column * */
@@ -90,7 +90,7 @@ abstract class AbstractConfigurableDataTable implements ConfigurableDataTable
         }, $displayColumnNames);
     }
 
-    public function buildHeader(GridContext $context, array $columns, array $displayColumnNames)
+    public function buildHeader(GridContext $context, array $columns, array $displayColumnNames): array
     {
         $headerRow = array_map(function ($columnName) use ($columns, $context) {
             /** @var \PaLabs\DatagridBundle\DataTable\Column\Column $field * */
@@ -119,7 +119,7 @@ abstract class AbstractConfigurableDataTable implements ConfigurableDataTable
         ];
     }
 
-    protected function displayFields(array $columns, GridParameters $parameters)
+    protected function displayFields(array $columns, GridParameters $parameters): array
     {
         $columns = array_filter($columns, function(Column $column){
             return !$column->getOptions()->isRequired();

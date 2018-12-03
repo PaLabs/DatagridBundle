@@ -7,6 +7,7 @@ namespace PaLabs\DatagridBundle\DataSource\Doctrine;
 use Doctrine\ORM\QueryBuilder;
 use PaLabs\DatagridBundle\DataSource\DataSourceConfiguration;
 use PaLabs\DatagridBundle\DataSource\Result\DataSourcePage;
+use PaLabs\DatagridBundle\DataSource\Result\DataSourcePageContext;
 use PaLabs\DatagridBundle\DataSource\Result\DataSourceResultContainer;
 use PaLabs\DatagridBundle\Grid\GridContext;
 use PaLabs\DatagridBundle\Grid\GridParameters;
@@ -22,10 +23,12 @@ abstract class DoctrineSinglePageDataSource extends DoctrineDataSource
         return $this->allPagesRows($queryBuilder, $configuration, $context);
     }
 
-    protected function allPagesRows(QueryBuilder $queryBuilder, DataSourceConfiguration $configuration, GridContext $context)
+    protected function allPagesRows(QueryBuilder $queryBuilder, DataSourceConfiguration $configuration,
+                                    GridContext $context): DataSourceResultContainer
     {
         $rows = $queryBuilder->getQuery()->getResult();
-        $pageContext = $this->buildPageContext($rows, $configuration, $context);
+        $pageContext = new DataSourcePageContext();
+        $this->buildPageContext($rows, $configuration, $context, $pageContext);
         $pageRowsIterator = $this->transformPage($rows, $configuration, $context, $pageContext);
 
         $page = new DataSourcePage($pageRowsIterator, $pageContext);
