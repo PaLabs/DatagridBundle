@@ -26,10 +26,10 @@
             {% endif %}
             {% for fieldName in  fieldNames %}
                 <li data-field="{{ fieldName }}" style="white-space: nowrap;padding-right: 10px;">
-                    <a href="#" style="color: #777;">
+                   <span style="color: #777; padding: 3px 20px; clear: both; cursor: pointer">
                     <input type="checkbox" data-component-role="row_visibility"/>
                         {{ filterForm.children[fieldName].vars.label|trans }}
-                    </a>
+                   </span>
                 </li>
             {% endfor %}
             {% if group is not empty %}
