@@ -9,7 +9,7 @@
     "url-loader": "^0.5.9",
     "webpack-vendor-chunk-plugin": "^1.0.0",
 
-    "jquery": "^3.2.1"
+    "jquery": "^3.4.0"
   },
   "scripts": {
     "dev-server": "./node_modules/.bin/encore dev-server",
