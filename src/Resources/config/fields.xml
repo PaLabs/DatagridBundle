@@ -30,12 +30,6 @@
             <tag name="pa_datagrid.field"/>
         </service>
 
-        <service id="PaLabs\DatagridBundle\Field\Type\Twig\TwigField"
-                 class="PaLabs\DatagridBundle\Field\Type\Twig\TwigField" public="false">
-            <argument type="service" id="templating"/>
-            <tag name="pa_datagrid.field"/>
-        </service>
-
         <service id="PaLabs\DatagridBundle\Field\Type\Url\UrlField"
                  class="PaLabs\DatagridBundle\Field\Type\Url\UrlField" public="true">
             <tag name="pa_datagrid.field"/>
