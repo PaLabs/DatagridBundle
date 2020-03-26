@@ -10,6 +10,8 @@ use PaLabs\DatagridBundle\DataSource\Filter\FilterFormProvider;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\Boolean\BooleanFilterData;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\Boolean\BooleanFilterForm;
 use PaLabs\DatagridBundle\DataSource\Filter\InvalidFilterDataException;
+use PaLabs\DatagridBundle\DataSource\Filter\Options\BaseFilterOptions;
+use PaLabs\DatagridBundle\DataSource\Filter\Options\FilterOptions;
 
 class BooleanFilter implements FilterFormProvider, DoctrineFilterInterface
 {
@@ -23,6 +25,10 @@ class BooleanFilter implements FilterFormProvider, DoctrineFilterInterface
         return [];
     }
 
+    public static function options(string $label): FilterOptions {
+        return new BaseFilterOptions($label);
+    }
+
     public function apply(QueryBuilder $qb, string $name, $criteria, array $options = [])
     {
         if(!$criteria instanceof BooleanFilterData) {
@@ -33,7 +39,7 @@ class BooleanFilter implements FilterFormProvider, DoctrineFilterInterface
         }
 
         $fieldName = FilterHelper::fieldName($name, $options);
-        $parameterName = FilterHelper::parameterName($name, $options);
+        $parameterName = FilterHelper::parameterName($name);
 
         $qb->andWhere(sprintf('%s = :%s', $fieldName, $parameterName))
             ->setParameter($parameterName, $criteria->getValue());

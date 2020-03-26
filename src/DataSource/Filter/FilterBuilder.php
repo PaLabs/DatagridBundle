@@ -5,7 +5,7 @@ namespace PaLabs\DatagridBundle\DataSource\Filter;
 
 class FilterBuilder
 {
-    private $filters = [];
+    private array $filters = [];
 
     public function add(
         string $name,

@@ -10,6 +10,8 @@ use PaLabs\DatagridBundle\DataSource\Filter\FilterFormProvider;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\Date\DateFilterData;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\Date\DateFilterForm;
 use PaLabs\DatagridBundle\DataSource\Filter\InvalidFilterDataException;
+use PaLabs\DatagridBundle\DataSource\Filter\Options\BaseFilterOptions;
+use PaLabs\DatagridBundle\DataSource\Filter\Options\FilterOptions;
 
 class DateFilter implements FilterFormProvider, DoctrineFilterInterface
 {
@@ -37,6 +39,10 @@ class DateFilter implements FilterFormProvider, DoctrineFilterInterface
         return [];
     }
 
+    public static function options(string $label): FilterOptions {
+        return new BaseFilterOptions($label);
+    }
+
     public function apply(QueryBuilder $qb, string $name, $criteria, array $options = [])
     {
         if (!$criteria instanceof DateFilterData) {
@@ -47,7 +53,7 @@ class DateFilter implements FilterFormProvider, DoctrineFilterInterface
         }
 
         $fieldName = FilterHelper::fieldName($name, $options);
-        $parameterName = FilterHelper::parameterName($name, $options);
+        $parameterName = FilterHelper::parameterName($name);
 
         switch ($criteria->getPeriod()) {
             case DateFilter::OPERATOR_CURRENT_DAY:

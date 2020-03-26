@@ -3,31 +3,21 @@
 namespace PaLabs\DatagridBundle\DataSource\Doctrine\Filter;
 
 
+use PaLabs\DatagridBundle\DataSource\Filter\Options\BaseFilterOptions;
+
 class FilterHelper
 {
-    public static function fieldName($name, array $options)
+    public static function fieldName(string $name, array $options): string
     {
-        if (isset($options['field'])) {
-            $fieldName = $options['field'];
-        } else {
-            $fieldName = sprintf('%s.%s', self::entityAlias($options), $name);
+        if (isset($options[BaseFilterOptions::FILTER_OPTION_FIELD])) {
+            return $options[BaseFilterOptions::FILTER_OPTION_FIELD];
         }
-
-        return $fieldName;
+        return sprintf('entity.%s', $name);
     }
 
-    public static function entityAlias(array $options)
+    public static function parameterName($name)
     {
-        if (isset($options['entityAlias'])) {
-            return $options['entityAlias'];
-        }
-        return 'entity';
-    }
-
-    public static function parameterName($name, array $options)
-    {
-        $parameterName = $name . '_criteria';
-        return $parameterName;
+        return $name . '_criteria';
     }
 
 }

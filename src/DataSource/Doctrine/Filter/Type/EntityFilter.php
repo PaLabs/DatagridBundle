@@ -10,6 +10,8 @@ use PaLabs\DatagridBundle\DataSource\Filter\FilterFormProvider;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\Entity\EntityFilterData;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\Entity\EntityFilterForm;
 use PaLabs\DatagridBundle\DataSource\Filter\InvalidFilterDataException;
+use PaLabs\DatagridBundle\DataSource\Filter\Options\BaseFilterOptions;
+use PaLabs\DatagridBundle\DataSource\Filter\Options\FilterOptions;
 
 class EntityFilter implements FilterFormProvider, DoctrineFilterInterface
 {
@@ -28,6 +30,10 @@ class EntityFilter implements FilterFormProvider, DoctrineFilterInterface
         return [];
     }
 
+    public static function options(string $label): FilterOptions {
+        return new EntityFilterOptions($label);
+    }
+
     public function apply(QueryBuilder $qb, string $name, $criteria, array $options = [])
     {
         if (!$criteria instanceof EntityFilterData) {
@@ -38,7 +44,7 @@ class EntityFilter implements FilterFormProvider, DoctrineFilterInterface
         }
 
         $fieldName = FilterHelper::fieldName($name, $options);
-        $parameterName = FilterHelper::parameterName($name, $options);
+        $parameterName = FilterHelper::parameterName($name);
 
         switch ($criteria->getOperator()) {
             case self::OPERATOR_EQUALS:

@@ -10,6 +10,8 @@ use PaLabs\DatagridBundle\DataSource\Filter\FilterFormProvider;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\Integer\IntegerFilterData;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\Integer\IntegerFilterForm;
 use PaLabs\DatagridBundle\DataSource\Filter\InvalidFilterDataException;
+use PaLabs\DatagridBundle\DataSource\Filter\Options\BaseFilterOptions;
+use PaLabs\DatagridBundle\DataSource\Filter\Options\FilterOptions;
 use PaLabs\DatagridBundle\Util\StringUtils;
 
 class IntegerHavingFilter implements FilterFormProvider, DoctrineFilterInterface
@@ -22,6 +24,10 @@ class IntegerHavingFilter implements FilterFormProvider, DoctrineFilterInterface
     public function formOptions(): array
     {
         return [];
+    }
+
+    public static function options(string $label): FilterOptions {
+        return new BaseFilterOptions($label);
     }
 
     public function apply(QueryBuilder $qb, string $name, $criteria, array $options = [])

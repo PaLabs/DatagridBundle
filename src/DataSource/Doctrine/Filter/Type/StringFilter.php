@@ -10,6 +10,8 @@ use PaLabs\DatagridBundle\DataSource\Filter\FilterFormProvider;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\String\StringFilterData;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\String\StringFilterForm;
 use PaLabs\DatagridBundle\DataSource\Filter\InvalidFilterDataException;
+use PaLabs\DatagridBundle\DataSource\Filter\Options\BaseFilterOptions;
+use PaLabs\DatagridBundle\DataSource\Filter\Options\FilterOptions;
 
 class StringFilter implements FilterFormProvider, DoctrineFilterInterface
 {
@@ -29,6 +31,10 @@ class StringFilter implements FilterFormProvider, DoctrineFilterInterface
         return [];
     }
 
+    public static function options(string $label): FilterOptions {
+        return new BaseFilterOptions($label);
+    }
+
     public function apply(QueryBuilder $qb, string $name, $criteria, array $options = [])
     {
         if (!$criteria instanceof StringFilterData) {
@@ -39,7 +45,7 @@ class StringFilter implements FilterFormProvider, DoctrineFilterInterface
         }
 
         $fieldName = FilterHelper::fieldName($name, $options);
-        $parameterName = FilterHelper::parameterName($name, $options);
+        $parameterName = FilterHelper::parameterName($name);
 
 
         switch ($criteria->getOperator()) {

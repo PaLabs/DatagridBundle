@@ -8,7 +8,7 @@ use PaLabs\DatagridBundle\DataSource\Filter\Registry\FilterRegistry;
 
 class QueryBuilderFilterApplier
 {
-    protected $filterRegistry;
+    protected FilterRegistry $filterRegistry;
 
     public function __construct(FilterRegistry $filterRegistry)
     {
