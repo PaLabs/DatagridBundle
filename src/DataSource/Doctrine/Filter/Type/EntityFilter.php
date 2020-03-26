@@ -30,7 +30,7 @@ class EntityFilter implements FilterFormProvider, DoctrineFilterInterface
         return [];
     }
 
-    public static function options(string $label): FilterOptions {
+    public static function options(string $label): EntityFilterOptions {
         return new EntityFilterOptions($label);
     }
 

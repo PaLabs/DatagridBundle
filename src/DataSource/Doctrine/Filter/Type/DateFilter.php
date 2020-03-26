@@ -39,7 +39,7 @@ class DateFilter implements FilterFormProvider, DoctrineFilterInterface
         return [];
     }
 
-    public static function options(string $label): FilterOptions {
+    public static function options(string $label): BaseFilterOptions {
         return new BaseFilterOptions($label);
     }
 

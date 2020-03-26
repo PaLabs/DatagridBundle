@@ -3,15 +3,14 @@
 namespace PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type;
 
 
+use Doctrine\ORM\QueryBuilder;
 use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\DoctrineFilterInterface;
 use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\FilterHelper;
 use PaLabs\DatagridBundle\DataSource\Filter\FilterFormProvider;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\Boolean\BooleanFilterData;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\Boolean\BooleanFilterForm;
-use Doctrine\ORM\QueryBuilder;
 use PaLabs\DatagridBundle\DataSource\Filter\InvalidFilterDataException;
 use PaLabs\DatagridBundle\DataSource\Filter\Options\BaseFilterOptions;
-use PaLabs\DatagridBundle\DataSource\Filter\Options\FilterOptions;
 
 class IsNullFilter implements FilterFormProvider, DoctrineFilterInterface
 {
@@ -25,7 +24,7 @@ class IsNullFilter implements FilterFormProvider, DoctrineFilterInterface
         return [];
     }
 
-    public static function options(string $label): FilterOptions {
+    public static function options(string $label): BaseFilterOptions {
         return new BaseFilterOptions($label);
     }
 

@@ -4,6 +4,7 @@ namespace PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type;
 
 
 use Doctrine\ORM\QueryBuilder;
+use Exception;
 use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\DoctrineFilterInterface;
 use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\FilterHelper;
 use PaLabs\DatagridBundle\DataSource\Filter\FilterFormProvider;
@@ -11,7 +12,6 @@ use PaLabs\DatagridBundle\DataSource\Filter\Form\String\StringFilterData;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\String\StringFilterForm;
 use PaLabs\DatagridBundle\DataSource\Filter\InvalidFilterDataException;
 use PaLabs\DatagridBundle\DataSource\Filter\Options\BaseFilterOptions;
-use PaLabs\DatagridBundle\DataSource\Filter\Options\FilterOptions;
 
 class StringFilter implements FilterFormProvider, DoctrineFilterInterface
 {
@@ -31,7 +31,7 @@ class StringFilter implements FilterFormProvider, DoctrineFilterInterface
         return [];
     }
 
-    public static function options(string $label): FilterOptions {
+    public static function options(string $label): BaseFilterOptions {
         return new BaseFilterOptions($label);
     }
 
@@ -68,7 +68,7 @@ class StringFilter implements FilterFormProvider, DoctrineFilterInterface
                 $qb->andWhere(sprintf('%s IS NOT NULL', $fieldName));
                 break;
             default:
-                throw new \Exception(sprintf("Unknown operator: %s", $criteria->getValue()));
+                throw new Exception(sprintf("Unknown operator: %s", $criteria->getValue()));
 
         }
     }

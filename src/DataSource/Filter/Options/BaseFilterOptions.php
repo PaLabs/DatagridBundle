@@ -18,19 +18,19 @@ class BaseFilterOptions  implements FilterOptions
         }
     }
 
-    public function default(): self
+    public function default()
     {
         $this->formOptions['default'] = true;
         return $this;
     }
 
-    public function group(string $group): self
+    public function group(string $group)
     {
         $this->formOptions['group'] = $group;
         return $this;
     }
 
-    public function field(string $field): self {
+    public function field(string $field) {
         $this->filterOptions[self::FILTER_OPTION_FIELD] = $field;
         return $this;
     }

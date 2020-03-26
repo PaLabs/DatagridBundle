@@ -34,11 +34,6 @@
             <tag name="pa_datagrid.filter"/>
         </service>
 
-        <service id="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\CollectionEmptinessFilter"
-                 class="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\CollectionEmptinessFilter" public="false">
-            <tag name="pa_datagrid.filter"/>
-        </service>
-
         <service id="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\IntegerHavingFilter"
                  class="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\IntegerHavingFilter" public="false">
             <tag name="pa_datagrid.filter"/>
