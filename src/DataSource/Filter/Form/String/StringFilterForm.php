@@ -3,7 +3,6 @@
 namespace PaLabs\DatagridBundle\DataSource\Filter\Form\String;
 
 
-use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\StringFilter;
 use PaLabs\DatagridBundle\DataSource\Filter\BaseFilterForm;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -21,11 +20,11 @@ class StringFilterForm extends AbstractType
         $builder
             ->add(self::OPERATOR_FIELD, ChoiceType::class, [
                 'choices' => [
-                    'operator_contains' => StringFilter::OPERATOR_CONTAINS,
-                    'operator_not_contains' => StringFilter::OPERATOR_NOT_CONTAINS,
-                    'operator_equals' => StringFilter::OPERATOR_EQUALS,
-                    'operator_empty' => StringFilter::OPERATOR_EMPTY,
-                    'operator_not_empty' => StringFilter::OPERATOR_NOT_EMPTY,
+                    'operator_contains' => StringFilterOperator::OPERATOR_CONTAINS,
+                    'operator_not_contains' => StringFilterOperator::OPERATOR_NOT_CONTAINS,
+                    'operator_equals' => StringFilterOperator::OPERATOR_EQUALS,
+                    'operator_empty' => StringFilterOperator::OPERATOR_EMPTY,
+                    'operator_not_empty' => StringFilterOperator::OPERATOR_NOT_EMPTY,
                 ]
             ])
             ->add(self::VALUE_FIELD, TextType::class, [

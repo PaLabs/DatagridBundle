@@ -8,10 +8,9 @@ use PaLabs\DatagridBundle\DataSource\Filter\FilterDataInterface;
 
 class BooleanFilterData implements FilterDataInterface
 {
-    /** @var bool|null */
-    protected $value;
+    protected ?bool $value;
 
-    public function __construct(bool $value = null)
+    public function __construct(?bool $value = null)
     {
         $this->value = $value;
     }

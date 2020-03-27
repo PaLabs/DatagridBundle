@@ -3,15 +3,14 @@
 namespace PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type;
 
 
+use Doctrine\ORM\QueryBuilder;
 use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\DoctrineFilterInterface;
 use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\FilterHelper;
 use PaLabs\DatagridBundle\DataSource\Filter\FilterFormProvider;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\Integer\IntegerFilterData;
 use PaLabs\DatagridBundle\DataSource\Filter\Form\Integer\IntegerFilterForm;
-use Doctrine\ORM\QueryBuilder;
 use PaLabs\DatagridBundle\DataSource\Filter\InvalidFilterDataException;
 use PaLabs\DatagridBundle\DataSource\Filter\Options\BaseFilterOptions;
-use PaLabs\DatagridBundle\DataSource\Filter\Options\FilterOptions;
 use PaLabs\DatagridBundle\Util\StringUtils;
 
 class IntegerFilter implements FilterFormProvider, DoctrineFilterInterface
@@ -23,6 +22,10 @@ class IntegerFilter implements FilterFormProvider, DoctrineFilterInterface
     public function formOptions(): array
     {
         return [];
+    }
+
+    public static function data(?string $value = null): IntegerFilterData {
+        return new IntegerFilterData($value);
     }
 
     public static function options(string $label): BaseFilterOptions {

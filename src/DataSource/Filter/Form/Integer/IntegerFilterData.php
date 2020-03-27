@@ -8,10 +8,9 @@ use PaLabs\DatagridBundle\DataSource\Filter\FilterDataInterface;
 
 class IntegerFilterData implements FilterDataInterface
 {
-    /** @var  string */
-    protected $value;
+    protected ?string $value;
 
-    public function __construct(string $value = null)
+    public function __construct(?string $value = null)
     {
         $this->value = $value;
     }

@@ -24,13 +24,19 @@ class IsNullFilter implements FilterFormProvider, DoctrineFilterInterface
         return [];
     }
 
-    public static function options(string $label): BaseFilterOptions {
+    public static function data(?bool $value): BooleanFilterData
+    {
+        return new BooleanFilterData($value);
+    }
+    
+    public static function options(string $label): BaseFilterOptions
+    {
         return new BaseFilterOptions($label);
     }
 
     public function apply(QueryBuilder $qb, string $name, $criteria, array $options = [])
     {
-        if(!$criteria instanceof BooleanFilterData) {
+        if (!$criteria instanceof BooleanFilterData) {
             throw new InvalidFilterDataException(BooleanFilterData::class, $criteria);
         }
         if (!$criteria->isEnabled()) {

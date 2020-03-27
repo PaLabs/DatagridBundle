@@ -1,7 +1,7 @@
 <?php
 
 
-namespace PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type;
+namespace PaLabs\DatagridBundle\DataSource\Filter\Form\Entity;
 
 
 use PaLabs\DatagridBundle\DataSource\Filter\Options\BaseFilterOptions;

@@ -4,25 +4,25 @@
 namespace PaLabs\DatagridBundle\DataSource\Filter\Form\String;
 
 
-use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\StringFilter;
+use LogicException;
 use PaLabs\DatagridBundle\DataSource\Filter\FilterDataInterface;
 
 class StringFilterData implements FilterDataInterface
 {
-    /** @var  string */
-    protected $operator;
+    protected string $operator;
+    protected ?string $value;
 
-    /** @var  string */
-    protected $value;
-
-    public function __construct(string $operator, string $value = null)
+    public function __construct(string $operator, ?string $value = null)
     {
+        if(!StringFilterOperator::valid($operator)) {
+            throw new LogicException(sprintf('StringFilter operator %s is not a valid operator', $operator));
+        }
         $this->operator = $operator;
         $this->value = $value;
     }
 
     public function isEnabled(): bool {
-        if(in_array($this->operator, [StringFilter::OPERATOR_EMPTY, StringFilter::OPERATOR_NOT_EMPTY])) {
+        if(in_array($this->operator, [StringFilterOperator::OPERATOR_EMPTY, StringFilterOperator::OPERATOR_NOT_EMPTY])) {
             return true;
         }
         return !empty($this->value);

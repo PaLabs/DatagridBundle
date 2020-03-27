@@ -24,6 +24,10 @@ class BooleanFilter implements FilterFormProvider, DoctrineFilterInterface
         return [];
     }
 
+    public static function data(?bool $value): BooleanFilterData {
+        return new BooleanFilterData($value);
+    }
+
     public static function options(string $label): BaseFilterOptions {
         return new BaseFilterOptions($label);
     }

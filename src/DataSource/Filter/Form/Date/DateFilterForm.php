@@ -22,11 +22,11 @@ class DateFilterForm extends AbstractType
         $builder
             ->add(self::PERIOD_FIELD, ChoiceType::class, [
                 'choices' => [
-                    'operator_interval' => DateFilter::OPERATOR_INTERVAL,
-                    'operator_current_day' => DateFilter::OPERATOR_CURRENT_DAY,
-                    'operator_yesterday' => DateFilter::OPERATOR_YESTERDAY,
-                    'operator_current_week' => DateFilter::OPERATOR_CURRENT_WEEK,
-                    'operator_current_year' => DateFilter::OPERATOR_CURRENT_YEAR
+                    'operator_interval' => DateFilterOperator::OPERATOR_INTERVAL,
+                    'operator_current_day' => DateFilterOperator::OPERATOR_CURRENT_DAY,
+                    'operator_yesterday' => DateFilterOperator::OPERATOR_YESTERDAY,
+                    'operator_current_week' => DateFilterOperator::OPERATOR_CURRENT_WEEK,
+                    'operator_current_year' => DateFilterOperator::OPERATOR_CURRENT_YEAR
                 ]
             ])
             ->add(self::START_FIELD, $options['dateForm'], $options['dateFormOptions'])

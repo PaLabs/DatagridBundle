@@ -4,29 +4,32 @@
 namespace PaLabs\DatagridBundle\DataSource\Filter\Form\Date;
 
 
-use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\DateFilter;
+use DateTime;
+use LogicException;
 use PaLabs\DatagridBundle\DataSource\Filter\FilterDataInterface;
 
 class DateFilterData implements FilterDataInterface
 {
-    /** @var string */
-    protected $period;
+    protected string $period;
+    protected ?DateTime $startDate;
+    protected ?DateTime $endDate;
 
-    /** @var  \DateTime */
-    protected $startDate;
-
-    /** @var  \DateTime */
-    protected $endDate;
-
-    public function __construct(string $period, \DateTime $startDate = null, \DateTime $endDate = null)
+    public function __construct(
+        string $period,
+        ?DateTime $startDate = null,
+        ?DateTime $endDate = null)
     {
+        if (!DateFilterOperator::valid($period)) {
+            throw new LogicException(sprintf('DateFilter operator %s is not a valid operator', $period));
+        }
         $this->period = $period;
         $this->startDate = $startDate;
         $this->endDate = $endDate;
     }
 
-    public function isEnabled(): bool {
-        if(in_array($this->period, DateFilter::PERIOD_OPERATORS)) {
+    public function isEnabled(): bool
+    {
+        if (in_array($this->period, DateFilterOperator::PERIOD_OPERATORS)) {
             return true;
         }
         return $this->startDate !== null || $this->endDate !== null;
@@ -41,12 +44,12 @@ class DateFilterData implements FilterDataInterface
         ];
     }
 
-    public function getStartDate(): ?\DateTime
+    public function getStartDate(): ?DateTime
     {
         return $this->startDate;
     }
 
-    public function getEndDate(): ?\DateTime
+    public function getEndDate(): ?DateTime
     {
         return $this->endDate;
     }

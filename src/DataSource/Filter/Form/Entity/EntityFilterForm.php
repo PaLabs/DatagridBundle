@@ -3,7 +3,6 @@
 namespace PaLabs\DatagridBundle\DataSource\Filter\Form\Entity;
 
 
-use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\EntityFilter;
 use PaLabs\DatagridBundle\DataSource\Filter\BaseFilterForm;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -21,10 +20,10 @@ class EntityFilterForm extends AbstractType
         $builder
             ->add(self::OPERATOR_FIELD, ChoiceType::class, [
                 'choices' => [
-                    'equals' => EntityFilter::OPERATOR_EQUALS,
-                    'not_equals' => EntityFilter::OPERATOR_NOT_EQUALS,
-                    'operator_empty' => EntityFilter::OPERATOR_EMPTY,
-                    'operator_not_empty' => EntityFilter::OPERATOR_NOT_EMPTY,
+                    'equals' => EntityFilterOperator::OPERATOR_EQUALS,
+                    'not_equals' => EntityFilterOperator::OPERATOR_NOT_EQUALS,
+                    'operator_empty' => EntityFilterOperator::OPERATOR_EMPTY,
+                    'operator_not_empty' => EntityFilterOperator::OPERATOR_NOT_EMPTY,
                 ]
             ])
             ->add(self::VALUE_FIELD, $options['entity_form'],
