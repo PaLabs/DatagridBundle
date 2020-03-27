@@ -17,7 +17,7 @@ use PaLabs\DatagridBundle\DataSource\Filter\Options\BaseFilterOptions;
 class StringFilter implements FilterFormProvider, DoctrineFilterInterface
 {
 
-    public static function data(string $operator, ?string $value = null): StringFilterData
+    public static function data(?string $value = null, string $operator = StringFilterOperator::OPERATOR_CONTAINS): StringFilterData
     {
         return new StringFilterData($operator, $value);
     }

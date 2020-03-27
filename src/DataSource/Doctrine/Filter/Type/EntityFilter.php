@@ -17,9 +17,9 @@ use PaLabs\DatagridBundle\DataSource\Filter\InvalidFilterDataException;
 class EntityFilter implements FilterFormProvider, DoctrineFilterInterface
 {
 
-    public static function data(string $operator, $value = null): EntityFilterData
+    public static function data($value = null, ?string $operator = null): EntityFilterData
     {
-        return new EntityFilterData($operator, $value);
+        return new EntityFilterData($operator ?? EntityFilterOperator::OPERATOR_EQUALS, $value);
     }
 
     public static function options(string $label): EntityFilterOptions

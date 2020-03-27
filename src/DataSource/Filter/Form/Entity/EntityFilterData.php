@@ -4,7 +4,6 @@
 namespace PaLabs\DatagridBundle\DataSource\Filter\Form\Entity;
 
 
-use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\EntityFilter;
 use PaLabs\DatagridBundle\DataSource\Filter\FilterDataInterface;
 
 class EntityFilterData implements FilterDataInterface
