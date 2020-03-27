@@ -30,6 +30,11 @@ class BaseFilterOptions  implements FilterOptions
         return $this;
     }
 
+    public function translationDomain(?string $domain = null) {
+        $this->formOptions['translation_domain'] = $domain;
+        return $this;
+    }
+
     public function field(string $field) {
         $this->filterOptions[self::FILTER_OPTION_FIELD] = $field;
         return $this;
