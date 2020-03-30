@@ -6,19 +6,19 @@ namespace PaLabs\DatagridBundle\DataSource;
 
 class DataSourceConfiguration
 {
-    protected $form;
-    protected $formOptions;
-    protected $formDefaults;
+    protected string $form;
+    protected array $formOptions;
+    protected DataSourceSettings $formDefaults;
 
-    protected $filters;
-    protected $sorting;
+    protected array $filters;
+    protected array $sorting;
 
     public function __construct(
-        $settingsForm,
-        $settingsFormOptions,
-        $defaultSettings,
-        $filters,
-        $sorting)
+        string $settingsForm,
+        array $settingsFormOptions,
+        DataSourceSettings $defaultSettings,
+        array $filters,
+        array $sorting)
     {
         $this->form = $settingsForm;
         $this->formOptions = $settingsFormOptions;
@@ -28,27 +28,27 @@ class DataSourceConfiguration
         $this->sorting = $sorting;
     }
 
-    public function getForm()
+    public function getForm(): string
     {
         return $this->form;
     }
 
-    public function getFormOptions()
+    public function getFormOptions(): array
     {
         return $this->formOptions;
     }
 
-    public function getFormDefaults()
+    public function getFormDefaults(): DataSourceSettings
     {
         return $this->formDefaults;
     }
 
-    public function getFilters()
+    public function getFilters(): array
     {
         return $this->filters;
     }
 
-    public function getSorting()
+    public function getSorting(): array
     {
         return $this->sorting;
     }

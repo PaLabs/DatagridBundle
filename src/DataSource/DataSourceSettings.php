@@ -8,24 +8,16 @@ class DataSourceSettings
     const DEFAULT_PER_PAGE = 20;
     const DEFAULT_PAGE_NUMBER = 1;
 
-    /** @var  array */
-    protected $filters;
-
-    /** @var array */
-    protected $order;
-
-    /** @var int */
-    protected $perPage;
-
-    /** @var  int */
-    protected $page;
+    protected array $filters = [];
+    protected array $order = [];
+    protected int $perPage = self::DEFAULT_PER_PAGE;
+    protected int $page = self::DEFAULT_PAGE_NUMBER;
 
     /**
      * @return self
      */
     public static function defaultSettings()
     {
-        /** @var DataSourceSettings $self */
         $self = (new static());
         return $self
             ->setFilters([])
@@ -39,29 +31,29 @@ class DataSourceSettings
         return $this->order;
     }
 
-    public function setOrder($order)
+    public function setOrder(array $order)
     {
         $this->order = $order;
         return $this;
     }
 
-    public function getPerPage()
+    public function getPerPage(): int
     {
         return $this->perPage;
     }
 
-    public function setPerPage($perPage)
+    public function setPerPage(int $perPage)
     {
         $this->perPage = $perPage;
         return $this;
     }
 
-    public function getFilters()
+    public function getFilters(): array
     {
         return $this->filters;
     }
 
-    public function setFilters($filters)
+    public function setFilters(array $filters)
     {
         $this->filters = $filters;
         return $this;

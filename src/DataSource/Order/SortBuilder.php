@@ -6,7 +6,7 @@ namespace PaLabs\DatagridBundle\DataSource\Order;
 
 class SortBuilder
 {
-    protected $sorting = [];
+    protected array $sorting = [];
 
     public function add(string $name, string $label, string $group = '', array $options = [])
     {
@@ -20,12 +20,12 @@ class SortBuilder
     }
 
 
-    public function getSorting()
+    public function getSorting(): array
     {
         return $this->sorting;
     }
 
-    private function checkOrderItemExists(string $name)
+    private function checkOrderItemExists(string $name): void
     {
         if (isset($this->sorting[$name])) {
             throw new \Exception(sprintf("Sorting already exists for item name=%s", $name));
