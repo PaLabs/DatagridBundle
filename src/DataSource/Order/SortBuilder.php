@@ -4,6 +4,8 @@
 namespace PaLabs\DatagridBundle\DataSource\Order;
 
 
+use Exception;
+
 class SortBuilder
 {
     protected array $sorting = [];
@@ -28,7 +30,7 @@ class SortBuilder
     private function checkOrderItemExists(string $name): void
     {
         if (isset($this->sorting[$name])) {
-            throw new \Exception(sprintf("Sorting already exists for item name=%s", $name));
+            throw new Exception(sprintf("Sorting already exists for item name=%s", $name));
         }
     }
 }

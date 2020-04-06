@@ -8,11 +8,11 @@ use PaLabs\DatagridBundle\Field\Type\BaseFieldData;
 
 class UrlFieldData extends BaseFieldData
 {
-    protected $url;
-    protected $text;
-    protected $attr;
+    protected ?string $url;
+    protected ?string $text;
+    protected array $attr;
 
-    public function __construct(string $url = null, string $text = null, array $attr = [], array $options = [])
+    public function __construct(?string $url = null, ?string $text = null, array $attr = [], array $options = [])
     {
         parent::__construct($options);
         $this->url = $url;

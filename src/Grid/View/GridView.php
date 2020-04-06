@@ -11,11 +11,11 @@ use Symfony\Component\Form\FormView;
 class GridView
 {
 
-    protected $form;
+    protected FormView $form;
     protected $header;
     protected $rows;
-    protected $dataSourceResult;
-    protected $context;
+    protected DataSourceResultContainer $dataSourceResult;
+    protected GridContext $context;
 
     public function __construct(
         $header,

@@ -4,9 +4,10 @@
 namespace PaLabs\DatagridBundle\Field\Type;
 
 
+use Exception;
 use Throwable;
 
-class InvalidDataTypeException extends \Exception
+class InvalidDataTypeException extends Exception
 {
 
     public function __construct($data, string $dataClass, $code = 0, Throwable $previous = null)

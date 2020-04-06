@@ -1,0 +1,19 @@
+DateFilterOperator:
+  OPERATOR_INTERVAL: Интервал
+  OPERATOR_CURRENT_YEAR: Этот год
+  OPERATOR_YESTERDAY: Вчера
+  OPERATOR_CURRENT_WEEK: Эта неделя
+  OPERATOR_CURRENT_DAY: Сегодня
+
+EntityFilterOperator:
+  OPERATOR_NOT_EMPTY: Не пусто
+  OPERATOR_EMPTY: Пусто
+  OPERATOR_EQUALS: Равно
+  OPERATOR_NOT_EQUALS: Не равно
+
+StringFilterOperator:
+  OPERATOR_CONTAINS: Содержится
+  OPERATOR_NOT_CONTAINS: Не содержится
+  OPERATOR_EMPTY: Пусто
+  OPERATOR_EQUALS: Равно
+  OPERATOR_NOT_EMPTY: Не пусто

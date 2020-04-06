@@ -8,7 +8,7 @@ use PaLabs\DatagridBundle\Field\Type\BaseFieldData;
 
 class HtmlFieldData extends BaseFieldData
 {
-    protected $value;
+    protected string $value;
 
     public function __construct(string $value, array $options = [])
     {

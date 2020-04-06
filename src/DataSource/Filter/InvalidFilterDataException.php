@@ -4,9 +4,10 @@
 namespace PaLabs\DatagridBundle\DataSource\Filter;
 
 
+use Exception;
 use Throwable;
 
-class InvalidFilterDataException extends \Exception
+class InvalidFilterDataException extends Exception
 {
 
     public function __construct(string $filterDataClass, $filterDataObj, $code = 0, Throwable $previous = null)

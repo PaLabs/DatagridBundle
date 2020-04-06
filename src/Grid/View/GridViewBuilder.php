@@ -18,8 +18,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class GridViewBuilder
 {
-    protected $formFactory;
-    protected $fieldRenderer;
+    protected FormFactoryInterface $formFactory;
+    protected FieldRenderer $fieldRenderer;
 
     public function __construct(
         FormFactoryInterface $formFactory,
@@ -80,9 +80,7 @@ class GridViewBuilder
     {
         $requestData = $request->query->get($form->getName());
         $form->submit($requestData, false);
-        $formData = $form->getData();
-
-        return $formData;
+        return $form->getData();
     }
 
     protected function rowsIterator($rows, $format)

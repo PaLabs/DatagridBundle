@@ -8,8 +8,8 @@ use PaLabs\DatagridBundle\Field\Type\BaseFieldData;
 
 class StringFieldData extends BaseFieldData
 {
-    protected $value;
-    protected $renderOptions;
+    protected string $value;
+    protected array $renderOptions;
 
    public function __construct(string $value, array $renderOptions = [], array $options = [])
    {

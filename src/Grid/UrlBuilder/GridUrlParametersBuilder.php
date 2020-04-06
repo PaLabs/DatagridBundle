@@ -8,11 +8,8 @@ use PaLabs\DatagridBundle\Grid\Form\GridForm;
 
 class GridUrlParametersBuilder
 {
-    /** @var GridDataSourceUrlParameters */
-    protected $dataSourceUrlParameters;
-
-    /** @var GridDataTableUrlParameters */
-    protected $dataTableUrlParameters;
+    protected ?GridDataSourceUrlParameters $dataSourceUrlParameters = null;
+    protected ?GridDataTableUrlParameters $dataTableUrlParameters = null;
 
     public function setDataSourceParameters(GridDataSourceUrlParameters $dataSourceUrlParameters): self
     {

@@ -6,7 +6,7 @@ namespace PaLabs\DatagridBundle\DataTable;
 class DataTableSettings
 {
     /** @var string[] */
-    protected $selectedFields = [];
+    protected array $selectedFields = [];
 
     public function __construct(array $selectedFields = [])
     {

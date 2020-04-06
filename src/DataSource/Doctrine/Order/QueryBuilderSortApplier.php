@@ -8,7 +8,7 @@ use PaLabs\DatagridBundle\DataSource\Order\OrderItem;
 
 class QueryBuilderSortApplier
 {
-    private $sorter;
+    private QueryBuilderSorter $sorter;
 
     public function __construct()
     {

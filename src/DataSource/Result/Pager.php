@@ -10,16 +10,10 @@ use PaLabs\DatagridBundle\Grid\Form\GridForm;
 
 class Pager
 {
-    /** @var  int */
-    protected $currentPageNumber;
-
-    /** @var  int */
-    protected $totalItemsCount;
-
-    /** @var  int */
-    protected $itemNumberPerPage;
-
-    protected $pageRange = 5;
+    protected int $currentPageNumber;
+    protected int $totalItemsCount;
+    protected int $itemNumberPerPage;
+    protected int $pageRange = 5;
 
     public function __construct(
         int $currentPage,

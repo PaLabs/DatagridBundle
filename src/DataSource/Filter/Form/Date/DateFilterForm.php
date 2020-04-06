@@ -3,10 +3,9 @@
 namespace PaLabs\DatagridBundle\DataSource\Filter\Form\Date;
 
 
-use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\Type\DateFilter;
 use PaLabs\DatagridBundle\DataSource\Filter\BaseFilterForm;
+use PaLabs\DatagridBundle\DataSource\Filter\Form\EnumForm;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,14 +19,8 @@ class DateFilterForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add(self::PERIOD_FIELD, ChoiceType::class, [
-                'choices' => [
-                    'operator_interval' => DateFilterOperator::OPERATOR_INTERVAL,
-                    'operator_current_day' => DateFilterOperator::OPERATOR_CURRENT_DAY,
-                    'operator_yesterday' => DateFilterOperator::OPERATOR_YESTERDAY,
-                    'operator_current_week' => DateFilterOperator::OPERATOR_CURRENT_WEEK,
-                    'operator_current_year' => DateFilterOperator::OPERATOR_CURRENT_YEAR
-                ]
+            ->add(self::PERIOD_FIELD, EnumForm::class, [
+                'type' => DateFilterOperator::class
             ])
             ->add(self::START_FIELD, $options['dateForm'], $options['dateFormOptions'])
             ->add(self::END_FIELD, $options['dateForm'], $options['dateFormOptions']);

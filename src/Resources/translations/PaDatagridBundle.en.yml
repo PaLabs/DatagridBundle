@@ -9,11 +9,6 @@ delete: Delete
 records_per_page: Records per page
 order_asc: Ascending
 order_desc: Descending
-operator_contains: Contains
-operator_not_contains: Not contains
-operator_equals: Equals
-operator_empty: Empty
-operator_not_empty: Not empty
 total_items: Total %itemsCount% records
 equals: Equals
 not_equals: Not equals

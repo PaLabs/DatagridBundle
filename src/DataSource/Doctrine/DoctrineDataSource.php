@@ -3,8 +3,11 @@
 namespace PaLabs\DatagridBundle\DataSource\Doctrine;
 
 
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
+use Exception;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
+use Knp\Component\Pager\PaginatorInterface;
 use PaLabs\DatagridBundle\DataSource\AbstractConfigurableDataSource;
 use PaLabs\DatagridBundle\DataSource\DataSourceConfiguration;
 use PaLabs\DatagridBundle\DataSource\Doctrine\Order\DoctrineSortBuilder;
@@ -20,10 +23,10 @@ use PaLabs\DatagridBundle\Util\DoctrineIterator;
 
 abstract class DoctrineDataSource extends AbstractConfigurableDataSource
 {
-    protected $em;
-    protected $paginator;
-    protected $filterApplier;
-    protected $sortApplier;
+    protected EntityManagerInterface $em;
+    protected PaginatorInterface $paginator;
+    protected Filter\QueryBuilderFilterApplier $filterApplier;
+    protected Order\QueryBuilderSortApplier $sortApplier;
 
     public function __construct(DoctrineDataSourceServices $services)
     {
@@ -47,7 +50,7 @@ abstract class DoctrineDataSource extends AbstractConfigurableDataSource
             case GridOptions::PAGING_TYPE_SINGLE_PAGE:
                 return $this->allPagesRows($queryBuilder, $configuration, $context);
             default:
-                throw new \Exception(sprintf("Unsupported context type: %s", $context->getOptions()->getPagingType()));
+                throw new Exception(sprintf("Unsupported context type: %s", $context->getOptions()->getPagingType()));
         }
 
     }
@@ -72,8 +75,7 @@ abstract class DoctrineDataSource extends AbstractConfigurableDataSource
         $pageRowsIterator = $this->transformPage($rows, $configuration, $context, $pageContext);
 
         $page = new DataSourcePage($pageRowsIterator, $pageContext);
-        $result = new PagedDataSourceResultContainer([$page], Pager::fromKpnPagination($pagination));
-        return $result;
+        return new PagedDataSourceResultContainer([$page], Pager::fromKpnPagination($pagination));
     }
 
     protected function allPagesRows(QueryBuilder $queryBuilder, DataSourceConfiguration $configuration,
@@ -81,8 +83,7 @@ abstract class DoctrineDataSource extends AbstractConfigurableDataSource
     {
         $itemsCount = DoctrineIterator::count($queryBuilder);
         $pageIterator = $this->allPagesRowsIterator($queryBuilder, $itemsCount, $configuration, $context);
-        $result = new DataSourceResultContainer($pageIterator, $itemsCount);
-        return $result;
+        return new DataSourceResultContainer($pageIterator, $itemsCount);
     }
 
     protected function allPagesRowsIterator(QueryBuilder $queryBuilder, $itemsCount,
@@ -94,9 +95,7 @@ abstract class DoctrineDataSource extends AbstractConfigurableDataSource
             $this->buildPageContext($rowData, $configuration, $context, $pageContext);
 
             $pageRowsIterator = $this->transformPage($rowData, $configuration, $context, $pageContext);
-            $page = new DataSourcePage($pageRowsIterator, $pageContext);
-
-            yield $page;
+            yield new DataSourcePage($pageRowsIterator, $pageContext);
             $this->em->clear();
         }
     }

@@ -4,9 +4,9 @@ namespace PaLabs\DatagridBundle\DataSource\Filter\Form\Entity;
 
 
 use PaLabs\DatagridBundle\DataSource\Filter\BaseFilterForm;
+use PaLabs\DatagridBundle\DataSource\Filter\Form\EnumForm;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,13 +18,8 @@ class EntityFilterForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add(self::OPERATOR_FIELD, ChoiceType::class, [
-                'choices' => [
-                    'equals' => EntityFilterOperator::OPERATOR_EQUALS,
-                    'not_equals' => EntityFilterOperator::OPERATOR_NOT_EQUALS,
-                    'operator_empty' => EntityFilterOperator::OPERATOR_EMPTY,
-                    'operator_not_empty' => EntityFilterOperator::OPERATOR_NOT_EMPTY,
-                ]
+            ->add(self::OPERATOR_FIELD, EnumForm::class, [
+                'type' => EntityFilterOperator::class
             ])
             ->add(self::VALUE_FIELD, $options['entity_form'],
                 array_merge(['required' => false], $options['entity_options']));
@@ -38,7 +33,6 @@ class EntityFilterForm extends AbstractType
             ->setDefaults([
                 'entity_form' => EntityType::class,
                 'entity_options' => [],
-                'translation_domain' => 'PaDatagridBundle'
             ]);
     }
 

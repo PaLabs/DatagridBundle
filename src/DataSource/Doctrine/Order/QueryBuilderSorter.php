@@ -5,6 +5,7 @@ namespace PaLabs\DatagridBundle\DataSource\Doctrine\Order;
 
 
 use Doctrine\ORM\QueryBuilder;
+use Exception;
 use PaLabs\DatagridBundle\DataSource\Order\OrderItem;
 
 class QueryBuilderSorter
@@ -22,7 +23,7 @@ class QueryBuilderSorter
                 $this->applyMultipleFields($qb, $orderItem, $config);
                 break;
             default:
-                throw new \Exception(sprintf("Unknown order type: %s", $config['type']));
+                throw new Exception(sprintf("Unknown order type: %s", $config['type']));
         }
     }
 

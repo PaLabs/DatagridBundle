@@ -4,6 +4,7 @@
 namespace PaLabs\DatagridBundle\DataTable\Service;
 
 
+use LogicException;
 use PaLabs\DatagridBundle\DataTable\Column\Column;
 use PaLabs\DatagridBundle\Grid\GridContext;
 
@@ -39,7 +40,7 @@ class DisplayColumnsBuilder
     {
         $selectedColumns = array_map(function(string $columnName) use ($columns) {
             if (!array_key_exists($columnName, $columns)) {
-                throw new \LogicException(sprintf("Unknown column field: %s", $columnName));
+                throw new LogicException(sprintf("Unknown column field: %s", $columnName));
             }
             return $columns[$columnName];
         }, $selectedColumnNames);

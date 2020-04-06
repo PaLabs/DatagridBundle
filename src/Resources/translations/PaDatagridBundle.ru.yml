@@ -9,14 +9,6 @@ delete: Удалить
 records_per_page: Записей на страницу
 order_asc: По возрастанию
 order_desc: По убыванию
-operator_contains: Содержится
-operator_not_contains: Не содержится
-operator_empty: Пусто
-operator_not_empty: Не пусто
-operator_equals: Равно
-operator_interval: Интервал
-operator_current_day: Этот день
-operator_current_year: Этот год
 total_items: Всего %itemsCount% записей
 equals: Равно
 not_equals: Не равно

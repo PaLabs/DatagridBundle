@@ -11,8 +11,8 @@ class GridOptions
 
     const RENDER_FORMAT_HTML = 'html';
 
-    protected $pagingType;
-    protected $renderFormat;
+    protected string $pagingType;
+    protected string $renderFormat;
 
     public function __construct(string $pagingType, string $renderFormat)
     {

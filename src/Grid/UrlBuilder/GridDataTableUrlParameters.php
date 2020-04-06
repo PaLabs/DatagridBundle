@@ -8,7 +8,7 @@ use PaLabs\DatagridBundle\DataTable\Form\SettingsForm;
 
 class GridDataTableUrlParameters
 {
-    protected $fields = [];
+    protected array $fields = [];
     
     public function build(): array {
         if(empty($this->fields)) {

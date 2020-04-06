@@ -8,9 +8,9 @@ use PaLabs\DatagridBundle\Field\Type\String\StringField;
 
 class ColumnOptions
 {
-    protected $label;
-    protected $group;
-    protected $required;
+    protected string $label;
+    protected string $group;
+    protected bool $required;
     protected $needDisplayChecker;
     protected $headerBuilder;
 

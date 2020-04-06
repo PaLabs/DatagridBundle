@@ -4,24 +4,22 @@
 namespace PaLabs\DatagridBundle\Field\Type\DateTime;
 
 
+use DateTime;
 use PaLabs\DatagridBundle\Field\Type\BaseFieldData;
 
 class DateTimeFieldData extends BaseFieldData
 {
-    protected $dateTime;
-    protected $locale;
+    protected ?DateTime $dateTime;
+    protected string $locale;
 
-    public function __construct(\DateTime $date = null, string $locale = 'en', array $options = [])
+    public function __construct(?DateTime $date = null, string $locale = 'en', array $options = [])
     {
         parent::__construct($options);
         $this->dateTime = $date;
         $this->locale = $locale;
     }
 
-    /**
-     * @return \DateTime|null
-     */
-    public function getDateTime()
+    public function getDateTime(): ?DateTime
     {
         return $this->dateTime;
     }

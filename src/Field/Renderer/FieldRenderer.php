@@ -9,7 +9,7 @@ use PaLabs\DatagridBundle\Grid\GridOptions;
 
 class FieldRenderer
 {
-    private $registry;
+    private FieldRegistry $registry;
 
     public function __construct(FieldRegistry $registry)
     {
@@ -35,8 +35,7 @@ class FieldRenderer
             return $this->renderMultiColumnField($fieldData, $displayFormat);
         } else {
             $field = $this->registry->getField($fieldData);
-            $result = [new FieldRenderResult($fieldData, $field->render($fieldData, $displayFormat))];
-            return $result;
+            return [new FieldRenderResult($fieldData, $field->render($fieldData, $displayFormat))];
         }
     }
 

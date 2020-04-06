@@ -42,8 +42,7 @@ class UrlField extends HtmlOrTextField
             throw new InvalidDataTypeException($data, $this->dataClass());
         }
 
-        $text = is_string($data->getText()) ? htmlspecialchars($data->getText()) : $data->getText();
-        return $text;
+        return is_string($data->getText()) ? htmlspecialchars($data->getText()) : $data->getText();
     }
 
     public function dataClass(): string

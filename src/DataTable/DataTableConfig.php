@@ -6,10 +6,10 @@ namespace PaLabs\DatagridBundle\DataTable;
 
 class DataTableConfig
 {
-    protected $columns;
-    protected $form;
-    protected $formOptions;
-    protected $formDefaults;
+    protected array $columns;
+    protected string $form;
+    protected array $formOptions;
+    protected DataTableSettings $formDefaults;
 
     public function __construct(
         array $columns,

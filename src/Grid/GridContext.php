@@ -9,10 +9,10 @@ use PaLabs\DatagridBundle\Grid\Form\GridFormData;
 
 class GridContext
 {
-    protected $dataTableSettings;
-    protected $dataSourceSettings;
-    protected $parameters;
-    protected $options;
+    protected DataTableSettings $dataTableSettings;
+    protected DataSourceSettings $dataSourceSettings;
+    protected GridParameters $parameters;
+    protected GridOptions $options;
 
     public function __construct(
         GridFormData $formData,

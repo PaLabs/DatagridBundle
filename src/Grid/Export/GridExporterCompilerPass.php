@@ -4,6 +4,7 @@
 namespace PaLabs\DatagridBundle\Grid\Export;
 
 
+use Exception;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -15,7 +16,7 @@ class GridExporterCompilerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         if (!$container->has(GridExporterFacade::class)) {
-            throw new \Exception(sprintf("Service %s is not registered", GridExporterFacade::class));
+            throw new Exception(sprintf("Service %s is not registered", GridExporterFacade::class));
         }
 
         $fieldRegistryDefinition = $container->findDefinition(GridExporterFacade::class);

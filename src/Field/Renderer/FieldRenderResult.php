@@ -8,7 +8,7 @@ use PaLabs\DatagridBundle\Field\FieldData;
 
 class FieldRenderResult
 {
-    protected $fieldData;
+    protected FieldData $fieldData;
     protected $renderedContent;
 
     public function __construct(FieldData $fieldData, $renderedContent)

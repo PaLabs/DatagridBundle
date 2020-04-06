@@ -8,14 +8,13 @@ use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use PaLabs\DatagridBundle\DataSource\Doctrine\Filter\QueryBuilderFilterApplier;
 use PaLabs\DatagridBundle\DataSource\Doctrine\Order\QueryBuilderSortApplier;
-use PaLabs\DatagridBundle\DataSource\Filter\Registry\FilterRegistry;
 
 class DoctrineDataSourceServices
 {
-    protected $em;
-    protected $paginator;
-    protected $filterApplier;
-    protected $sortApplier;
+    protected EntityManagerInterface $em;
+    protected PaginatorInterface $paginator;
+    protected QueryBuilderFilterApplier $filterApplier;
+    protected QueryBuilderSortApplier $sortApplier;
 
     public function __construct(
         EntityManagerInterface $em,

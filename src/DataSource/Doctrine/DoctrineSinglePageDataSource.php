@@ -32,8 +32,7 @@ abstract class DoctrineSinglePageDataSource extends DoctrineDataSource
         $pageRowsIterator = $this->transformPage($rows, $configuration, $context, $pageContext);
 
         $page = new DataSourcePage($pageRowsIterator, $pageContext);
-        $result = new DataSourceResultContainer([$page], count($rows));
-        return $result;
+        return new DataSourceResultContainer([$page], count($rows));
     }
 
     protected function settingsFormOptions(GridParameters $parameters): array

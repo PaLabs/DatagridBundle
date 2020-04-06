@@ -82,7 +82,7 @@ abstract class AbstractConfigurableDataTable implements ConfigurableDataTable
         array $displayColumnNames): array
     {
         return array_map(function (string $columnName) use ($columnMakersCaller, $columns, $rowData, $loopIndex, $page, $context) {
-            /** @var \PaLabs\DatagridBundle\DataTable\Column\Column $column * */
+            /** @var Column $column * */
             $column = $columns[$columnName];
             $columnMakerContext = new ColumnMakerContext($rowData, $loopIndex, $page, $context);
 
@@ -93,7 +93,7 @@ abstract class AbstractConfigurableDataTable implements ConfigurableDataTable
     public function buildHeader(GridContext $context, array $columns, array $displayColumnNames): array
     {
         $headerRow = array_map(function ($columnName) use ($columns, $context) {
-            /** @var \PaLabs\DatagridBundle\DataTable\Column\Column $field * */
+            /** @var Column $field * */
             $field = $columns[$columnName];
             $builder = $field->getOptions()->getHeaderBuilder();
             return $builder($context, $columnName);

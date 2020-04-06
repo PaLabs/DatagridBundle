@@ -4,6 +4,7 @@
 namespace PaLabs\DatagridBundle\Grid\UrlBuilder;
 
 
+use Exception;
 use PaLabs\DatagridBundle\DataSource\DataSourceSettingsForm;
 use PaLabs\DatagridBundle\DataSource\Filter\FilterDataInterface;
 use PaLabs\DatagridBundle\DataSource\Order\OrderItem;
@@ -11,12 +12,10 @@ use PaLabs\DatagridBundle\DataSource\Order\OrderItemForm;
 
 class GridDataSourceUrlParameters
 {
-    protected $filters = [];
-    protected $order = [];
-    /** @var int */
-    protected $page;
-    /** @var int */
-    protected $perPage;
+    protected array $filters = [];
+    protected array $order = [];
+    protected ?int $page = null;
+    protected ?int $perPage = null;
 
     public function build(): array
     {
@@ -42,7 +41,7 @@ class GridDataSourceUrlParameters
     public function addFilter(string $name, FilterDataInterface $filterData): self
     {
         if (isset($this->filters[$name])) {
-            throw new \Exception(sprintf("Filter data %s already set", $name));
+            throw new Exception(sprintf("Filter data %s already set", $name));
         }
         $this->filters[$name] = $filterData->toUrlParams();
         return $this;

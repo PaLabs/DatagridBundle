@@ -30,9 +30,7 @@ class DoctrineIterator
 
             $localPaginator = new Paginator($currentQb->getQuery(), true);
             $localIterator = $localPaginator->getIterator();
-            $items = iterator_to_array($localIterator);
-
-            yield $items;
+            yield iterator_to_array($localIterator);
         }
     }
 

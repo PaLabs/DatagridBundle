@@ -6,8 +6,8 @@ namespace PaLabs\DatagridBundle\DataSource\Result;
 
 class DataSourcePage
 {
-    protected $rows;
-    protected $pageContext;
+    protected iterable $rows;
+    protected DataSourcePageContext $pageContext;
 
     public function __construct(iterable $rows, DataSourcePageContext $pageContext)
     {

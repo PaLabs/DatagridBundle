@@ -61,7 +61,6 @@ class HtmlField implements Field
             throw new InvalidDataTypeException($data, $this->dataClass());
         }
         $wizard = new Html();
-        $richText = $wizard->toRichTextObject($data->getValue());
-        return $richText;
+        return $wizard->toRichTextObject($data->getValue());
     }
 }

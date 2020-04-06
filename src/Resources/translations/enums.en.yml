@@ -1,0 +1,19 @@
+DateFilterOperator:
+  OPERATOR_INTERVAL: Interval
+  OPERATOR_CURRENT_YEAR: This year
+  OPERATOR_YESTERDAY: Yesterday
+  OPERATOR_CURRENT_WEEK: This week
+  OPERATOR_CURRENT_DAY: Today
+
+EntityFilterOperator:
+  OPERATOR_NOT_EMPTY: Not empty
+  OPERATOR_EMPTY: Empty
+  OPERATOR_EQUALS: Equals
+  OPERATOR_NOT_EQUALS: Not equals
+
+StringFilterOperator:
+  OPERATOR_CONTAINS: Contrains
+  OPERATOR_NOT_CONTAINS: Not contains
+  OPERATOR_EMPTY: Empty
+  OPERATOR_EQUALS: Equals
+  OPERATOR_NOT_EMPTY: Not empty

@@ -5,23 +5,19 @@ namespace PaLabs\DatagridBundle\DataSource\Filter\Form\Date;
 
 
 use DateTime;
-use LogicException;
 use PaLabs\DatagridBundle\DataSource\Filter\FilterDataInterface;
 
 class DateFilterData implements FilterDataInterface
 {
-    protected string $period;
+    protected DateFilterOperator $period;
     protected ?DateTime $startDate;
     protected ?DateTime $endDate;
 
     public function __construct(
-        string $period,
+        DateFilterOperator $period,
         ?DateTime $startDate = null,
         ?DateTime $endDate = null)
     {
-        if (!DateFilterOperator::valid($period)) {
-            throw new LogicException(sprintf('DateFilter operator %s is not a valid operator', $period));
-        }
         $this->period = $period;
         $this->startDate = $startDate;
         $this->endDate = $endDate;
@@ -29,7 +25,7 @@ class DateFilterData implements FilterDataInterface
 
     public function isEnabled(): bool
     {
-        if (in_array($this->period, DateFilterOperator::PERIOD_OPERATORS)) {
+        if (in_array($this->period, DateFilterOperator::$PERIOD_OPERATORS)) {
             return true;
         }
         return $this->startDate !== null || $this->endDate !== null;
@@ -54,7 +50,7 @@ class DateFilterData implements FilterDataInterface
         return $this->endDate;
     }
 
-    public function getPeriod(): string
+    public function getPeriod(): DateFilterOperator
     {
         return $this->period;
     }

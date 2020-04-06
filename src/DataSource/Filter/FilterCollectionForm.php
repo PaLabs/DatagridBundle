@@ -11,7 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class FilterCollectionForm extends AbstractType
 {
-    protected $filterRegistry;
+    protected FilterRegistry $filterRegistry;
 
     public function __construct(FilterRegistry $filterRegistry)
     {

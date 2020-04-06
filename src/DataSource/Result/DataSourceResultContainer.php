@@ -9,8 +9,7 @@ class DataSourceResultContainer
     /** @var DataSourcePage[] */
     protected $pages;
 
-    /** @var  int */
-    protected $totalItemsCount;
+    protected int $totalItemsCount;
 
     public function __construct($pages, int $totalItemsCount)
     {

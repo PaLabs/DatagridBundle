@@ -8,7 +8,7 @@ use PaLabs\DatagridBundle\Field\Type\BaseFieldData;
 
 class BooleanFieldData extends BaseFieldData
 {
-    protected $value;
+    protected bool $value;
     
     public function __construct(bool $value, array $options = [])
     {

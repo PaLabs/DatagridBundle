@@ -4,23 +4,26 @@
 namespace PaLabs\DatagridBundle\DataTable\Service;
 
 
+use Exception;
 use PaLabs\DatagridBundle\DataTable\Column\Column;
 use PaLabs\DatagridBundle\DataTable\ColumnMakerContext;
+use ReflectionFunction;
+use ReflectionParameter;
 
 class ColumnMakerCaller
 {
-    const  CALL_TYPE_DEFAULT = 1;
+    const CALL_TYPE_DEFAULT = 1;
     const CALL_TYPE_ONLY_CONTEXT = 2;
 
-    protected $columnMakersCallTypes = [];
+    protected array $columnMakersCallTypes = [];
 
     public function __construct(array $columns)
     {
         foreach ($columns as $column) {
-            /** @var \PaLabs\DatagridBundle\DataTable\Column\Column $column */
+            /** @var Column $column */
             $columnMaker = $column->getColumnMaker();
 
-            $r = new \ReflectionFunction($columnMaker);
+            $r = new ReflectionFunction($columnMaker);
             $params = $r->getParameters();
 
             $callType = self::CALL_TYPE_DEFAULT;
@@ -31,6 +34,26 @@ class ColumnMakerCaller
             $this->columnMakersCallTypes[$column->getName()] = $callType;
 
         }
+    }
+
+    /**
+     * @param ReflectionParameter[] $parameters
+     * @return bool
+     */
+    private function argumentsIsOnlyContext(array $parameters)
+    {
+
+        if (count($parameters) == 1) {
+            $firstParameter = $parameters[0];
+            $parameterClass = $firstParameter->getClass();
+            if ($parameterClass === null) {
+                return false;
+            }
+            if ($parameterClass->getName() == ColumnMakerContext::class) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function call(Column $column, ColumnMakerContext $context)
@@ -49,28 +72,8 @@ class ColumnMakerCaller
             case self::CALL_TYPE_ONLY_CONTEXT:
                 return $columnMaker($context);
             default:
-                throw new \Exception(sprintf("Unknown call type: %s", $this->columnMakersCallTypes[$column->getName()]));
+                throw new Exception(sprintf("Unknown call type: %s", $this->columnMakersCallTypes[$column->getName()]));
         }
 
-    }
-
-    /**
-     * @param \ReflectionParameter[] $parameters
-     * @return bool
-     */
-    private function argumentsIsOnlyContext(array $parameters)
-    {
-
-        if (count($parameters) == 1) {
-            $firstParameter = $parameters[0];
-            $parameterClass = $firstParameter->getClass();
-            if($parameterClass === null) {
-                return false;
-            }
-            if ($parameterClass->getName() == ColumnMakerContext::class) {
-                return true;
-            }
-        }
-        return false;
     }
 }

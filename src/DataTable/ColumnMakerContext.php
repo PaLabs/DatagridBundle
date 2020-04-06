@@ -9,9 +9,9 @@ use PaLabs\DatagridBundle\Grid\GridContext;
 
 class ColumnMakerContext
 {
-    protected $gridContext;
-    protected $page;
-    protected $loopIndex;
+    protected GridContext $gridContext;
+    protected DataSourcePage $page;
+    protected int $loopIndex;
     protected $row;
 
     public function __construct(

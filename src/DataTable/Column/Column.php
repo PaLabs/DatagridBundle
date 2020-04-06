@@ -5,9 +5,9 @@ namespace PaLabs\DatagridBundle\DataTable\Column;
 
 class Column
 {
-    protected $name;
+    protected string $name;
     protected $columnMaker;
-    protected $options;
+    protected ColumnOptions $options;
 
     public function __construct(string $name, callable $columnMaker, ColumnOptions $options) {
         $this->name = $name;
