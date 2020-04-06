@@ -4,7 +4,7 @@ namespace PaLabs\DatagridBundle\DataSource\Filter\Form\Date;
 
 
 use PaLabs\DatagridBundle\DataSource\Filter\BaseFilterForm;
-use PaLabs\DatagridBundle\DataSource\Filter\Form\EnumForm;
+use PaLabs\DatagridBundle\Form\Type\EnumForm;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;

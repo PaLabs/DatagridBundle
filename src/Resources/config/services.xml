@@ -6,8 +6,8 @@
 
     <services>
 
-        <service id="PaLabs\DatagridBundle\DataSource\Filter\Form\EnumForm"
-                 class="PaLabs\DatagridBundle\DataSource\Filter\Form\EnumForm" public="false">
+        <service id="PaLabs\DatagridBundle\Form\Type\EnumForm"
+                 class="PaLabs\DatagridBundle\Form\Type\EnumForm" public="false">
             <argument type="service" id="translator"/>
         </service>
 

@@ -11,8 +11,8 @@ final class StringFilterOperator extends Enum
     public static StringFilterOperator
         $OPERATOR_CONTAINS,
         $OPERATOR_NOT_CONTAINS,
-        $OPERATOR_EMPTY,
         $OPERATOR_EQUALS,
+        $OPERATOR_EMPTY,
         $OPERATOR_NOT_EMPTY;
 }
 

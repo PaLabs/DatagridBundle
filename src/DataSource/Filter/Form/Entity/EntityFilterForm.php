@@ -4,7 +4,7 @@ namespace PaLabs\DatagridBundle\DataSource\Filter\Form\Entity;
 
 
 use PaLabs\DatagridBundle\DataSource\Filter\BaseFilterForm;
-use PaLabs\DatagridBundle\DataSource\Filter\Form\EnumForm;
+use PaLabs\DatagridBundle\Form\Type\EnumForm;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

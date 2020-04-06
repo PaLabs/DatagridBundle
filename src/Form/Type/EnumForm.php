@@ -1,7 +1,7 @@
 <?php
 
 
-namespace PaLabs\DatagridBundle\DataSource\Filter\Form;
+namespace PaLabs\DatagridBundle\Form\Type;
 
 
 use PaLabs\Enum\Enum;
