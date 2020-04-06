@@ -21,10 +21,9 @@ export default class GridStringFilter extends Component {
     _processType() {
         const optionValue = this.typeSelector.find('option:selected').val();
         switch (optionValue) {
-            case 'em':
-            case 'nem':
+            case 'OPERATOR_EMPTY':
+            case 'OPERATOR_NOT_EMPTY':
                 this._expandOperator();
-
                 break;
             default:
                 this._collapseOperator();

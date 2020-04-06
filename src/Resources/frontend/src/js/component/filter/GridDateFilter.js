@@ -21,10 +21,10 @@ export default class GridDateFilter extends Component {
     _processType() {
         const optionValue = this.typeSelector.find('option:selected').val();
         switch (optionValue) {
-            case 'cd':
-            case 'yd':
-            case 'cw':
-            case 'cy':
+            case 'OPERATOR_CURRENT_DAY':
+            case 'OPERATOR_YESTERDAY':
+            case 'OPERATOR_CURRENT_WEEK':
+            case 'OPERATOR_CURRENT_YEAR':
                 this._expandOperator();
                 break;
             default:

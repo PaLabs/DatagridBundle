@@ -7,7 +7,7 @@
     <services>
 
         <service id="PaLabs\DatagridBundle\Form\Type\EnumForm"
-                 class="PaLabs\DatagridBundle\Form\Type\EnumForm" public="false">
+                 class="PaLabs\DatagridBundle\Form\Type\EnumForm" public="true">
             <argument type="service" id="translator"/>
         </service>
 
