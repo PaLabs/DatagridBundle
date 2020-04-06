@@ -5,6 +5,12 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+
+        <service id="PaLabs\DatagridBundle\DataSource\Filter\Form\EnumForm"
+                 class="PaLabs\DatagridBundle\DataSource\Filter\Form\EnumForm" public="false">
+            <argument type="service" id="translator"/>
+        </service>
+
         <service id="PaLabs\DatagridBundle\Field\Registry\FieldRegistry"
                  class="PaLabs\DatagridBundle\Field\Registry\FieldRegistry" public="false"/>
 
@@ -13,7 +19,7 @@
 
         <service id="PaLabs\DatagridBundle\Field\Renderer\FieldRenderer"
                  class="PaLabs\DatagridBundle\Field\Renderer\FieldRenderer" public="false">
-            <argument type="service" id="PaLabs\DatagridBundle\Field\Registry\FieldRegistry" />
+            <argument type="service" id="PaLabs\DatagridBundle\Field\Registry\FieldRegistry"/>
         </service>
 
         <service id="PaLabs\DatagridBundle\Grid\View\GridViewBuilder"
@@ -28,15 +34,15 @@
         </service>
 
         <service id="PaLabs\DatagridBundle\Grid\Export\GridExporterFacade"
-                 class="PaLabs\DatagridBundle\Grid\Export\GridExporterFacade" public="false" />
+                 class="PaLabs\DatagridBundle\Grid\Export\GridExporterFacade" public="false"/>
 
         <service id="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\QueryBuilderFilterApplier"
-            class="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\QueryBuilderFilterApplier" public="false">
+                 class="PaLabs\DatagridBundle\DataSource\Doctrine\Filter\QueryBuilderFilterApplier" public="false">
             <argument type="service" id="PaLabs\DatagridBundle\DataSource\Filter\Registry\FilterRegistry"/>
         </service>
 
         <service id="PaLabs\DatagridBundle\DataSource\Doctrine\Order\QueryBuilderSortApplier"
-        class="PaLabs\DatagridBundle\DataSource\Doctrine\Order\QueryBuilderSortApplier" public="false">
+                 class="PaLabs\DatagridBundle\DataSource\Doctrine\Order\QueryBuilderSortApplier" public="false">
         </service>
 
         <service id="PaLabs\DatagridBundle\DataSource\Doctrine\DoctrineDataSourceServices"
@@ -49,7 +55,7 @@
 
 
         <service id="PaLabs\DatagridBundle\DataSource\Filter\FilterCollectionForm"
-        class="PaLabs\DatagridBundle\DataSource\Filter\FilterCollectionForm" public="false">
+                 class="PaLabs\DatagridBundle\DataSource\Filter\FilterCollectionForm" public="false">
             <argument type="service" id="PaLabs\DatagridBundle\DataSource\Filter\Registry\FilterRegistry"/>
             <tag name="form.type"/>
         </service>
