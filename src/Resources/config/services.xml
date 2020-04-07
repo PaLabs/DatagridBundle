@@ -7,8 +7,9 @@
     <services>
 
         <service id="PaLabs\DatagridBundle\Form\Type\EnumForm"
-                 class="PaLabs\DatagridBundle\Form\Type\EnumForm" public="true">
+                 class="PaLabs\DatagridBundle\Form\Type\EnumForm" public="false">
             <argument type="service" id="translator"/>
+            <tag name="form.type"/>
         </service>
 
         <service id="PaLabs\DatagridBundle\Field\Registry\FieldRegistry"
