@@ -17,3 +17,7 @@ StringFilterOperator:
   OPERATOR_EMPTY: Пусто
   OPERATOR_EQUALS: Равно
   OPERATOR_NOT_EMPTY: Не пусто
+
+OrderDirection:
+  ASC: По возрастанию
+  DESC: По убыванию

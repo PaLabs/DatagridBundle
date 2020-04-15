@@ -7,13 +7,7 @@ move_up: Вверх
 move_down: Вниз
 delete: Удалить
 records_per_page: Записей на страницу
-order_asc: По возрастанию
-order_desc: По убыванию
 total_items: Всего %itemsCount% записей
-equals: Равно
-not_equals: Не равно
-choice_yes: Да
-choice_no: Нет
 
 form:
   apply: Применить

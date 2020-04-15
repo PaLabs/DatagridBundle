@@ -17,3 +17,7 @@ StringFilterOperator:
   OPERATOR_EMPTY: Empty
   OPERATOR_EQUALS: Equals
   OPERATOR_NOT_EMPTY: Not empty
+
+OrderDirection:
+  ASC: Ascending
+  DESC: Descending
