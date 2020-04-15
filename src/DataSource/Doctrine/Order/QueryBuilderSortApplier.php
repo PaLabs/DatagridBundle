@@ -15,7 +15,7 @@ class QueryBuilderSortApplier
         $this->sorter = new QueryBuilderSorter();
     }
 
-    public function apply(QueryBuilder $queryBuilder, array $orderConfig, array $orderItems)
+    public function apply(QueryBuilder $queryBuilder, array $orderConfig, array $orderItems): void
     {
         /** @var OrderItem[] $orderItems */
 

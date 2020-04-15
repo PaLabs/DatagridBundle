@@ -25,7 +25,7 @@ class DateFilterData implements FilterDataInterface
 
     public function isEnabled(): bool
     {
-        if (in_array($this->period, DateFilterOperator::$PERIOD_OPERATORS)) {
+        if (DateFilterOperators::getInstance()->isPeriodOperator($this->period)) {
             return true;
         }
         return $this->startDate !== null || $this->endDate !== null;

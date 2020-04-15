@@ -15,16 +15,4 @@ final class DateFilterOperator extends Enum
         $OPERATOR_YESTERDAY,
         $OPERATOR_CURRENT_WEEK,
         $OPERATOR_CURRENT_YEAR;
-
-    public static array $PERIOD_OPERATORS;
-
 }
-
-DateFilterOperator::init();
-
-DateFilterOperator::$PERIOD_OPERATORS = [
-    DateFilterOperator::$OPERATOR_CURRENT_DAY,
-    DateFilterOperator::$OPERATOR_YESTERDAY,
-    DateFilterOperator::$OPERATOR_CURRENT_WEEK,
-    DateFilterOperator::$OPERATOR_CURRENT_YEAR
-];

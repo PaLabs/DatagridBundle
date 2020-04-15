@@ -68,6 +68,7 @@ abstract class DoctrineDataSource extends AbstractConfigurableDataSource
         /** @var SlidingPagination $pagination */
         $pagination = $this->paginator->paginate($queryBuilder, $context->getDataSourceSettings()->getPage(),
             $context->getDataSourceSettings()->getPerPage());
+        /** @var array $rows */
         $rows = $pagination->getItems();
 
         $pageContext = new DataSourcePageContext();

@@ -32,7 +32,7 @@ class BooleanFilter implements FilterFormProvider, DoctrineFilterInterface
         return new BaseFilterOptions($label);
     }
 
-    public function apply(QueryBuilder $qb, string $name, $criteria, array $options = [])
+    public function apply(QueryBuilder $qb, string $name, $criteria, array $options = []): void
     {
         if(!$criteria instanceof BooleanFilterData) {
             throw new InvalidFilterDataException(BooleanFilterData::class, $criteria);

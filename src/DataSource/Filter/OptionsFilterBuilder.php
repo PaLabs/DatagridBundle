@@ -6,7 +6,7 @@ namespace PaLabs\DatagridBundle\DataSource\Filter;
 
 use PaLabs\DatagridBundle\DataSource\Filter\Options\FilterOptions;
 
-class OptFilterBuilder
+class OptionsFilterBuilder
 {
     private FilterBuilder $builder;
 

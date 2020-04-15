@@ -3,6 +3,7 @@
 namespace PaLabs\DatagridBundle\DataSource\Order;
 
 
+use PaLabs\DatagridBundle\Form\Type\EnumForm;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -21,12 +22,9 @@ class OrderItemForm extends AbstractType
                 'required' => true,
                 'choices' => $options['sortFields']
             ])
-            ->add(self::DIRECTION_FORM_NAME, ChoiceType::class, [
+            ->add(self::DIRECTION_FORM_NAME, EnumForm::class, [
                 'required' => true,
-                'choices' => [
-                    'order_asc' => OrderItem::ASC,
-                    'order_desc' => OrderItem::DESC
-                ]
+                'type' => OrderDirection::class
             ]);
         $builder->addModelTransformer(new CallbackTransformer(
             function (OrderItem $item = null) {

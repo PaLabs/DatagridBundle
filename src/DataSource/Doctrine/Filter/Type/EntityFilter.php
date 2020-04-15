@@ -37,7 +37,7 @@ class EntityFilter implements FilterFormProvider, DoctrineFilterInterface
         return [];
     }
 
-    public function apply(QueryBuilder $qb, string $name, $criteria, array $options = [])
+    public function apply(QueryBuilder $qb, string $name, $criteria, array $options = []): void
     {
         if (!$criteria instanceof EntityFilterData) {
             throw new InvalidFilterDataException(EntityFilterData::class, $criteria);

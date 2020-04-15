@@ -15,7 +15,7 @@ class FilterHelper
         return sprintf('entity.%s', $name);
     }
 
-    public static function parameterName($name)
+    public static function parameterName(string $name): string
     {
         return $name . '_criteria';
     }

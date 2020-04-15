@@ -16,4 +16,3 @@ final class EntityFilterOperator extends Enum
         $OPERATOR_EMPTY;
 }
 
-EntityFilterOperator::init();

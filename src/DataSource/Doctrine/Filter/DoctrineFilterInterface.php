@@ -8,5 +8,5 @@ use Doctrine\ORM\QueryBuilder;
 
 interface DoctrineFilterInterface
 {
-    public function apply(QueryBuilder $qb, string $name, $criteria, array $options = []);
+    public function apply(QueryBuilder $qb, string $name, $criteria, array $options = []): void;
 }

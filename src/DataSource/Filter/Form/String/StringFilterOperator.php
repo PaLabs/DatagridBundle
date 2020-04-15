@@ -16,4 +16,3 @@ final class StringFilterOperator extends Enum
         $OPERATOR_NOT_EMPTY;
 }
 
-StringFilterOperator::init();

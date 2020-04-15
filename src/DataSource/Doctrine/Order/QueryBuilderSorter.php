@@ -29,13 +29,13 @@ class QueryBuilderSorter
 
     private function applySingleField(QueryBuilder $queryBuilder, OrderItem $orderItem, array $config)
     {
-        $queryBuilder->addOrderBy($config['field'], $orderItem->getDirection());
+        $queryBuilder->addOrderBy($config['field'], $orderItem->getDirection()->name());
     }
 
     private function applyMultipleFields(QueryBuilder $queryBuilder, OrderItem $orderItem, $config)
     {
         foreach ($config['fields'] as $field) {
-            $queryBuilder->addOrderBy($field, $orderItem->getDirection());
+            $queryBuilder->addOrderBy($field, $orderItem->getDirection()->name());
         }
     }
 }

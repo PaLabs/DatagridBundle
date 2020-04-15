@@ -37,7 +37,7 @@ class StringFilter implements FilterFormProvider, DoctrineFilterInterface
         return [];
     }
 
-    public function apply(QueryBuilder $qb, string $name, $criteria, array $options = [])
+    public function apply(QueryBuilder $qb, string $name, $criteria, array $options = []): void
     {
         if (!$criteria instanceof StringFilterData) {
             throw new InvalidFilterDataException(StringFilterData::class, $criteria);

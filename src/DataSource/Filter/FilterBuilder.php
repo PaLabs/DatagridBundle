@@ -13,7 +13,7 @@ class FilterBuilder
         string $name,
         string $filterClass,
         array $formOptions = [],
-        array $filterOptions = [])
+        array $filterOptions = []): self
     {
         if (isset($this->filters[$name])) {
             throw new Exception(sprintf("Filter already set, name=%s", $name));
@@ -30,8 +30,12 @@ class FilterBuilder
         return $this;
     }
 
-    public function getFilters()
+    public function getFilters(): array
     {
         return $this->filters;
+    }
+
+    public function withOptions(): OptionsFilterBuilder {
+        return new OptionsFilterBuilder($this);
     }
 }

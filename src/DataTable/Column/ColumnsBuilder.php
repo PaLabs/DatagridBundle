@@ -23,4 +23,8 @@ class ColumnsBuilder
     {
         return $this->columns;
     }
+
+    public function withNameLabel(): NameLabelColumnBuilder {
+        return new NameLabelColumnBuilder($this);
+    }
 }

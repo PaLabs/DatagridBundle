@@ -8,18 +8,12 @@ use Exception;
 
 class OrderItem
 {
-    const DESC = 'desc';
-    const ASC = 'asc';
-
     protected string $field;
-    protected string $direction;
+    protected OrderDirection $direction;
 
-    public function __construct(string $field, string $direction = self::ASC) {
-        if(!in_array($direction, [self::ASC, self::DESC])) {
-            throw new Exception("Invalid direction value");
-        }
+    public function __construct(string $field, ?OrderDirection $direction = null) {
         $this->field = $field;
-        $this->direction = $direction;
+        $this->direction = $direction === null ? OrderDirection::$ASC : $direction;
     }
 
     public function getField(): string
@@ -27,7 +21,7 @@ class OrderItem
         return $this->field;
     }
 
-    public function getDirection(): string
+    public function getDirection(): OrderDirection
     {
         return $this->direction;
     }
