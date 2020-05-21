@@ -31,7 +31,7 @@ class StringFilterData implements FilterDataInterface
         }
 
         return [
-            StringFilterForm::OPERATOR_FIELD => $this->operator,
+            StringFilterForm::OPERATOR_FIELD => $this->operator->name(),
             StringFilterForm::VALUE_FIELD => $this->value
         ];
     }

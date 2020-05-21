@@ -34,7 +34,7 @@ class DateFilterData implements FilterDataInterface
     public function toUrlParams(): array
     {
         return [
-            DateFilterForm::PERIOD_FIELD => $this->period,
+            DateFilterForm::PERIOD_FIELD => $this->period->name(),
             DateFilterForm::START_FIELD => $this->startDate,
             DateFilterForm::END_FIELD => $this->endDate
         ];

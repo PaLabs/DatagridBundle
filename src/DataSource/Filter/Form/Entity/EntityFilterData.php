@@ -30,7 +30,7 @@ class EntityFilterData implements FilterDataInterface
             return [];
         }
         return [
-            EntityFilterForm::OPERATOR_FIELD => $this->operator,
+            EntityFilterForm::OPERATOR_FIELD => $this->operator->name(),
             EntityFilterForm::VALUE_FIELD => $this->value === null ? null : $this->value->getId()
         ];
     }
