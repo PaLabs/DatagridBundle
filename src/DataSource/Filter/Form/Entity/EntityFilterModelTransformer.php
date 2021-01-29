@@ -18,7 +18,10 @@ class EntityFilterModelTransformer implements DataTransformerInterface
             throw new TransformationFailedException();
         }
 
-        return $value->toUrlParams();
+        return [
+            EntityFilterForm::OPERATOR_FIELD => $value->getOperator()->name(),
+            EntityFilterForm::VALUE_FIELD => $value->getValue()
+        ];
     }
 
     public function reverseTransform($value)

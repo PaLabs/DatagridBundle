@@ -54,6 +54,11 @@ class GridViewBuilder
         $gridFormDefaults = (new GridFormData())
             ->setDataTableSettings($dataTableConfig->getFormDefaults())
             ->setDataSourceSettings($dataSourceConfig->getFormDefaults());
+        // Clear filters if request has grid data. Need to do it because form defaults can exists, and request data must overwrite
+        // all filter defaults (if user unset enabled by default filter - it must be unset)
+        if(empty($this->gridRequestData($request))) {
+            $gridFormDefaults->getDataSourceSettings()->setFilters([]);
+        }
 
         $gridForm = $this->formFactory->createNamed(GridForm::FORM_NAME, GridForm::class, $gridFormDefaults, $gridFormOptions);
         $gridData = $this->handleForm($request, $gridForm);
@@ -74,6 +79,10 @@ class GridViewBuilder
             $gridContext
         );
 
+    }
+
+    private function gridRequestData(Request $request) {
+        return $request->query->get(GridForm::FORM_NAME);
     }
 
     private function handleForm(Request $request, FormInterface $form)
