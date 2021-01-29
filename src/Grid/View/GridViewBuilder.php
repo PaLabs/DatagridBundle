@@ -56,7 +56,7 @@ class GridViewBuilder
             ->setDataSourceSettings($dataSourceConfig->getFormDefaults());
         // Clear filters if request has grid data. Need to do it because form defaults can exists, and request data must overwrite
         // all filter defaults (if user unset enabled by default filter - it must be unset)
-        if(empty($this->gridRequestData($request))) {
+        if(!empty($this->gridRequestData($request))) {
             $gridFormDefaults->getDataSourceSettings()->setFilters([]);
         }
 
