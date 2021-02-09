@@ -5,7 +5,7 @@
     "keywords": ["Datagrid"],
     "license": "MIT",
     "require": {
-        "php": "^7.4",
+        "php": "^7.4 || ^8.0",
         "doctrine/common": "^2.8 || ^3.0",
         "doctrine/orm": "^2.6",
         "symfony/form": "^3.0 || ^4.0 || ^5.0",
