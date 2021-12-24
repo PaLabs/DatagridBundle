@@ -82,12 +82,12 @@ class GridViewBuilder
     }
 
     private function gridRequestData(Request $request) {
-        return $request->query->get(GridForm::FORM_NAME);
+        return $request->query->all(GridForm::FORM_NAME);
     }
 
     private function handleForm(Request $request, FormInterface $form)
     {
-        $requestData = $request->query->get($form->getName());
+        $requestData = $request->query->all($form->getName());
         $form->submit($requestData, false);
         return $form->getData();
     }
