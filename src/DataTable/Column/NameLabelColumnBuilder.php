@@ -6,16 +6,14 @@ namespace PaLabs\DatagridBundle\DataTable\Column;
 
 class NameLabelColumnBuilder
 {
-    private ColumnsBuilder $builder;
 
-    public function __construct(ColumnsBuilder $builder)
+    public function __construct(private ColumnsBuilder $builder)
     {
-        $this->builder = $builder;
     }
 
-    public function add(string $name, string $label, callable $columnMaker): self
+    public function add(string $name, string $label, callable $columnMaker, string $group = ''): self
     {
-        $columnOptions = new ColumnOptions($label);
+        $columnOptions = new ColumnOptions($label, $group);
         $this->builder->add(new Column($name, $columnMaker, $columnOptions));
 
         return $this;
