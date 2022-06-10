@@ -19,7 +19,7 @@ class EntityFilterModelTransformer implements DataTransformerInterface
         }
 
         return [
-            EntityFilterForm::OPERATOR_FIELD => $value->getOperator()->name(),
+            EntityFilterForm::OPERATOR_FIELD => $value->getOperator()->value,
             EntityFilterForm::VALUE_FIELD => $value->getValue()
         ];
     }

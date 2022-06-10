@@ -60,7 +60,7 @@ class GridDataSourceUrlParameters
     {
         $this->order[] = [
             OrderItemForm::FIELD_FORM_NAME => $orderItem->getField(),
-            OrderItemForm::DIRECTION_FORM_NAME => $orderItem->getDirection()->name()
+            OrderItemForm::DIRECTION_FORM_NAME => $orderItem->getDirection()->value
         ];
         return $this;
     }
