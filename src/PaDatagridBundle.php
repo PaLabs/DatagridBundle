@@ -28,9 +28,4 @@ class PaDatagridBundle extends Bundle
             ->addCompilerPass(new FilterRegistryCompilerPass())
             ->addCompilerPass(new GridExporterCompilerPass());
     }
-
-    public function boot()
-    {
-        EnumInitializer::init();
-    }
 }

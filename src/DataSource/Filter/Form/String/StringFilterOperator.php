@@ -4,15 +4,12 @@
 namespace PaLabs\DatagridBundle\DataSource\Filter\Form\String;
 
 
-use PaLabs\Enum\Enum;
-
-final class StringFilterOperator extends Enum
+enum StringFilterOperator: string
 {
-    public static StringFilterOperator
-        $OPERATOR_CONTAINS,
-        $OPERATOR_NOT_CONTAINS,
-        $OPERATOR_EQUALS,
-        $OPERATOR_EMPTY,
-        $OPERATOR_NOT_EMPTY;
+    case OPERATOR_CONTAINS = 'OPERATOR_CONTAINS';
+    case  OPERATOR_NOT_CONTAINS = 'OPERATOR_NOT_CONTAINS';
+    case  OPERATOR_EQUALS = 'OPERATOR_EQUALS';
+    case  OPERATOR_EMPTY = 'OPERATOR_EMPTY';
+    case  OPERATOR_NOT_EMPTY = 'OPERATOR_NOT_EMPTY';
 }
 

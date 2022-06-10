@@ -19,7 +19,7 @@ class EntityFilter implements FilterFormProvider, DoctrineFilterInterface
 
     public static function data($value = null, ?EntityFilterOperator $operator = null): EntityFilterData
     {
-        return new EntityFilterData($operator ?? EntityFilterOperator::$OPERATOR_EQUALS, $value);
+        return new EntityFilterData($operator ?? EntityFilterOperator::OPERATOR_EQUALS, $value);
     }
 
     public static function options(string $label): EntityFilterOptions
@@ -50,18 +50,18 @@ class EntityFilter implements FilterFormProvider, DoctrineFilterInterface
         $parameterName = FilterHelper::parameterName($name);
 
         switch ($criteria->getOperator()) {
-            case EntityFilterOperator::$OPERATOR_EQUALS:
+            case EntityFilterOperator::OPERATOR_EQUALS:
                 $qb->andWhere(sprintf('%s = :%s', $fieldName, $parameterName))
                     ->setParameter($parameterName, $criteria->getValue());
                 break;
-            case EntityFilterOperator::$OPERATOR_NOT_EQUALS:
+            case EntityFilterOperator::OPERATOR_NOT_EQUALS:
                 $qb->andWhere(sprintf('%s != :%s', $fieldName, $parameterName))
                     ->setParameter($parameterName, $criteria->getValue());
                 break;
-            case EntityFilterOperator::$OPERATOR_EMPTY:
+            case EntityFilterOperator::OPERATOR_EMPTY:
                 $qb->andWhere(sprintf('%s IS NULL', $fieldName));
                 break;
-            case EntityFilterOperator::$OPERATOR_NOT_EMPTY:
+            case EntityFilterOperator::OPERATOR_NOT_EMPTY:
                 $qb->andWhere(sprintf('%s IS NOT NULL', $fieldName));
                 break;
             default:

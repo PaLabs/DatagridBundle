@@ -13,10 +13,10 @@ class DateFilterOperators
     private function __construct()
     {
         $this->periodOperators = [
-            DateFilterOperator::$OPERATOR_CURRENT_DAY,
-            DateFilterOperator::$OPERATOR_YESTERDAY,
-            DateFilterOperator::$OPERATOR_CURRENT_WEEK,
-            DateFilterOperator::$OPERATOR_CURRENT_YEAR
+            DateFilterOperator::OPERATOR_CURRENT_DAY,
+            DateFilterOperator::OPERATOR_YESTERDAY,
+            DateFilterOperator::OPERATOR_CURRENT_WEEK,
+            DateFilterOperator::OPERATOR_CURRENT_YEAR
         ];
     }
 

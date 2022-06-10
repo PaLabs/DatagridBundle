@@ -9,18 +9,12 @@ use PaLabs\DatagridBundle\DataSource\Filter\FilterDataInterface;
 
 class DateFilterData implements FilterDataInterface
 {
-    protected DateFilterOperator $period;
-    protected ?DateTime $startDate;
-    protected ?DateTime $endDate;
 
     public function __construct(
-        DateFilterOperator $period,
-        ?DateTime $startDate = null,
-        ?DateTime $endDate = null)
+        protected DateFilterOperator $period,
+        protected ?DateTime $startDate = null,
+        protected ?DateTime $endDate = null)
     {
-        $this->period = $period;
-        $this->startDate = $startDate;
-        $this->endDate = $endDate;
     }
 
     public function isEnabled(): bool
@@ -34,7 +28,7 @@ class DateFilterData implements FilterDataInterface
     public function toUrlParams(): array
     {
         return [
-            DateFilterForm::PERIOD_FIELD => $this->period->name(),
+            DateFilterForm::PERIOD_FIELD => $this->period->value,
             DateFilterForm::START_FIELD => $this->startDate,
             DateFilterForm::END_FIELD => $this->endDate
         ];

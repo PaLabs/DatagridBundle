@@ -19,7 +19,7 @@ class StringFilter implements FilterFormProvider, DoctrineFilterInterface
 
     public static function data(?string $value = null, ?StringFilterOperator $operator = null): StringFilterData
     {
-        return new StringFilterData($operator ?? StringFilterOperator::$OPERATOR_EQUALS, $value);
+        return new StringFilterData($operator ?? StringFilterOperator::OPERATOR_EQUALS, $value);
     }
 
     public static function options(string $label): BaseFilterOptions
@@ -51,22 +51,22 @@ class StringFilter implements FilterFormProvider, DoctrineFilterInterface
 
 
         switch ($criteria->getOperator()) {
-            case StringFilterOperator::$OPERATOR_CONTAINS:
+            case StringFilterOperator::OPERATOR_CONTAINS:
                 $qb->andWhere(sprintf('%s LIKE :%s', $fieldName, $parameterName))
                     ->setParameter($parameterName, '%' . $criteria->getValue() . '%');
                 break;
-            case StringFilterOperator::$OPERATOR_NOT_CONTAINS:
+            case StringFilterOperator::OPERATOR_NOT_CONTAINS:
                 $qb->andWhere(sprintf('%s NOT LIKE :%s', $fieldName, $parameterName))
                     ->setParameter($parameterName, '%' . $criteria->getValue() . '%');
                 break;
-            case StringFilterOperator::$OPERATOR_EQUALS:
+            case StringFilterOperator::OPERATOR_EQUALS:
                 $qb->andWhere(sprintf('%s = :%s', $fieldName, $parameterName))
                     ->setParameter($parameterName, $criteria->getValue());
                 break;
-            case StringFilterOperator::$OPERATOR_EMPTY:
+            case StringFilterOperator::OPERATOR_EMPTY:
                 $qb->andWhere(sprintf('%s IS NULL', $fieldName));
                 break;
-            case StringFilterOperator::$OPERATOR_NOT_EMPTY:
+            case StringFilterOperator::OPERATOR_NOT_EMPTY:
                 $qb->andWhere(sprintf('%s IS NOT NULL', $fieldName));
                 break;
             default:

@@ -4,9 +4,8 @@
 namespace PaLabs\DatagridBundle\DataSource\Order;
 
 
-use PaLabs\Enum\Enum;
-
-class OrderDirection extends Enum
+enum OrderDirection: string
 {
-    public static OrderDirection $ASC, $DESC;
+    case ASC = 'ASC';
+    case DESC = 'DESC';
 }

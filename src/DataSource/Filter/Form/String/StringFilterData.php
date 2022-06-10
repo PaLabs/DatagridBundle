@@ -8,17 +8,15 @@ use PaLabs\DatagridBundle\DataSource\Filter\FilterDataInterface;
 
 class StringFilterData implements FilterDataInterface
 {
-    protected StringFilterOperator $operator;
-    protected ?string $value;
 
-    public function __construct(StringFilterOperator $operator, ?string $value = null)
+    public function __construct(
+        protected StringFilterOperator $operator,
+        protected ?string $value = null)
     {
-        $this->operator = $operator;
-        $this->value = $value;
     }
 
     public function isEnabled(): bool {
-        if(in_array($this->operator, [StringFilterOperator::$OPERATOR_EMPTY, StringFilterOperator::$OPERATOR_NOT_EMPTY])) {
+        if(in_array($this->operator, [StringFilterOperator::OPERATOR_EMPTY, StringFilterOperator::OPERATOR_NOT_EMPTY])) {
             return true;
         }
         return !empty($this->value);
@@ -31,7 +29,7 @@ class StringFilterData implements FilterDataInterface
         }
 
         return [
-            StringFilterForm::OPERATOR_FIELD => $this->operator->name(),
+            StringFilterForm::OPERATOR_FIELD => $this->operator->value,
             StringFilterForm::VALUE_FIELD => $this->value
         ];
     }

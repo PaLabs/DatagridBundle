@@ -4,15 +4,11 @@
 namespace PaLabs\DatagridBundle\DataSource\Filter\Form\Date;
 
 
-use PaLabs\Enum\Enum;
-
-final class DateFilterOperator extends Enum
+enum DateFilterOperator: string
 {
-
-    public static DateFilterOperator
-        $OPERATOR_INTERVAL,
-        $OPERATOR_CURRENT_DAY,
-        $OPERATOR_YESTERDAY,
-        $OPERATOR_CURRENT_WEEK,
-        $OPERATOR_CURRENT_YEAR;
+    case OPERATOR_INTERVAL = 'OPERATOR_INTERVAL';
+    case OPERATOR_CURRENT_DAY = 'OPERATOR_CURRENT_DAY';
+    case OPERATOR_YESTERDAY = 'OPERATOR_YESTERDAY';
+    case OPERATOR_CURRENT_WEEK = 'OPERATOR_CURRENT_WEEK';
+    case OPERATOR_CURRENT_YEAR = 'OPERATOR_CURRENT_YEAR';
 }

@@ -51,20 +51,20 @@ class DateFilter implements FilterFormProvider, DoctrineFilterInterface
         $parameterName = FilterHelper::parameterName($name);
 
         switch ($criteria->getPeriod()) {
-            case DateFilterOperator::$OPERATOR_CURRENT_DAY:
+            case DateFilterOperator::OPERATOR_CURRENT_DAY:
                 $this->applyPeriod($qb, $fieldName, $parameterName, (new DateTime('today')));
                 break;
-            case DateFilterOperator::$OPERATOR_YESTERDAY:
+            case DateFilterOperator::OPERATOR_YESTERDAY:
                 $this->applyPeriod($qb, $fieldName, $parameterName, (new DateTime('yesterday')));
                 break;
-            case DateFilterOperator::$OPERATOR_CURRENT_WEEK:
+            case DateFilterOperator::OPERATOR_CURRENT_WEEK:
                 $this->applyPeriod($qb, $fieldName, $parameterName, (new DateTime('this week')));
                 break;
-            case DateFilterOperator::$OPERATOR_CURRENT_YEAR:
+            case DateFilterOperator::OPERATOR_CURRENT_YEAR:
                 $this->applyPeriod($qb, $fieldName, $parameterName,
                     (new DateTime(sprintf('first day of january %d', (new DateTime())->format('Y')))));
                 break;
-            case DateFilterOperator::$OPERATOR_INTERVAL:
+            case DateFilterOperator::OPERATOR_INTERVAL:
                 $this->applyInterval($qb, $criteria, $fieldName, $parameterName);
                 break;
             default:

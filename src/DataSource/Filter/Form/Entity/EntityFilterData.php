@@ -8,17 +8,15 @@ use PaLabs\DatagridBundle\DataSource\Filter\FilterDataInterface;
 
 class EntityFilterData implements FilterDataInterface
 {
-    protected EntityFilterOperator $operator;
-    protected $value;
 
-    public function __construct(EntityFilterOperator $operator, $value = null)
+    public function __construct(
+        protected EntityFilterOperator $operator,
+        protected mixed $value = null)
     {
-        $this->operator = $operator;
-        $this->value = $value;
     }
 
     public function isEnabled(): bool {
-        if(in_array($this->operator, [EntityFilterOperator::$OPERATOR_EMPTY, EntityFilterOperator::$OPERATOR_NOT_EMPTY])) {
+        if(in_array($this->operator, [EntityFilterOperator::OPERATOR_EMPTY, EntityFilterOperator::OPERATOR_NOT_EMPTY])) {
             return true;
         }
         return !empty($this->value);
@@ -30,8 +28,8 @@ class EntityFilterData implements FilterDataInterface
             return [];
         }
         return [
-            EntityFilterForm::OPERATOR_FIELD => $this->operator->name(),
-            EntityFilterForm::VALUE_FIELD => $this->value === null ? null : $this->value->getId()
+            EntityFilterForm::OPERATOR_FIELD => $this->operator->value,
+            EntityFilterForm::VALUE_FIELD => $this->value?->getId()
         ];
     }
 

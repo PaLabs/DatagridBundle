@@ -27,7 +27,7 @@ class StringFilterForm extends AbstractType
         $builder->addModelTransformer(new StringFilterModelTransformer());
     }
 
-    public function getParent()
+    public function getParent(): string
     {
         return BaseFilterForm::class;
     }

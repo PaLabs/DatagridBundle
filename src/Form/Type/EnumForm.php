@@ -4,7 +4,7 @@
 namespace PaLabs\DatagridBundle\Form\Type;
 
 
-use PaLabs\Enum\Enum;
+use BackedEnum;
 use ReflectionClass;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -14,20 +14,18 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class EnumForm extends AbstractType
 {
-    private TranslatorInterface $translator;
 
-    public function __construct(TranslatorInterface $translator)
+    public function __construct(private readonly TranslatorInterface $translator)
     {
-        $this->translator = $translator;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $choiceBuilder = function (Options $options) {
-            /** @var Enum $enum */
+            /** @var BackedEnum $enum */
             $enum = $options['type'];
             $choices = [];
-            $values = isset($options['items']) ? $options['items'] : $enum::values();
+            $values = isset($options['items']) ? $options['items'] : $enum::cases();
 
             foreach ($values as $value) {
                 $translatedLabel = $this->translateEnum($value, $options);
@@ -37,13 +35,11 @@ class EnumForm extends AbstractType
         };
 
         $choiceResolver = function ($value = null) {
-            if ($value === null) {
-                return null;
-            }
-            if ($value instanceof Enum) {
-                return $value->name();
-            }
-            return $value;
+            return match (true) {
+                $value === null => null,
+                $value instanceof BackedEnum => $value->name,
+                default => $value
+            };
         };
 
 
@@ -58,13 +54,13 @@ class EnumForm extends AbstractType
 
     }
 
-    private function translateEnum(Enum $enum, Options $options): string
+    private function translateEnum(BackedEnum $enum, Options $options): string
     {
-        $transId = sprintf('%s.%s', (new ReflectionClass($enum))->getShortName(), $enum->name());
+        $transId = sprintf('%s.%s', (new ReflectionClass($enum))->getShortName(), $enum->name);
         return $this->translator->trans($transId, [], $options['value_translation_domain']);
     }
 
-    public function getParent()
+    public function getParent(): string
     {
         return ChoiceType::class;
     }

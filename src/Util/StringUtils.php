@@ -6,7 +6,7 @@ namespace PaLabs\DatagridBundle\Util;
 
 class StringUtils
 {
-    public static function startsWith($haystack, $needle, $strictCase = true)
+    public static function startsWith($haystack, $needle, $strictCase = true): bool
     {
         if ($strictCase) {
             return strpos($haystack, $needle, 0) === 0;
@@ -14,7 +14,7 @@ class StringUtils
         return stripos($haystack, $needle, 0) === 0;
     }
 
-    public static function startsWithAny($haystack, array $needles, $strictCase = true)
+    public static function startsWithAny($haystack, array $needles, $strictCase = true): bool
     {
         foreach ($needles as $needle) {
             if (self::startsWith($haystack, $needle, $strictCase)) {
@@ -24,7 +24,7 @@ class StringUtils
         return false;
     }
 
-    public static function endsWith($haystack, $needle, $strictCase = true)
+    public static function endsWith($haystack, $needle, $strictCase = true): bool
     {
         $expectedPosition = strlen($haystack) - strlen($needle);
 
@@ -47,7 +47,7 @@ class StringUtils
      *
      * @return string The camelized string
      */
-    public static function camelize($id)
+    public static function camelize(string $id): string
     {
         return strtr(ucwords(strtr($id, array('_' => ' ', '.' => '_ ', '\\' => '_ '))), array(' ' => ''));
     }
@@ -59,7 +59,7 @@ class StringUtils
      *
      * @return string The underscored string
      */
-    public static function underscore($id)
+    public static function underscore(string $id): string
     {
         return strtolower(preg_replace(['/([A-Z]+)([A-Z][a-z])/', '/([a-z\d])([A-Z])/'], ['\\1_\\2', '\\1_\\2'], $id));
     }
