@@ -7,7 +7,7 @@ namespace PaLabs\DatagridBundle\DataSource\Result;
 class DataSourceResultContainer
 {
     /** @var DataSourcePage[] */
-    protected array $pages;
+    protected $pages;
 
     protected int $totalItemsCount;
 
@@ -17,7 +17,7 @@ class DataSourceResultContainer
         $this->totalItemsCount = $totalItemsCount;
     }
 
-    public function getPages(): array
+    public function getPages()
     {
         return $this->pages;
     }
