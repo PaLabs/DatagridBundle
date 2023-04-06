@@ -29,6 +29,7 @@ class DoctrineIterator
                 ->setMaxResults($pageSize);
 
             $localPaginator = new Paginator($currentQb->getQuery(), true);
+            $localPaginator->setUseOutputWalkers(false);
             $localIterator = $localPaginator->getIterator();
             yield iterator_to_array($localIterator);
         }
