@@ -8,18 +8,25 @@ use PaLabs\DatagridBundle\Field\Type\BaseFieldData;
 
 class BooleanFieldData extends BaseFieldData
 {
-    protected bool $value;
-    
-    public function __construct(bool $value, array $options = [])
+
+    public function __construct(
+        protected bool $value,
+        protected bool $htmlLabel = true,
+        array $options = [])
     {
         parent::__construct($options);
-        $this->value = $value;
     }
 
     public function getValue(): bool
     {
         return $this->value;
     }
-    
+
+    public function isHtmlLabel(): bool
+    {
+        return $this->htmlLabel;
+    }
+
+
     
 }
