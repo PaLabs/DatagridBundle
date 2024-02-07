@@ -29,8 +29,8 @@ class DateFilterData implements FilterDataInterface
     {
         return [
             DateFilterForm::PERIOD_FIELD => $this->period->value,
-            DateFilterForm::START_FIELD => $this->startDate,
-            DateFilterForm::END_FIELD => $this->endDate
+            DateFilterForm::START_FIELD => $this->startDate?->format('Y-m-d'),
+            DateFilterForm::END_FIELD => $this->endDate?->format('Y-m-d')
         ];
     }
 

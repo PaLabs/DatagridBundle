@@ -16,7 +16,7 @@ class DateFilterForm extends AbstractType
     const START_FIELD = 's';
     const END_FIELD = 'e';
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add(self::PERIOD_FIELD, EnumForm::class, [
@@ -28,7 +28,7 @@ class DateFilterForm extends AbstractType
         $builder->addModelTransformer(new DateFilterModelTransformer());
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefaults([
@@ -38,12 +38,12 @@ class DateFilterForm extends AbstractType
     }
 
 
-    protected function dateForm()
+    protected function dateForm(): string
     {
         return DateType::class;
     }
 
-    protected function dateFormOptions()
+    protected function dateFormOptions(): array
     {
         return [
             'widget' => 'single_text',
@@ -51,7 +51,7 @@ class DateFilterForm extends AbstractType
         ];
     }
 
-    public function getParent()
+    public function getParent(): string
     {
         return BaseFilterForm::class;
     }
