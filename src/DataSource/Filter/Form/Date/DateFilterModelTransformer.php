@@ -28,8 +28,8 @@ class DateFilterModelTransformer implements DataTransformerInterface
         }
         return new DateFilterData(
             $value[DateFilterForm::PERIOD_FIELD],
-            $value[DateFilterForm::START_FIELD ?? null],
-            $value[DateFilterForm::END_FIELD ?? null]
+            $value[DateFilterForm::START_FIELD] ?? null,
+            $value[DateFilterForm::END_FIELD] ?? null
         );
     }
 }
