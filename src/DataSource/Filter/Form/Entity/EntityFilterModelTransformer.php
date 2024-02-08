@@ -9,7 +9,7 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class EntityFilterModelTransformer implements DataTransformerInterface
 {
-    public function transform($value)
+    public function transform($value): mixed
     {
         if ($value == null) {
             return null;
@@ -24,7 +24,7 @@ class EntityFilterModelTransformer implements DataTransformerInterface
         ];
     }
 
-    public function reverseTransform($value)
+    public function reverseTransform($value): mixed
     {
         if ($value === null) {
             return null;

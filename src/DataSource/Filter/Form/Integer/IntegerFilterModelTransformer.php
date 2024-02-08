@@ -9,7 +9,7 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class IntegerFilterModelTransformer implements DataTransformerInterface
 {
-    public function transform($value) {
+    public function transform($value): mixed {
         if ($value == null) {
             return null;
         }
@@ -20,7 +20,7 @@ class IntegerFilterModelTransformer implements DataTransformerInterface
         return $value->toUrlParams();
     }
 
-    public function reverseTransform($value) {
+    public function reverseTransform($value): mixed {
         if($value === null) {
             return null;
         }
