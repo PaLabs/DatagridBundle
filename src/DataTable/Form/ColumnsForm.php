@@ -13,11 +13,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ColumnsForm extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $allowedFieldNames = array_map(function ($field) {
-            return $field['name'];
-        }, $options['fields']);
+        $allowedFieldNames = array_map(fn($field) => $field['name'], $options['fields']);
 
         $builder->addModelTransformer(new CallbackTransformer(
             function ($valuesAsArray) use ($allowedFieldNames) {
@@ -36,7 +34,7 @@ class ColumnsForm extends AbstractType
     }
 
 
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         $fieldLabels = [];
         foreach ($options['fields'] as $field) {
@@ -47,7 +45,8 @@ class ColumnsForm extends AbstractType
         $view->vars['fieldLabels'] = $fieldLabels;
     }
 
-    protected function groupFields(array $fields) {
+    protected function groupFields(array $fields): array
+    {
         $fieldGroups = [];
 
         foreach($fields as $field) {
@@ -56,7 +55,7 @@ class ColumnsForm extends AbstractType
         return $fieldGroups;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefaults([
@@ -68,7 +67,7 @@ class ColumnsForm extends AbstractType
     }
 
 
-    public function getParent()
+    public function getParent(): string
     {
         return TextType::class;
     }

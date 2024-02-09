@@ -14,7 +14,7 @@ class StringFilterForm extends AbstractType
     const OPERATOR_FIELD = 'o';
     const VALUE_FIELD = 'v';
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add(self::OPERATOR_FIELD, EnumForm::class, [

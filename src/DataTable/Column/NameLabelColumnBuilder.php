@@ -7,7 +7,7 @@ namespace PaLabs\DatagridBundle\DataTable\Column;
 class NameLabelColumnBuilder
 {
 
-    public function __construct(private ColumnsBuilder $builder)
+    public function __construct(private readonly ColumnsBuilder $builder)
     {
     }
 

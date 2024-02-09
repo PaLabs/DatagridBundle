@@ -11,14 +11,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class FilterCollectionForm extends AbstractType
 {
-    protected FilterRegistry $filterRegistry;
 
-    public function __construct(FilterRegistry $filterRegistry)
+    public function __construct(protected FilterRegistry $filterRegistry)
     {
-        $this->filterRegistry = $filterRegistry;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         foreach ($options['filters'] as $name => $filterDesc) {
             $filter = $this->filterRegistry->getFilter($filterDesc['filterClass']);
@@ -29,13 +27,13 @@ class FilterCollectionForm extends AbstractType
         }
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
        $resolver->setRequired('filters');
     }
 
 
-    public function getParent()
+    public function getParent(): string
     {
         return EmptyGetForm::class;
     }

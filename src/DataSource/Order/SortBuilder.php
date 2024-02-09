@@ -10,7 +10,7 @@ class SortBuilder
 {
     protected array $sorting = [];
 
-    public function add(string $name, string $label, string $group = '', array $options = [])
+    public function add(string $name, string $label, string $group = '', array $options = []): static
     {
         $this->checkOrderItemExists($name);
         $this->sorting[$name] = [

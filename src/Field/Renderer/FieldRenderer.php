@@ -9,25 +9,23 @@ use PaLabs\DatagridBundle\Grid\GridOptions;
 
 class FieldRenderer
 {
-    private FieldRegistry $registry;
 
-    public function __construct(FieldRegistry $registry)
+    public function __construct(private readonly FieldRegistry $registry)
     {
-        $this->registry = $registry;
     }
 
-    public static function multiValueField(array $values, $wrapNewLine = false, array $options = [])
+    public static function multiValueField(array $values, $wrapNewLine = false, array $options = []): MultiValueFieldData
     {
         return new MultiValueFieldData($values, ['wrap_new_line' => $wrapNewLine], $options);
     }
 
-    public static function multiColumnField(array $values, array $options = [])
+    public static function multiColumnField(array $values, array $options = []): MultiColumnFieldData
     {
         return new MultiColumnFieldData($values, $options);
     }
 
 
-    public function renderField(FieldData $fieldData, string $displayFormat)
+    public function renderField(FieldData $fieldData, string $displayFormat): array
     {
         if ($fieldData instanceof MultiValueFieldData) {
             return [$this->renderMultiValueField($fieldData, $displayFormat)];
@@ -39,27 +37,27 @@ class FieldRenderer
         }
     }
 
-    private function renderMultiColumnField(MultiColumnFieldData $data, $format)
+    private function renderMultiColumnField(MultiColumnFieldData $data, $format): array
     {
-        $parts = array_map(function ($nestedFieldDesc) use ($format) {
-            return $this->renderField($nestedFieldDesc, $format);
-        }, $data->getColumns());
+        $parts = array_map(
+            fn($nestedFieldDesc) => $this->renderField($nestedFieldDesc, $format),
+            $data->getColumns()
+        );
         return $this->flatten2($parts);
     }
 
-    private function renderMultiValueField(MultiValueFieldData $data, $format)
+    private function renderMultiValueField(MultiValueFieldData $data, $format): FieldRenderResult
     {
-        $parts = array_map(function ($nestedFieldDesc) use ($format) {
-            return $this->renderField($nestedFieldDesc, $format);
-        }, $data->getValues());
+        $parts = array_map(
+            fn($nestedFieldDesc) => $this->renderField($nestedFieldDesc, $format),
+            $data->getValues()
+        );
 
         $parts = $this->flatten2($parts);
-        $partsContent = array_map(function (FieldRenderResult $renderResult) {
-            return $renderResult->getRenderedContent();
-        }, $parts);
+        $partsContent = array_map(fn(FieldRenderResult $renderResult) => $renderResult->getRenderedContent(), $parts);
 
         if ($data->getRenderOptions()['wrap_new_line']) {
-            if($format == GridOptions::RENDER_FORMAT_HTML) {
+            if ($format == GridOptions::RENDER_FORMAT_HTML) {
                 $content = implode('<br/>', $partsContent);
             } else {
                 $content = implode(', ', $partsContent);
@@ -70,7 +68,7 @@ class FieldRenderer
         return new FieldRenderResult($data, $content);
     }
 
-    private function flatten2(array $data)
+    private function flatten2(array $data): array
     {
         $result = [];
         foreach ($data as $parts) {

@@ -35,7 +35,7 @@ class StringUtils
         return strripos($haystack, $needle, 0) === $expectedPosition;
     }
 
-    public static function contains($haystack, $needle)
+    public static function contains($haystack, $needle): bool
     {
         return strpos($haystack, $needle) !== false;
     }
@@ -64,26 +64,9 @@ class StringUtils
         return strtolower(preg_replace(['/([A-Z]+)([A-Z][a-z])/', '/([a-z\d])([A-Z])/'], ['\\1_\\2', '\\1_\\2'], $id));
     }
 
-    public static function utf8ForXml($string)
+    public static function trimStringArray(array $data): array
     {
-        return preg_replace('/[^\x{0009}\x{000a}\x{000d}\x{0020}-\x{D7FF}\x{E000}-\x{FFFD}]+/u', ' ', $string);
-    }
-
-    public static function removeNewLineSymbols($string)
-    {
-        return str_replace(["\r", "\n"], "", $string);
-    }
-
-    public static function removeMultiSpaces($string)
-    {
-        return preg_replace('!\s+!', ' ', $string);
-    }
-
-    public static function trimStringArray(array $data)
-    {
-        return array_map(function ($item) {
-            return trim($item);
-        }, $data);
+        return array_map(fn($item) => trim($item), $data);
     }
 
     public static function fixEncoding($line)

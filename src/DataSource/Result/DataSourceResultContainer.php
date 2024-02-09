@@ -6,18 +6,17 @@ namespace PaLabs\DatagridBundle\DataSource\Result;
 
 class DataSourceResultContainer
 {
-    /** @var DataSourcePage[] */
-    protected $pages;
 
-    protected int $totalItemsCount;
-
-    public function __construct($pages, int $totalItemsCount)
+    public function __construct(
+        protected iterable $pages,
+        protected int $totalItemsCount)
     {
-        $this->pages = $pages;
-        $this->totalItemsCount = $totalItemsCount;
     }
 
-    public function getPages()
+    /**
+     * @return iterable<DataSourcePage>
+     */
+    public function getPages(): iterable
     {
         return $this->pages;
     }

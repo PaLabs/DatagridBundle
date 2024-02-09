@@ -33,7 +33,7 @@ class ColumnOptions
             };
     }
 
-    public static function fromArray(array $parameters)
+    public static function fromArray(array $parameters): ColumnOptions
     {
         return new self(
             $parameters['label'],

@@ -8,14 +8,12 @@ use PaLabs\DatagridBundle\DataSource\Filter\Registry\FilterRegistry;
 
 class QueryBuilderFilterApplier
 {
-    protected FilterRegistry $filterRegistry;
 
-    public function __construct(FilterRegistry $filterRegistry)
+    public function __construct(protected FilterRegistry $filterRegistry)
     {
-        $this->filterRegistry = $filterRegistry;
     }
 
-    public function apply(QueryBuilder $queryBuilder, array $filters, array $filterData)
+    public function apply(QueryBuilder $queryBuilder, array $filters, array $filterData): void
     {
         foreach ($filters as $name => $filterDesc) {
             if (!empty($filterData[$name])) {

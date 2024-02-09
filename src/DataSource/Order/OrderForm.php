@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class OrderForm extends AbstractType
 {
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'allow_add' => true,
@@ -20,7 +20,7 @@ class OrderForm extends AbstractType
         ]);
     }
 
-    public function getParent()
+    public function getParent(): string
     {
         return CollectionType::class;
     }

@@ -10,24 +10,18 @@ use PaLabs\DatagridBundle\Grid\Form\GridForm;
 
 class Pager
 {
-    protected int $currentPageNumber;
-    protected int $totalItemsCount;
-    protected int $itemNumberPerPage;
     protected int $pageRange = 5;
 
     public function __construct(
-        int $currentPage,
-        int $itemNumberPerPage,
-        int $totalItems)
+        protected int $currentPageNumber,
+        protected int $itemNumberPerPage,
+        protected int $totalItemsCount)
     {
-        $this->currentPageNumber = $currentPage;
-        $this->itemNumberPerPage = $itemNumberPerPage;
-        $this->totalItemsCount = $totalItems;
     }
 
-    public static function fromKpnPagination(SlidingPagination $pagination)
+    public static function fromKpnPagination(SlidingPagination $pagination): static
     {
-        return new static(
+        return new Pager(
             $pagination->getCurrentPageNumber(),
             $pagination->getItemNumberPerPage(),
             $pagination->getTotalItemCount()
@@ -35,7 +29,7 @@ class Pager
     }
 
 
-    public function getPaginationData()
+    public function getPaginationData(): array
     {
         $pageCount = $this->getPageCount();
         $current = $this->currentPageNumber;
@@ -105,7 +99,7 @@ class Pager
         return $viewData;
     }
 
-    public function getPageCount()
+    public function getPageCount(): int
     {
         return intval(ceil($this->totalItemsCount / $this->itemNumberPerPage));
     }

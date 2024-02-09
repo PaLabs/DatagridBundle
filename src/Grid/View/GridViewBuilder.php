@@ -34,7 +34,7 @@ class GridViewBuilder
         ConfigurableDataTable $dataTable,
         ConfigurableDataSource $dataSource,
         GridParameters $parameters,
-        GridOptions $options)
+        GridOptions $options): GridView
     {
 
         $dataTableConfig = $dataTable->configure($parameters);
@@ -92,14 +92,14 @@ class GridViewBuilder
         return $form->getData();
     }
 
-    protected function rowsIterator($rows, $format)
+    protected function rowsIterator($rows, $format): \Generator
     {
         foreach ($rows as $row) {
             yield $this->rowIterator($row, $format);
         }
     }
 
-    protected function rowIterator($row, $format)
+    protected function rowIterator($row, $format): \Generator
     {
         /** @var FieldData[] $row */
         foreach ($row as $field) {

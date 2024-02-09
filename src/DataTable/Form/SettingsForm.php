@@ -13,7 +13,7 @@ class SettingsForm extends AbstractType
 {
     const FIELDS_FORM_NAME = 'fi';
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add(self::FIELDS_FORM_NAME, ColumnsForm::class, [
@@ -23,7 +23,7 @@ class SettingsForm extends AbstractType
     }
 
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefaults([

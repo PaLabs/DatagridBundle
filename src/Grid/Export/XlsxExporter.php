@@ -23,7 +23,7 @@ class XlsxExporter implements GridExporter
         return self::FORMAT;
     }
 
-    public function export(GridView $view, string $fileName)
+    public function export(GridView $view, string $fileName): StreamedResponse
     {
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
@@ -34,7 +34,9 @@ class XlsxExporter implements GridExporter
             $this->exportRow($row, $rowNumber, $sheet);
             $rowNumber++;
         }
-        $sheet->freezePaneByColumnAndRow(1, $rowNumber);
+        //$sheet->freezePaneByColumnAndRow(1, $rowNumber);
+        $sheet->freezePane([1, $rowNumber]);
+
 
         foreach ($view->getRows() as $row) {
             $this->exportRow($row, $rowNumber, $sheet);
@@ -45,13 +47,16 @@ class XlsxExporter implements GridExporter
         $callback = function () use ($writer) {
             $writer->save('php://output');
         };
-        return new StreamedResponse($callback, 200, [
-            'Content-Type' => ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-            'Content-Disposition' => "attachment; filename=$fileName.xlsx"
-        ]);
+        return new StreamedResponse(
+            callback: $callback,
+            status: 200,
+            headers: [
+                'Content-Type' => ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Disposition' => "attachment; filename=$fileName.xlsx"
+            ]);
     }
 
-    private function exportRow($row, $rowNumber, Worksheet $sheet)
+    private function exportRow($row, $rowNumber, Worksheet $sheet): void
     {
         $columnNumber = 1;
         /** @var FieldRenderResult[] $row */
@@ -63,10 +68,11 @@ class XlsxExporter implements GridExporter
                 $content->setCoordinates($coordinate);
                 $content->setWorksheet($sheet);
             } else {
-                if(is_string($content)) {
+                if (is_string($content)) {
                     $content = StringUtils::fixEncoding($content);
                 }
-                $sheet->setCellValueByColumnAndRow($columnNumber, $rowNumber, $content);
+                //$sheet->setCellValueByColumnAndRow($columnNumber, $rowNumber, $content);
+                $sheet->setCellValue([$columnNumber, $rowNumber], $content);
             }
             $columnNumber++;
         }

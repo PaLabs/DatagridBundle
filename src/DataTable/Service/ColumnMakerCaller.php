@@ -40,7 +40,7 @@ class ColumnMakerCaller
      * @param ReflectionParameter[] $parameters
      * @return bool
      */
-    private function argumentsIsOnlyContext(array $parameters)
+    private function argumentsIsOnlyContext(array $parameters): bool
     {
 
         if (count($parameters) == 1) {

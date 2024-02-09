@@ -10,17 +10,15 @@ use PaLabs\DatagridBundle\Grid\GridOptions;
 
 abstract class HtmlOrTextField implements Field
 {
-    public function render(FieldData $data, String $format)
+    public function render(FieldData $data, String $format): string
     {
-        switch ($format) {
-            case GridOptions::RENDER_FORMAT_HTML:
-                return $this->renderHtml($data);
-            default:
-                return $this->renderTxt($data);
-        }
+        return match ($format) {
+            GridOptions::RENDER_FORMAT_HTML => $this->renderHtml($data),
+            default => $this->renderTxt($data),
+        };
     }
 
-    protected abstract function renderHtml(FieldData $data);
+    protected abstract function renderHtml(FieldData $data): string;
 
-    protected abstract function renderTxt(FieldData $data);
+    protected abstract function renderTxt(FieldData $data): string;
 }

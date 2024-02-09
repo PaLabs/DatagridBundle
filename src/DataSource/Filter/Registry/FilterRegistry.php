@@ -11,7 +11,7 @@ class FilterRegistry
 {
     private array $filters = [];
 
-    public function registerFilter(FilterFormProvider $filter)
+    public function registerFilter(FilterFormProvider $filter): void
     {
         $filterClass = get_class($filter);
 

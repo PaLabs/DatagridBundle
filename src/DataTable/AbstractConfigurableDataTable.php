@@ -81,13 +81,16 @@ abstract class AbstractConfigurableDataTable implements ConfigurableDataTable
         array $columns,
         array $displayColumnNames): array
     {
-        return array_map(function (string $columnName) use ($columnMakersCaller, $columns, $rowData, $loopIndex, $page, $context) {
-            /** @var Column $column * */
-            $column = $columns[$columnName];
-            $columnMakerContext = new ColumnMakerContext($rowData, $loopIndex, $page, $context);
+        return array_map(
+            function (string $columnName) use ($columnMakersCaller, $columns, $rowData, $loopIndex, $page, $context) {
+                /** @var Column $column * */
+                $column = $columns[$columnName];
+                $columnMakerContext = new ColumnMakerContext($rowData, $loopIndex, $page, $context);
 
-            return $columnMakersCaller->call($column, $columnMakerContext);
-        }, $displayColumnNames);
+                return $columnMakersCaller->call($column, $columnMakerContext);
+            },
+            $displayColumnNames
+        );
     }
 
     public function buildHeader(GridContext $context, array $columns, array $displayColumnNames): array
@@ -121,11 +124,11 @@ abstract class AbstractConfigurableDataTable implements ConfigurableDataTable
 
     protected function displayFields(array $columns, GridParameters $parameters): array
     {
-        $columns = array_filter($columns, function(Column $column){
+        $columns = array_filter($columns, function (Column $column) {
             return !$column->getOptions()->isRequired();
         });
 
-        return array_map(function(Column $column){
+        return array_map(function (Column $column) {
             return [
                 'name' => $column->getName(),
                 'label' => $column->getOptions()->getLabel(),

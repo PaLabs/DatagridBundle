@@ -15,7 +15,7 @@ class EntityFilterForm extends AbstractType
     const OPERATOR_FIELD = 'o';
     const VALUE_FIELD = 'v';
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add(self::OPERATOR_FIELD, EnumForm::class, [
@@ -27,7 +27,7 @@ class EntityFilterForm extends AbstractType
         $builder->addModelTransformer(new EntityFilterModelTransformer());
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefaults([
@@ -36,7 +36,7 @@ class EntityFilterForm extends AbstractType
             ]);
     }
 
-    public function getParent()
+    public function getParent(): string
     {
         return BaseFilterForm::class;
     }

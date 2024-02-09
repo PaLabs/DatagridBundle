@@ -19,7 +19,7 @@ class PaDatagridBundle extends Bundle
         return new PaDatagridExtension();
     }
 
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         parent::build($container);
 

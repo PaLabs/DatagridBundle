@@ -44,26 +44,27 @@ abstract class DoctrineDataSource extends AbstractConfigurableDataSource
         $queryBuilder = $this->createQuery($context);
         $this->applyFilterSorting($queryBuilder, $configuration, $context);
 
-        switch ($context->getOptions()->getPagingType()) {
-            case GridOptions::PAGING_TYPE_SPLIT_BY_PAGES:
-                return $this->onePageRows($queryBuilder, $configuration, $context);
-            case GridOptions::PAGING_TYPE_SINGLE_PAGE:
-                return $this->allPagesRows($queryBuilder, $configuration, $context);
-            default:
-                throw new Exception(sprintf("Unsupported context type: %s", $context->getOptions()->getPagingType()));
-        }
+        return match ($context->getOptions()->getPagingType()) {
+            GridOptions::PAGING_TYPE_SPLIT_BY_PAGES => $this->onePageRows($queryBuilder, $configuration, $context),
+            GridOptions::PAGING_TYPE_SINGLE_PAGE => $this->allPagesRows($queryBuilder, $configuration, $context),
+            default => throw new Exception(sprintf("Unsupported context type: %s", $context->getOptions()->getPagingType())),
+        };
 
     }
 
-    protected function applyFilterSorting(QueryBuilder $queryBuilder, DataSourceConfiguration $configuration,
-                                          GridContext $context): void
+    protected function applyFilterSorting(
+        QueryBuilder $queryBuilder,
+        DataSourceConfiguration $configuration,
+        GridContext $context): void
     {
         $this->filterApplier->apply($queryBuilder, $configuration->getFilters(), $context->getDataSourceSettings()->getFilters());
         $this->sortApplier->apply($queryBuilder, $configuration->getSorting(), $context->getDataSourceSettings()->getOrder());
     }
 
-    protected function onePageRows(QueryBuilder $queryBuilder, DataSourceConfiguration $configuration,
-                                   GridContext $context): DataSourceResultContainer
+    protected function onePageRows(
+        QueryBuilder $queryBuilder,
+        DataSourceConfiguration $configuration,
+        GridContext $context): DataSourceResultContainer
     {
         /** @var SlidingPagination $pagination */
         $pagination = $this->paginator->paginate($queryBuilder, $context->getDataSourceSettings()->getPage(),
@@ -79,16 +80,21 @@ abstract class DoctrineDataSource extends AbstractConfigurableDataSource
         return new PagedDataSourceResultContainer([$page], Pager::fromKpnPagination($pagination));
     }
 
-    protected function allPagesRows(QueryBuilder $queryBuilder, DataSourceConfiguration $configuration,
-                                    GridContext $context): DataSourceResultContainer
+    protected function allPagesRows(
+        QueryBuilder $queryBuilder,
+        DataSourceConfiguration $configuration,
+        GridContext $context): DataSourceResultContainer
     {
         $itemsCount = DoctrineIterator::count($queryBuilder);
         $pageIterator = $this->allPagesRowsIterator($queryBuilder, $itemsCount, $configuration, $context);
         return new DataSourceResultContainer($pageIterator, $itemsCount);
     }
 
-    protected function allPagesRowsIterator(QueryBuilder $queryBuilder, $itemsCount,
-                                            DataSourceConfiguration $configuration, GridContext $context): iterable
+    protected function allPagesRowsIterator(
+        QueryBuilder $queryBuilder,
+        $itemsCount,
+        DataSourceConfiguration $configuration,
+        GridContext $context): iterable
     {
         $doctrineIterator = DoctrineIterator::iterator($queryBuilder, $itemsCount);
         foreach ($doctrineIterator as $rowData) {
@@ -101,15 +107,21 @@ abstract class DoctrineDataSource extends AbstractConfigurableDataSource
         }
     }
 
-    protected function transformPage(array $rows, DataSourceConfiguration $configuration,
-                                     GridContext $context, DataSourcePageContext $pageContext): iterable
+    protected function transformPage(
+        array $rows,
+        DataSourceConfiguration $configuration,
+        GridContext $context,
+        DataSourcePageContext $pageContext): iterable
     {
         return $rows;
     }
 
 
-    protected function buildPageContext(array $rows, DataSourceConfiguration $configuration,
-                                        GridContext $context, DataSourcePageContext $pageContext): void
+    protected function buildPageContext(
+        array $rows,
+        DataSourceConfiguration $configuration,
+        GridContext $context,
+        DataSourcePageContext $pageContext): void
     {
     }
 

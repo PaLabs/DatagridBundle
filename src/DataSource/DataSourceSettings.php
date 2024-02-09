@@ -13,13 +13,9 @@ class DataSourceSettings
     protected int $perPage = self::DEFAULT_PER_PAGE;
     protected int $page = self::DEFAULT_PAGE_NUMBER;
 
-    /**
-     * @return self
-     */
-    public static function defaultSettings()
+    public static function defaultSettings(): static
     {
-        $self = (new static());
-        return $self
+        return (new DataSourceSettings())
             ->setFilters([])
             ->setOrder([])
             ->setPerPage(self::DEFAULT_PER_PAGE)
@@ -31,7 +27,7 @@ class DataSourceSettings
         return $this->order;
     }
 
-    public function setOrder(array $order)
+    public function setOrder(array $order): static
     {
         $this->order = $order;
         return $this;
@@ -42,7 +38,7 @@ class DataSourceSettings
         return $this->perPage;
     }
 
-    public function setPerPage(int $perPage)
+    public function setPerPage(int $perPage): static
     {
         $this->perPage = $perPage;
         return $this;
@@ -53,7 +49,7 @@ class DataSourceSettings
         return $this->filters;
     }
 
-    public function setFilters(array $filters)
+    public function setFilters(array $filters): static
     {
         $this->filters = $filters;
         return $this;
@@ -64,7 +60,7 @@ class DataSourceSettings
         return $this->page;
     }
 
-    public function setPage(int $page)
+    public function setPage(int $page): static
     {
         $this->page = $page;
         return $this;

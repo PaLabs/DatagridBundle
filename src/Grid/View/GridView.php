@@ -11,33 +11,22 @@ use Symfony\Component\Form\FormView;
 class GridView
 {
 
-    protected FormView $form;
-    protected $header;
-    protected $rows;
-    protected DataSourceResultContainer $dataSourceResult;
-    protected GridContext $context;
-
     public function __construct(
-        $header,
-        $rows,
-        FormView $form,
-        DataSourceResultContainer $dataSourceResult,
-        GridContext $context
+        protected iterable $header,
+        protected iterable $rows,
+        protected FormView $form,
+        protected DataSourceResultContainer $dataSourceResult,
+        protected GridContext $context
     )
     {
-        $this->header = $header;
-        $this->rows = $rows;
-        $this->form = $form;
-        $this->dataSourceResult = $dataSourceResult;
-        $this->context = $context;
     }
 
-    public function getHeader()
+    public function getHeader(): iterable
     {
         return $this->header;
     }
 
-    public function getRows()
+    public function getRows(): iterable
     {
         return $this->rows;
     }

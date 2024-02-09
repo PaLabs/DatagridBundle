@@ -31,7 +31,7 @@ class IntegerFilterData implements FilterDataInterface
         ];
     }
 
-    public function getValue()
+    public function getValue(): ?string
     {
         return $this->value;
     }

@@ -11,7 +11,7 @@ class FieldRegistry
 {
     private array $fields = [];
 
-    public function registerField(Field $field)
+    public function registerField(Field $field): void
     {
         if (isset($this->fields[$field->dataClass()])) {
             throw new Exception(sprintf("Field with data class already registered, dataClass=%s, field=%s", $field->dataClass(), get_class($field)));

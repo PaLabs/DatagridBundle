@@ -12,7 +12,7 @@ class IntegerFilterForm extends AbstractType
 {
     const VALUE_FIELD = 'v';
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add(self::VALUE_FIELD, TextType::class, [
@@ -23,7 +23,7 @@ class IntegerFilterForm extends AbstractType
         $builder->addModelTransformer(new IntegerFilterModelTransformer());
     }
 
-    public function getParent()
+    public function getParent(): string
     {
         return BaseFilterForm::class;
     }

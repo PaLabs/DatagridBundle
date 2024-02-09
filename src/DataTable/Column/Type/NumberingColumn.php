@@ -28,7 +28,7 @@ class NumberingColumn extends Column
         parent::__construct('numbering', $columnMaker, ColumnOptions::fromArray($parameters));
     }
 
-    private function defaultParameters()
+    private function defaultParameters(): array
     {
         return [
             'label' => '',

@@ -12,7 +12,7 @@ class BooleanFilterForm extends AbstractType
 {
     const VALUE_FIELD = 'v';
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add(self::VALUE_FIELD, BooleanForm::class, ['required' => false]);
@@ -20,7 +20,7 @@ class BooleanFilterForm extends AbstractType
         $builder->addModelTransformer(new BooleanFilterModelTransformer());
     }
 
-    public function getParent()
+    public function getParent(): string
     {
         return BaseFilterForm::class;
     }

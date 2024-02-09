@@ -20,12 +20,12 @@ class UrlFieldData extends BaseFieldData
         $this->attr = $attr;
     }
 
-    public function getUrl()
+    public function getUrl(): ?string
     {
         return $this->url;
     }
 
-    public function getText()
+    public function getText(): ?string
     {
         return $this->text;
     }

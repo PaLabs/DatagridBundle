@@ -11,7 +11,8 @@ class GridExporterFacade
 {
     protected array $exporters = [];
 
-    public function registerExporter(GridExporter $exporter) {
+    public function registerExporter(GridExporter $exporter): void
+    {
         $format = $exporter->supportedFormat();
 
         if(isset($this->exporters[$format])) {

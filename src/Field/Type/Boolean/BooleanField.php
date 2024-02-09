@@ -13,12 +13,12 @@ class BooleanField extends HtmlOrTextField
     public static function field(
         bool $value,
         bool $htmlLabel = true,
-        array $options = [])
+        array $options = []): BooleanFieldData
     {
         return new BooleanFieldData($value, $htmlLabel, $options);
     }
 
-    public function renderHtml(FieldData $data)
+    public function renderHtml(FieldData $data): string
     {
         if (!$data instanceof BooleanFieldData) {
             throw new InvalidDataTypeException($data, $this->dataClass());
@@ -27,7 +27,7 @@ class BooleanField extends HtmlOrTextField
         return FieldRenderUtils::renderBoolLabel($data->getValue(), $data->isHtmlLabel());
     }
 
-    public function renderTxt(FieldData $data)
+    public function renderTxt(FieldData $data): string
     {
         if (!$data instanceof BooleanFieldData) {
             throw new InvalidDataTypeException($data, $this->dataClass());

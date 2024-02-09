@@ -13,7 +13,7 @@ class FilterRegistryCompilerPass implements CompilerPassInterface
 {
     const TAG_NAME = 'pa_datagrid.filter';
 
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->has(FilterRegistry::class)) {
             throw new Exception(sprintf("Service %s is not registered", FilterRegistry::class));

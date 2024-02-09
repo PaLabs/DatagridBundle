@@ -19,7 +19,7 @@ class EnumForm extends AbstractType
     {
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $choiceBuilder = function (Options $options) {
             /** @var BackedEnum $enum */

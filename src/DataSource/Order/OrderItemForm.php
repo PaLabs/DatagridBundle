@@ -15,7 +15,7 @@ class OrderItemForm extends AbstractType
     const FIELD_FORM_NAME = 'f';
     const DIRECTION_FORM_NAME = 'd';
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add(self::FIELD_FORM_NAME, ChoiceType::class, [
@@ -42,7 +42,7 @@ class OrderItemForm extends AbstractType
         ));
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefaults([

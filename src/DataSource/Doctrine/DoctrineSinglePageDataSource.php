@@ -23,8 +23,10 @@ abstract class DoctrineSinglePageDataSource extends DoctrineDataSource
         return $this->allPagesRows($queryBuilder, $configuration, $context);
     }
 
-    protected function allPagesRows(QueryBuilder $queryBuilder, DataSourceConfiguration $configuration,
-                                    GridContext $context): DataSourceResultContainer
+    protected function allPagesRows(
+        QueryBuilder $queryBuilder,
+        DataSourceConfiguration $configuration,
+        GridContext $context): DataSourceResultContainer
     {
         $rows = $queryBuilder->getQuery()->getResult();
         $pageContext = new DataSourcePageContext();

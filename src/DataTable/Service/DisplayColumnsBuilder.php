@@ -11,7 +11,7 @@ use PaLabs\DatagridBundle\Grid\GridContext;
 class DisplayColumnsBuilder
 {
 
-    public function build(array $columns, GridContext $context)
+    public function build(array $columns, GridContext $context): array
     {
         $selectedColumnNames = $context->getDataTableSettings()->getSelectedFields();
 

@@ -8,7 +8,7 @@ use PaLabs\DatagridBundle\DataSource\Order\SortBuilder;
 
 class DoctrineSortBuilder extends SortBuilder
 {
-    public function add(string $name, string $label, string $group = '', array $options = []) {
+    public function add(string $name, string $label, string $group = '', array $options = []): static {
         $defaultOptions = [
             'field' => $name,
             'sorter' => QueryBuilderSortApplier::class,

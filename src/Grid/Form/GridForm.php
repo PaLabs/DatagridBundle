@@ -15,7 +15,7 @@ class GridForm extends AbstractType
     const DATA_TABLE_SETTINGS_FORM_NAME = 'gs';
     const DATA_SOURCE_SETTINGS_FORM_NAME = 'ds';
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
        $builder
            ->add(self::DATA_TABLE_SETTINGS_FORM_NAME, $options['dataTableSettings']['type'], array_merge(
@@ -24,7 +24,7 @@ class GridForm extends AbstractType
                $options['dataSourceSettings']['options'], ['property_path' => 'dataSourceSettings']));
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefaults([
@@ -36,7 +36,7 @@ class GridForm extends AbstractType
         ]);
     }
 
-    public function getParent()
+    public function getParent(): string
     {
         return EmptyGetForm::class;
     }

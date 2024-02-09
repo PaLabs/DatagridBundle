@@ -9,21 +9,13 @@ use PaLabs\DatagridBundle\Grid\GridContext;
 
 class ColumnMakerContext
 {
-    protected GridContext $gridContext;
-    protected DataSourcePage $page;
-    protected int $loopIndex;
-    protected $row;
 
     public function __construct(
-        $row,
-        int $loopIndex,
-        DataSourcePage $page,
-        GridContext $gridContext)
+        protected mixed $row,
+        protected int $loopIndex,
+        protected DataSourcePage $page,
+        protected GridContext $gridContext)
     {
-        $this->row = $row;
-        $this->loopIndex = $loopIndex;
-        $this->gridContext = $gridContext;
-        $this->page = $page;
     }
 
     public function getGridContext(): GridContext
@@ -41,7 +33,7 @@ class ColumnMakerContext
         return $this->loopIndex;
     }
 
-    public function getRow()
+    public function getRow(): mixed
     {
         return $this->row;
     }

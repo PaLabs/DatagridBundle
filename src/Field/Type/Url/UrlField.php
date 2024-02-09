@@ -9,12 +9,12 @@ use PaLabs\DatagridBundle\Field\Type\InvalidDataTypeException;
 
 class UrlField extends HtmlOrTextField
 {
-    public static function field(string $url = null, string $text = null, array $attr = [], array $options = [])
+    public static function field(string $url = null, string $text = null, array $attr = [], array $options = []): UrlFieldData
     {
         return new UrlFieldData($url, $text, $attr, $options);
     }
 
-    public function renderHtml(FieldData $data)
+    public function renderHtml(FieldData $data): string
     {
         if (!$data instanceof UrlFieldData) {
             throw new InvalidDataTypeException($data, $this->dataClass());
@@ -36,7 +36,7 @@ class UrlField extends HtmlOrTextField
         return "<a $attrStr>$text</a>";
     }
 
-    public function renderTxt(FieldData $data)
+    public function renderTxt(FieldData $data): string
     {
         if (!$data instanceof UrlFieldData) {
             throw new InvalidDataTypeException($data, $this->dataClass());

@@ -10,27 +10,25 @@ use PaLabs\DatagridBundle\Field\Type\InvalidDataTypeException;
 use PaLabs\DatagridBundle\Grid\Export\XlsxExporter;
 use PaLabs\DatagridBundle\Grid\GridOptions;
 use PhpOffice\PhpSpreadsheet\Helper\Html;
+use PhpOffice\PhpSpreadsheet\RichText\RichText;
 
 class HtmlField implements Field
 {
-    public static function field(string $value = '', array $options = [])
+    public static function field(string $value = '', array $options = []): HtmlFieldData
     {
         return new HtmlFieldData($value, $options);
     }
 
-    public function render(FieldData $data, String $format)
+    public function render(FieldData $data, String $format): mixed
     {
-        switch ($format) {
-            case GridOptions::RENDER_FORMAT_HTML:
-                return $this->renderHtml($data);
-            case XlsxExporter::FORMAT:
-                return $this->renderXlxs($data);
-            default:
-                return $this->renderTxt($data);
-        }
+        return match ($format) {
+            GridOptions::RENDER_FORMAT_HTML => $this->renderHtml($data),
+            XlsxExporter::FORMAT => $this->renderXlxs($data),
+            default => $this->renderTxt($data),
+        };
     }
 
-    public function renderHtml(FieldData $data)
+    public function renderHtml(FieldData $data): string
     {
         if (!$data instanceof HtmlFieldData) {
             throw new InvalidDataTypeException($data, $this->dataClass());
@@ -39,7 +37,7 @@ class HtmlField implements Field
         return $data->getValue();
     }
 
-    public function renderTxt(FieldData $data)
+    public function renderTxt(FieldData $data): string
     {
         if (!$data instanceof HtmlFieldData) {
             throw new InvalidDataTypeException($data, $this->dataClass());
@@ -55,7 +53,7 @@ class HtmlField implements Field
         return HtmlFieldData::class;
     }
 
-    private function renderXlxs(FieldData $data)
+    private function renderXlxs(FieldData $data): RichText
     {
         if (!$data instanceof HtmlFieldData) {
             throw new InvalidDataTypeException($data, $this->dataClass());

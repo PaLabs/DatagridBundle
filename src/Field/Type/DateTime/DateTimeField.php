@@ -12,12 +12,12 @@ use PaLabs\DatagridBundle\Field\Type\InvalidDataTypeException;
 
 class DateTimeField extends HtmlOrTextField
 {
-    public static function field(?DateTime $dateTime = null, string $locale = 'en', array $options = [])
+    public static function field(?DateTime $dateTime = null, string $locale = 'en', array $options = []): DateTimeFieldData
     {
         return new DateTimeFieldData($dateTime, $locale, $options);
     }
 
-    public function renderHtml(FieldData $data)
+    public function renderHtml(FieldData $data): string
     {
         if (!$data instanceof DateTimeFieldData) {
             throw new InvalidDataTypeException($data, $this->dataClass());
@@ -31,7 +31,7 @@ class DateTimeField extends HtmlOrTextField
             ->format($data->getDateTime());
     }
 
-    public function renderTxt(FieldData $data)
+    public function renderTxt(FieldData $data): string
     {
         return $this->renderHtml($data);
     }

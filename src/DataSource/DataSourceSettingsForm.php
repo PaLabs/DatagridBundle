@@ -19,7 +19,7 @@ class DataSourceSettingsForm extends AbstractType
     const PAGE_FORM_NAME = 'p';
     const PER_PAGE_FORM_NAME = 'pp';
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if (count($options['filters']) > 0) {
             $builder
@@ -49,7 +49,7 @@ class DataSourceSettingsForm extends AbstractType
     }
 
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefaults([
@@ -63,7 +63,7 @@ class DataSourceSettingsForm extends AbstractType
             ]);
     }
 
-    private function makeSortFields(array $sorting)
+    private function makeSortFields(array $sorting): array
     {
         $sortFields = [];
         foreach ($sorting as $name => $options) {
@@ -77,7 +77,7 @@ class DataSourceSettingsForm extends AbstractType
         return $sortFields;
     }
 
-    private function perPageChoices(array $recordsPerPage)
+    private function perPageChoices(array $recordsPerPage): array
     {
         $result = [];
         foreach ($recordsPerPage as $value) {
@@ -86,7 +86,7 @@ class DataSourceSettingsForm extends AbstractType
         return $result;
     }
 
-    public function getParent()
+    public function getParent(): string
     {
         return EmptyGetForm::class;
     }
