@@ -22,16 +22,17 @@ class UrlField extends HtmlOrTextField
 
         $url = $data->getUrl();
         $text = is_string($data->getText()) ? htmlspecialchars($data->getText()) : $data->getText();
+        if (empty($text)) {
+            $text = "";
+        }
 
         if (empty($url)) {
             return $text;
         }
         $attr = ['href' => $url];
-            $attr = array_merge($attr, $data->getAttr());
+        $attr = array_merge($attr, $data->getAttr());
 
-            $attrStr = implode(' ', array_map(function ($key) use ($attr) {
-            return sprintf('%s="%s"', $key, $attr[$key]);
-        }, array_keys($attr)));
+        $attrStr = implode(' ', array_map(fn($key) => sprintf('%s="%s"', $key, $attr[$key]), array_keys($attr)));
 
         return "<a $attrStr>$text</a>";
     }
