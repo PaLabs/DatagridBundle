@@ -22,11 +22,11 @@ class UrlField extends HtmlOrTextField
 
         $url = $data->getUrl();
         $text = is_string($data->getText()) ? htmlspecialchars($data->getText()) : $data->getText();
-        if (empty($text)) {
+        if ($text === null) {
             $text = "";
         }
 
-        if (empty($url)) {
+        if ($url === null || $url === '') {
             return $text;
         }
         $attr = ['href' => $url];
