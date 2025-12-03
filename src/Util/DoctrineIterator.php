@@ -11,7 +11,7 @@ class DoctrineIterator
 {
     const PAGE_SIZE = 50;
 
-    public static function iterator(QueryBuilder $qb, $itemsCount = null, $pageSize = self::PAGE_SIZE): \Generator
+    public static function iterator(QueryBuilder $qb, ?int $itemsCount = null, int $pageSize = self::PAGE_SIZE): \Generator
     {
         if($itemsCount === null) {
             $itemsCount = self::count($qb);

@@ -9,7 +9,7 @@ use PaLabs\DatagridBundle\Field\Type\InvalidDataTypeException;
 
 class StringField extends HtmlOrTextField
 {
-    public static function field(string $value = null, array $renderOptions = [], array $options = []): StringFieldData
+    public static function field(?string $value = null, array $renderOptions = [], array $options = []): StringFieldData
     {
         return new StringFieldData($value ?? '', $renderOptions, $options);
     }

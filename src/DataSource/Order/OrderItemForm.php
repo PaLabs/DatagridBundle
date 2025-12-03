@@ -27,7 +27,7 @@ class OrderItemForm extends AbstractType
                 'type' => OrderDirection::class
             ]);
         $builder->addModelTransformer(new CallbackTransformer(
-            function (OrderItem $item = null) {
+            function (?OrderItem $item = null) {
                 if ($item == null) {
                     return null;
                 }

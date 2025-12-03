@@ -11,7 +11,7 @@ use PaLabs\DatagridBundle\Field\Type\InvalidDataTypeException;
 
 class DateField extends HtmlOrTextField
 {
-    public static function field(DateTime $dateTime = null, string $locale = 'en', array $options = []): DateFieldData
+    public static function field(?DateTime $dateTime = null, string $locale = 'en', array $options = []): DateFieldData
     {
         return new DateFieldData($dateTime, $locale, $options);
     }

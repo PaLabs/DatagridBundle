@@ -18,8 +18,8 @@ class ColumnOptions
         string $label,
         string $group = '',
         bool $required = false,
-        callable $needDisplayChecker = null,
-        callable $headerBuilder = null)
+        ?callable $needDisplayChecker = null,
+        ?callable $headerBuilder = null)
     {
         $this->label = $label;
         $this->group = $group;
