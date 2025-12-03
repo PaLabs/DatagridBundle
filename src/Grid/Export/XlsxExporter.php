@@ -48,7 +48,7 @@ class XlsxExporter implements GridExporter
             $writer->save('php://output');
         };
         return new StreamedResponse(
-            callback: $callback,
+            callbackOrChunks: $callback,
             status: 200,
             headers: [
                 'Content-Type' => ' application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',

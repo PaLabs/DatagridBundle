@@ -13,6 +13,6 @@ exclude:
       - composer.lock
 
 php:
-  version: '8.2'
+  version: '8.4'
 
 linter: jetbrains/qodana-php:latest
