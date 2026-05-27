@@ -12,7 +12,7 @@ use PaLabs\DatagridBundle\Grid\Export\GridExporter;
 use PaLabs\DatagridBundle\Grid\Export\GridExporterCompilerPass;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class PaDatagridExtension extends Extension
@@ -28,10 +28,11 @@ class PaDatagridExtension extends Extension
         $container->registerForAutoconfiguration(GridExporter::class)
             ->addTag(GridExporterCompilerPass::TAG_NAME);
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('services.xml');
-        $loader->load('fields.xml');
-        $loader->load('filters.xml');
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('services.php');
+        $loader->load('fields.php');
+        $loader->load('filters.php');
+
 
 
     }
