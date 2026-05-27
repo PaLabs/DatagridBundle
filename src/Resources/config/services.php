@@ -73,7 +73,7 @@ return static function (ContainerConfigurator $configurator): void {
         service('doctrine.orm.entity_manager'),
         service('knp_paginator'),
         service(QueryBuilderFilterApplier::class),
-        service(QueryBuilderFilterApplier::class)
+        service(QueryBuilderSortApplier::class)
     ]);
 
     $services

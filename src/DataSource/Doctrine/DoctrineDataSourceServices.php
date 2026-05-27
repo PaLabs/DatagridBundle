@@ -11,22 +11,14 @@ use PaLabs\DatagridBundle\DataSource\Doctrine\Order\QueryBuilderSortApplier;
 
 class DoctrineDataSourceServices
 {
-    protected EntityManagerInterface $em;
-    protected PaginatorInterface $paginator;
-    protected QueryBuilderFilterApplier $filterApplier;
-    protected QueryBuilderSortApplier $sortApplier;
 
     public function __construct(
-        EntityManagerInterface $em,
-        PaginatorInterface $paginator,
-        QueryBuilderFilterApplier $filterApplier,
-        QueryBuilderSortApplier $sortApplier
+        protected EntityManagerInterface $em,
+        protected PaginatorInterface $paginator,
+        protected QueryBuilderFilterApplier $filterApplier,
+        protected QueryBuilderSortApplier $sortApplier
     )
     {
-        $this->em = $em;
-        $this->paginator = $paginator;
-        $this->filterApplier = $filterApplier;
-        $this->sortApplier = $sortApplier;
     }
 
     public function getEm(): EntityManagerInterface
