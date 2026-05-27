@@ -10,8 +10,8 @@
     "php": "^8.2",
     "doctrine/common": "^2.8 || ^3.0",
     "doctrine/orm": "^2.6 || ^3.0",
-    "symfony/form": " ^6.0 || ^7.0",
-    "symfony/doctrine-bridge": "^6.0 || ^7.0",
+    "symfony/form": " ^7.0 || ^8.0",
+    "symfony/doctrine-bridge": "^7.0 || ^8.0",
     "symfony/translation-contracts": "^3.5",
     "knplabs/knp-paginator-bundle": "^5.0 || ^6.0"
   },
