@@ -10,9 +10,9 @@ use PaLabs\DatagridBundle\Field\Type\BaseFieldData;
 class DateTimeFieldData extends BaseFieldData
 {
     protected ?DateTime $dateTime;
-    protected string $locale;
+    protected ?string $locale;
 
-    public function __construct(?DateTime $date = null, string $locale = 'en', array $options = [])
+    public function __construct(?DateTime $date = null, ?string $locale = null, array $options = [])
     {
         parent::__construct($options);
         $this->dateTime = $date;
@@ -24,7 +24,7 @@ class DateTimeFieldData extends BaseFieldData
         return $this->dateTime;
     }
 
-    public function getLocale(): string
+    public function getLocale(): ?string
     {
         return $this->locale;
     }

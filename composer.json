@@ -8,6 +8,7 @@
   "license": "MIT",
   "require": {
     "php": "^8.2",
+    "ext-intl": "*",
     "doctrine/common": "^2.8 || ^3.0",
     "doctrine/orm": "^2.6 || ^3.0",
     "symfony/form": " ^7.0 || ^8.0",

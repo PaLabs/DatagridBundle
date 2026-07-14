@@ -5,13 +5,14 @@ namespace PaLabs\DatagridBundle\Field\Type\Date;
 
 use DateTime;
 use IntlDateFormatter;
+use Locale;
 use PaLabs\DatagridBundle\Field\FieldData;
 use PaLabs\DatagridBundle\Field\Type\HtmlOrTextField;
 use PaLabs\DatagridBundle\Field\Type\InvalidDataTypeException;
 
 class DateField extends HtmlOrTextField
 {
-    public static function field(?DateTime $dateTime = null, string $locale = 'en', array $options = []): DateFieldData
+    public static function field(?DateTime $dateTime = null, ?string $locale = null, array $options = []): DateFieldData
     {
         return new DateFieldData($dateTime, $locale, $options);
     }
@@ -26,7 +27,8 @@ class DateField extends HtmlOrTextField
             return '';
         }
 
-        return IntlDateFormatter::create($data->getLocale(), IntlDateFormatter::MEDIUM, IntlDateFormatter::NONE)
+        $locale = $data->getLocale() ?? Locale::getDefault();
+        return IntlDateFormatter::create($locale, IntlDateFormatter::MEDIUM, IntlDateFormatter::NONE)
             ->format($data->getDateTime());
     }
 
