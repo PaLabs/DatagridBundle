@@ -12,8 +12,8 @@ use ReflectionParameter;
 
 class ColumnMakerCaller
 {
-    const CALL_TYPE_DEFAULT = 1;
-    const CALL_TYPE_ONLY_CONTEXT = 2;
+    public const int CALL_TYPE_DEFAULT = 1;
+    public const int CALL_TYPE_ONLY_CONTEXT = 2;
 
     protected array $columnMakersCallTypes = [];
 

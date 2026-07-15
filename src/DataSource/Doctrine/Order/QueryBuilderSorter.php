@@ -10,8 +10,8 @@ use PaLabs\DatagridBundle\DataSource\Order\OrderItem;
 
 class QueryBuilderSorter
 {
-    const SINGLE_FIELD_TYPE = 'single_field';
-    const MULTIPLE_FIELDS_TYPE = 'multiple_fields';
+    public const string SINGLE_FIELD_TYPE = 'single_field';
+    public const string MULTIPLE_FIELDS_TYPE = 'multiple_fields';
 
     public function apply(QueryBuilder $qb, OrderItem $orderItem, array $config): void
     {

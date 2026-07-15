@@ -23,35 +23,47 @@ class DisplayColumnsBuilder
 
     private function requiredColumnNames(array $columns, GridContext $context): array
     {
-        $requiredColumns = array_filter($columns, function(Column $column){
-            return $column->getOptions()->isRequired();
-        });
-        $requiredColumns = array_filter($requiredColumns, function(Column $column) use ($context) {
-            $callback = $column->getOptions()->getNeedDisplayChecker();
-            return $callback($context) === true;
-        });
+        $requiredColumns = array_filter(
+            $columns,
+            fn(Column $column) => $column->getOptions()->isRequired()
+        );
+        $requiredColumns = array_filter(
+            $requiredColumns,
+            function (Column $column) use ($context) {
+                $callback = $column->getOptions()->getNeedDisplayChecker();
+                return $callback($context) === true;
+            }
+        );
 
-        return array_map(function(Column $column){
-            return $column->getName();
-        }, $requiredColumns);
+        return array_map(
+            fn(Column $column) => $column->getName(),
+            $requiredColumns
+        );
     }
 
     private function selectedColumnNames(array $columns, array $selectedColumnNames, GridContext $context): array
     {
-        $selectedColumns = array_map(function(string $columnName) use ($columns) {
-            if (!array_key_exists($columnName, $columns)) {
-                throw new LogicException(sprintf("Unknown column field: %s", $columnName));
+        $selectedColumns = array_map(
+            function (string $columnName) use ($columns) {
+                if (!array_key_exists($columnName, $columns)) {
+                    throw new LogicException(sprintf("Unknown column field: %s", $columnName));
+                }
+                return $columns[$columnName];
+            },
+            $selectedColumnNames
+        );
+
+        $selectedColumns = array_filter(
+            $selectedColumns,
+            function (Column $column) use ($context) {
+                $callback = $column->getOptions()->getNeedDisplayChecker();
+                return $callback($context) === true;
             }
-            return $columns[$columnName];
-        }, $selectedColumnNames);
+        );
 
-        $selectedColumns = array_filter($selectedColumns, function(Column $column) use ($context) {
-            $callback = $column->getOptions()->getNeedDisplayChecker();
-            return $callback($context) === true;
-        });
-
-        return array_map(function(Column $column){
-            return $column->getName();
-        }, $selectedColumns);
+        return array_map(
+            fn(Column $column) => $column->getName(),
+            $selectedColumns
+        );
     }
 }

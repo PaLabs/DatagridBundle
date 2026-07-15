@@ -6,10 +6,10 @@ namespace PaLabs\DatagridBundle\Grid;
 
 class GridOptions
 {
-    const PAGING_TYPE_SPLIT_BY_PAGES = 'split_by_pages';
-    const PAGING_TYPE_SINGLE_PAGE = 'single_page';
+    public const string PAGING_TYPE_SPLIT_BY_PAGES = 'split_by_pages';
+    public const string PAGING_TYPE_SINGLE_PAGE = 'single_page';
 
-    const RENDER_FORMAT_HTML = 'html';
+    public const string RENDER_FORMAT_HTML = 'html';
 
     protected string $pagingType;
     protected string $renderFormat;

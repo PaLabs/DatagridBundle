@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class FieldRegistryCompilerPass implements CompilerPassInterface
 {
-    const TAG_NAME = 'pa_datagrid.field';
+    public const string TAG_NAME = 'pa_datagrid.field';
 
     public function process(ContainerBuilder $container): void
     {

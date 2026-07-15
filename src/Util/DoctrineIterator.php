@@ -9,11 +9,21 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class DoctrineIterator
 {
-    const PAGE_SIZE = 50;
+    public const int PAGE_SIZE = 50;
 
-    public static function iterator(QueryBuilder $qb, ?int $itemsCount = null, int $pageSize = self::PAGE_SIZE): \Generator
+    /**
+     * @param QueryBuilder $qb
+     * @param int|null $itemsCount
+     * @param int $pageSize
+     * @return \Generator<array> generator of batch of entities
+     * @throws \Exception
+     */
+    public static function iterator(
+        QueryBuilder $qb,
+        ?int $itemsCount = null,
+        int $pageSize = self::PAGE_SIZE): \Generator
     {
-        if($itemsCount === null) {
+        if ($itemsCount === null) {
             $itemsCount = self::count($qb);
         }
 

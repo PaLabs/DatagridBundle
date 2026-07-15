@@ -11,9 +11,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class GridForm extends AbstractType
 {
-    const FORM_NAME = 'g';
-    const DATA_TABLE_SETTINGS_FORM_NAME = 'gs';
-    const DATA_SOURCE_SETTINGS_FORM_NAME = 'ds';
+    public const string FORM_NAME = 'g';
+    public const string DATA_TABLE_SETTINGS_FORM_NAME = 'gs';
+    public const string DATA_SOURCE_SETTINGS_FORM_NAME = 'ds';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

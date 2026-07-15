@@ -10,7 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class BooleanFilterForm extends AbstractType
 {
-    const VALUE_FIELD = 'v';
+    public const string VALUE_FIELD = 'v';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

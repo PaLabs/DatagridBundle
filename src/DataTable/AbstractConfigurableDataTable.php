@@ -25,7 +25,7 @@ abstract class AbstractConfigurableDataTable implements ConfigurableDataTable
     {
     }
 
-    protected abstract function configureColumns(ColumnsBuilder $builder, GridParameters $parameters);
+    protected abstract function configureColumns(ColumnsBuilder $builder, GridParameters $parameters): void;
 
     public function configure(GridParameters $parameters): DataTableConfig
     {
@@ -95,12 +95,15 @@ abstract class AbstractConfigurableDataTable implements ConfigurableDataTable
 
     public function buildHeader(GridContext $context, array $columns, array $displayColumnNames): array
     {
-        $headerRow = array_map(function ($columnName) use ($columns, $context) {
-            /** @var Column $field * */
-            $field = $columns[$columnName];
-            $builder = $field->getOptions()->getHeaderBuilder();
-            return $builder($context, $columnName);
-        }, $displayColumnNames);
+        $headerRow = array_map(
+            function ($columnName) use ($columns, $context) {
+                /** @var Column $field * */
+                $field = $columns[$columnName];
+                $builder = $field->getOptions()->getHeaderBuilder();
+                return $builder($context, $columnName);
+            },
+            $displayColumnNames
+        );
 
         return [$headerRow];
     }
@@ -124,17 +127,19 @@ abstract class AbstractConfigurableDataTable implements ConfigurableDataTable
 
     protected function displayFields(array $columns, GridParameters $parameters): array
     {
-        $columns = array_filter($columns, function (Column $column) {
-            return !$column->getOptions()->isRequired();
-        });
+        $columns = array_filter(
+            $columns,
+            fn(Column $column) => !$column->getOptions()->isRequired()
+        );
 
-        return array_map(function (Column $column) {
-            return [
+        return array_map(
+            fn(Column $column) => [
                 'name' => $column->getName(),
                 'label' => $column->getOptions()->getLabel(),
                 'group' => $column->getOptions()->getGroup()
-            ];
-        }, $columns);
+            ],
+            $columns
+        );
     }
 
 

@@ -5,8 +5,8 @@ namespace PaLabs\DatagridBundle\DataSource;
 
 class DataSourceSettings
 {
-    const DEFAULT_PER_PAGE = 20;
-    const DEFAULT_PAGE_NUMBER = 1;
+    public const int DEFAULT_PER_PAGE = 20;
+    public const int DEFAULT_PAGE_NUMBER = 1;
 
     protected array $filters = [];
     protected array $order = [];

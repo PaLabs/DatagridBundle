@@ -12,9 +12,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DateFilterForm extends AbstractType
 {
-    const PERIOD_FIELD = 'o';
-    const START_FIELD = 's';
-    const END_FIELD = 'e';
+    public const string PERIOD_FIELD = 'o';
+    public const string START_FIELD = 's';
+    public const string END_FIELD = 'e';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

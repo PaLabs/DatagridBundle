@@ -12,8 +12,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class OrderItemForm extends AbstractType
 {
-    const FIELD_FORM_NAME = 'f';
-    const DIRECTION_FORM_NAME = 'd';
+    public const string FIELD_FORM_NAME = 'f';
+    public const string DIRECTION_FORM_NAME = 'd';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -26,6 +26,7 @@ class OrderItemForm extends AbstractType
                 'required' => true,
                 'type' => OrderDirection::class
             ]);
+
         $builder->addModelTransformer(new CallbackTransformer(
             function (?OrderItem $item = null) {
                 if ($item == null) {

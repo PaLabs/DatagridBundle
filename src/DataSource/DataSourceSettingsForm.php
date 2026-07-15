@@ -14,10 +14,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DataSourceSettingsForm extends AbstractType
 {
-    const FILTERS_FORM_NAME = 'f';
-    const ORDER_FORM_NAME = 'o';
-    const PAGE_FORM_NAME = 'p';
-    const PER_PAGE_FORM_NAME = 'pp';
+    public const string FILTERS_FORM_NAME = 'f';
+    public const string ORDER_FORM_NAME = 'o';
+    public const string PAGE_FORM_NAME = 'p';
+    public const string PER_PAGE_FORM_NAME = 'pp';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

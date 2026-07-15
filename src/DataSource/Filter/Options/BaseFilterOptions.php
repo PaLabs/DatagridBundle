@@ -6,7 +6,7 @@ namespace PaLabs\DatagridBundle\DataSource\Filter\Options;
 
 class BaseFilterOptions implements FilterOptions
 {
-    public const FILTER_OPTION_FIELD = 'field';
+    public const string FILTER_OPTION_FIELD = 'field';
 
     protected array $formOptions = [];
     protected array $filterOptions = [];

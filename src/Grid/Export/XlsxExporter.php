@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class XlsxExporter implements GridExporter
 {
-    const FORMAT = 'xlsx';
+    public const string FORMAT = 'xlsx';
 
     public function supportedFormat(): string
     {
@@ -34,7 +34,6 @@ class XlsxExporter implements GridExporter
             $this->exportRow($row, $rowNumber, $sheet);
             $rowNumber++;
         }
-        //$sheet->freezePaneByColumnAndRow(1, $rowNumber);
         $sheet->freezePane([1, $rowNumber]);
 
 
@@ -71,7 +70,6 @@ class XlsxExporter implements GridExporter
                 if (is_string($content)) {
                     $content = StringUtils::fixEncoding($content);
                 }
-                //$sheet->setCellValueByColumnAndRow($columnNumber, $rowNumber, $content);
                 $sheet->setCellValue([$columnNumber, $rowNumber], $content);
             }
             $columnNumber++;

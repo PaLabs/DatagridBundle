@@ -11,7 +11,11 @@ class NameLabelColumnBuilder
     {
     }
 
-    public function add(string $name, string $label, callable $columnMaker, string $group = ''): self
+    public function add(
+        string $name,
+        string $label,
+        callable $columnMaker,
+        string $group = ''): self
     {
         $columnOptions = new ColumnOptions($label, $group);
         $this->builder->add(new Column($name, $columnMaker, $columnOptions));

@@ -25,12 +25,8 @@ class ColumnOptions
         $this->group = $group;
         $this->required = $required;
 
-        $this->needDisplayChecker = $needDisplayChecker ?? function () {
-                return true;
-            };
-        $this->headerBuilder = $headerBuilder ?? function () {
-                return StringField::field($this->label);
-            };
+        $this->needDisplayChecker = $needDisplayChecker ?? fn() => true;
+        $this->headerBuilder = $headerBuilder ?? fn() => StringField::field($this->label);
     }
 
     public static function fromArray(array $parameters): ColumnOptions

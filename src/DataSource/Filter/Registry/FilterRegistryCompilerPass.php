@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class FilterRegistryCompilerPass implements CompilerPassInterface
 {
-    const TAG_NAME = 'pa_datagrid.filter';
+    public const string TAG_NAME = 'pa_datagrid.filter';
 
     public function process(ContainerBuilder $container): void
     {

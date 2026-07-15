@@ -12,8 +12,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EntityFilterForm extends AbstractType
 {
-    const OPERATOR_FIELD = 'o';
-    const VALUE_FIELD = 'v';
+    public const string OPERATOR_FIELD = 'o';
+    public const string VALUE_FIELD = 'v';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

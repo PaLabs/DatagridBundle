@@ -10,14 +10,14 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class IntegerFilterForm extends AbstractType
 {
-    const VALUE_FIELD = 'v';
+    public const string VALUE_FIELD = 'v';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add(self::VALUE_FIELD, TextType::class, [
                 'required' => false,
-                'attr' => ['placeholder' => '1990, 1992-1995, 2000-']
+                'attr' => []
             ]);
 
         $builder->addModelTransformer(new IntegerFilterModelTransformer());

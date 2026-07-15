@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class GridExporterCompilerPass implements CompilerPassInterface
 {
-    const TAG_NAME = 'pa_datagrid.exporter';
+    public const string TAG_NAME = 'pa_datagrid.exporter';
 
     public function process(ContainerBuilder $container): void
     {
